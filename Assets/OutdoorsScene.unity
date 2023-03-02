@@ -1262,7 +1262,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883568022}
-  m_LocalRotation: {x: 0.06432994, y: -0.0000000042926853, z: 2.7672137e-10, w: 0.9979287}
+  m_LocalRotation: {x: 0.06432994, y: 0.0000000042926853, z: -2.7672137e-10, w: 0.9979287}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4836,6 +4836,11 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2415101726958282828, guid: e8fd96bffc08cd3428c65b6bab69814c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40c838525e7fd3946be3bb55f7ba68c0, type: 2}
     - target: {fileID: -2387164861959411455, guid: e8fd96bffc08cd3428c65b6bab69814c,
         type: 3}
       propertyPath: m_Layer
