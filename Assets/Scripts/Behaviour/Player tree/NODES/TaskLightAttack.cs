@@ -25,10 +25,10 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            _Anim.Play(_Animations[0], 1);
-            _Anim.Play(_Animations[0], 0);
-            PlayerBT.combostep = 2;
-            PlayerBT.attackCooldown = 0.3f;
+            if(!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                PlayerBT._WeapAttack.Attack();
+            }
 
             state = NodeState.RUNNING;
             return state;

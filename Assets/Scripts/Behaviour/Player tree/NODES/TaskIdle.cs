@@ -10,6 +10,8 @@ namespace BehaviorTree
     {
         private Animator _Anim;
 
+        //float mouseXSmooth = 0f;
+
         public TaskIdle(Transform transform)
         {
             _Anim = transform.GetComponent<Animator>();
@@ -19,8 +21,9 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            if(PlayerBT.attackCooldown <= -0.5)
-                PlayerBT.combostep = 1;
+
+            //here it makes the character strafe left adn right when rotating the camera
+
             _Anim.SetBool("Moving", false);
             state = NodeState.RUNNING;
             return state;

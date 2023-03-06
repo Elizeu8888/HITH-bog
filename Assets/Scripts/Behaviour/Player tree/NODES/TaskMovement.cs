@@ -51,12 +51,12 @@ namespace BehaviorTree
 
             // here is the movement
             Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
-            _CharacterController.Move(movedir.normalized * 5 * Time.deltaTime);
+            _CharacterController.Move(movedir.normalized * 7 * Time.deltaTime);
 
             //here it sets the animation parameters for strafing. it first gets input from the mouses X input so it can add to make the character move their feet when rotating
 
 
-            mouseXSmooth = Mathf.Lerp(mouseXSmooth, Input.GetAxis("Mouse X"), 5.5f * Time.deltaTime);
+            mouseXSmooth = Mathf.Lerp(mouseXSmooth, Input.GetAxisRaw("Mouse X"), 5.5f * Time.deltaTime);
             _Anim.SetFloat("InputY", z = Mathf.MoveTowards(z, direction.z, 5f * Time.deltaTime));
             _Anim.SetFloat("InputX", mouseXSmooth + (x = Mathf.MoveTowards(x, direction.x, 5f * Time.deltaTime)));
 

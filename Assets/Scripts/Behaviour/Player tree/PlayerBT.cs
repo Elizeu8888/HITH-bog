@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BehaviorTree;
+using UnityEngine;
 
 public class PlayerBT : BT_Tree
 {
@@ -12,8 +13,12 @@ public class PlayerBT : BT_Tree
 
     public UnityEngine.Transform _Camera;
 
-    public static int combostep;
+    public static WeaponAttack _WeapAttack;
 
+    void Awake()
+    {
+        _WeapAttack = gameObject.GetComponent<WeaponAttack>();
+    }
 
     protected override Node SetupTree()
     {

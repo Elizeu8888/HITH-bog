@@ -1,0 +1,72 @@
+# Blender 3.4.1 MTL File: 'test ground.blend'
+# www.blender.org
+
+newmtl ground_texture_tutorial_FMP_2
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd C:/Users/Elizeu mazzo/Downloads/ground texture tutorial FMP 2.png
+map_d C:/Users/Elizeu mazzo/Downloads/ground texture tutorial FMP 2.png
+
+newmtl highground
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.261177 0.393114 0.291238
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl liliy
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd C:/giant liliy.png
+map_d C:/giant liliy.png
+
+newmtl path
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.123586 0.266754 0.136435
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl willo_blue
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd C:/willo blue texture.png
+map_d C:/willo blue texture.png
+
+newmtl willo_textutr
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+map_Kd C:/willo textutr.png
+map_d C:/willo textutr.png
+
+newmtl wood
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.367238 0.266590 0.156156
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1

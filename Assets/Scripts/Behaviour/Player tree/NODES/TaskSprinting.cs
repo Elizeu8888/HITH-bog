@@ -17,7 +17,12 @@ namespace BehaviorTree
         float turnsmoothing = 0.1f;
         float turnsmoothvelocity = 0.5f;
 
+        float mouseXSmooth = 0f;
+
         Transform _transform;
+
+        float z = 0f;
+        float x = 0f;
 
         public TaskSprinting(Transform transform, Transform camera)
         {
@@ -32,7 +37,7 @@ namespace BehaviorTree
         {
 
             // uses input to find direction
-            float horizontal = Input.GetAxisRaw("Horizontal") * 0.4f;
+            float horizontal = Input.GetAxisRaw("Horizontal") * 0.7f;
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
@@ -41,7 +46,7 @@ namespace BehaviorTree
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
 
             // here rotates the player to face camera
-            float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnsmoothvelocity, turnsmoothing);
+            float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, targetangle, ref turnsmoothvelocity, turnsmoothing);
             _transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // here is the movement
@@ -49,6 +54,11 @@ namespace BehaviorTree
             _CharacterController.Move(movedir.normalized * 15 * Time.deltaTime);
 
             //here it sets the animation parameters for strafing. it first gets input from the mouses X input so it can add to make the character move their feet when rotating
+
+            mouseXSmooth = Mathf.Lerp(mouseXSmooth, Input.GetAxis("Mouse X"), 5.5f * Time.deltaTime);
+            _Anim.SetFloat("InputY", z = Mathf.MoveTowards(z, direction.z, 5f * Time.deltaTime));
+            _Anim.SetFloat("InputX", mouseXSmooth + (x = Mathf.MoveTowards(x, direction.x, 5f * Time.deltaTime)));
+
 
             _Anim.SetBool("Moving", true);
             _Anim.SetBool("Sprinting", true);

@@ -13,8 +13,6 @@ namespace BehaviorTree
         private string[] _Animations;
         private Transform _transform;
 
-        float _2ndLayerWeight;
-
         int comboStep;
 
 
@@ -30,7 +28,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if(PlayerBT.combostep == 2)
+            if (PlayerBT._WeapAttack.comboStep != 0)
             {
                 state = NodeState.SUCCESS;
                 return state;

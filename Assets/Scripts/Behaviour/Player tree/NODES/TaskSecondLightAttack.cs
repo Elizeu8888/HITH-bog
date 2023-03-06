@@ -26,10 +26,10 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            _Anim.Play(_Animations[1], 1);
-            _Anim.Play(_Animations[1], 0);
-            PlayerBT.combostep = 1;
-            PlayerBT.attackCooldown = 0.6f;
+            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsName("Sword Light 2"))
+            {
+                PlayerBT._WeapAttack.Attack();
+            }
 
             state = NodeState.RUNNING;
             return state;
