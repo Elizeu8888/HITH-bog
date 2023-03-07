@@ -15,19 +15,20 @@ namespace BehaviorTree
 
         Transform _transform, cam;
 
+
         public TaskCombatIdle(Transform transform, Transform camera)
         {
             _Anim = transform.GetComponent<Animator>();
             _transform = transform;
             cam = camera;
+            
         }
 
 
         public override NodeState LogicEvaluate()
-        {
+        {                    
 
             //rotation
-
 
             float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnsmoothvelocity, turnsmoothing);
             _transform.rotation = Quaternion.Euler(0f, angle, 0f);

@@ -26,7 +26,7 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            if (Input.GetKeyDown("r") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (Input.GetKeyDown("r") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword draw"))
             {
                 _incombat = !_incombat;
                 if (_Anim.GetBool("InCombat") == true)

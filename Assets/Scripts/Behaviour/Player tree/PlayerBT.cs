@@ -15,9 +15,22 @@ public class PlayerBT : BT_Tree
 
     public static WeaponAttack _WeapAttack;
 
+    Animator _AnimBase;
+
+    public static Vector3 rootMotion;
+    private CharacterController _CharacterController;
+
     void Awake()
     {
         _WeapAttack = gameObject.GetComponent<WeaponAttack>();
+        _AnimBase = gameObject.GetComponent<Animator>();
+        _CharacterController = gameObject.GetComponent<CharacterController>();
+    }
+
+    void OnAnimatorMove()
+    {
+        rootMotion = _AnimBase.deltaPosition;
+        _CharacterController.Move(rootMotion);
     }
 
     protected override Node SetupTree()
