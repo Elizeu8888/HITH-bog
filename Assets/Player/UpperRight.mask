@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UpperRight
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/daggerMechSnap
+    m_Weight: 1
+  - m_Path: Armature/daggerMechSnap/daggerProperty
+    m_Weight: 1
+  - m_Path: Armature/potion2.001
+    m_Weight: 0
+  - m_Path: Armature/root
+    m_Weight: 0
+  - m_Path: Armature/root/Centre
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Knee.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L/Calve.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L/Calve.L/Foot.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L/Calve.L/Foot.L/Ankle.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L/Calve.L/Foot.L/Foot.L.001
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.L/Thigh.L/HipHolster2
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Knee.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/Calve.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/Calve.R/Foot.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/Calve.R/Foot.R/Ankle.R
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/Calve.R/Foot.R/Foot.R.001
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/potion1
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/potion1.001
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/Hip.R/Thigh.R/potion1.002
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/HipHolster
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/BotEyelid.L
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/BotEyelid.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Eyebrow.L
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Eyebrow.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/eyeController
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/glasses bone
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/HeadPhoneControll
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/HoodControll
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Jaw
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Jaw/bottom lip
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Mouth.L
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Mouth.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/Tongue
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/TopEyelid.L
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/TopEyelid.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/neck/head/upperLip
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/RunicWeapon1
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/RunicWeapon2
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/RunicWeapon3
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand1.L/knuckle1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand1.L/PointF1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand1.L/PointF1.L/PointF2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand1.L/PointF1.L/PointF2.L/PointF3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand2.L/Knuckle2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand2.L/MiddleF1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand2.L/MiddleF1.L/MiddleF2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand2.L/MiddleF1.L/MiddleF2.L/MiddleF3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand3.L/Knuckle3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand3.L/RingF1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand3.L/RingF1.L/RingF2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand3.L/RingF1.L/RingF2.L/RingF3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand4.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand4.L/Knuckle4.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand4.L/Pinky1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand4.L/Pinky1.L/pinky2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Hand4.L/Pinky1.L/pinky2.L/Pinky3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/MiddleCONT.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/PinkyCONT.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/PointCONT.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/RingCONT.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Thumb1.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Thumb1.L/Thumb2.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Thumb1.L/Thumb2.L/Thumb3.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/Thumb1.L/ThumbKnuckle.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/ThumbCONT.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Arm.L/elbow bone.L/ForeArm.L/HAND.L/weaponLocation.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.L/Handcontroller.L
+    m_Weight: 0
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand1.R/knuckle1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand1.R/PointF1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand1.R/PointF1.R/PointF2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand1.R/PointF1.R/PointF2.R/PointF3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand2.R/Knuckle2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand2.R/MiddleF1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand2.R/MiddleF1.R/MiddleF2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand2.R/MiddleF1.R/MiddleF2.R/MiddleF3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand3.R/Knuckle3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand3.R/RingF1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand3.R/RingF1.R/RingF2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand3.R/RingF1.R/RingF2.R/RingF3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand4.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand4.R/Knuckle4.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand4.R/Pinky1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand4.R/Pinky1.R/pinky2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Hand4.R/Pinky1.R/pinky2.R/Pinky3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/MiddleCONT.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/PinkyCONT.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/PointCONT.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/RingCONT.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Thumb1.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Thumb1.R/Thumb2.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Thumb1.R/Thumb2.R/Thumb3.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/Thumb1.R/ThumbKnuckle.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/ThumbCONT.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Arm.R/elbow bone.R/ForeArm.R/HAND.R/weaponLocation.R
+    m_Weight: 1
+  - m_Path: Armature/root/Centre/stomach/Chest/Shoulder.R/Handcontroller.R
+    m_Weight: 1
+  - m_Path: Armature/root/Elbow.L
+    m_Weight: 0
+  - m_Path: Armature/root/Elbow.R
+    m_Weight: 1
+  - m_Path: Armature/root/FootController.L
+    m_Weight: 0
+  - m_Path: Armature/root/FootController.R
+    m_Weight: 0
+  - m_Path: Armature/weaponMechSnap
+    m_Weight: 1
+  - m_Path: Armature/weaponMechSnap/weaponProperty
+    m_Weight: 1
+  - m_Path: Body
+    m_Weight: 0
+  - m_Path: body hips
+    m_Weight: 0
+  - m_Path: body Legs
+    m_Weight: 0
+  - m_Path: dagger
+    m_Weight: 0
+  - m_Path: dagger scabbar
+    m_Weight: 0
+  - m_Path: ears
+    m_Weight: 0
+  - m_Path: eyebrow
+    m_Weight: 0
+  - m_Path: hair base
+    m_Weight: 0
+  - m_Path: hair base form
+    m_Weight: 0
+  - m_Path: head malle
+    m_Weight: 0
+  - m_Path: headPhones
+    m_Weight: 0
+  - m_Path: laces
+    m_Weight: 0
+  - m_Path: lowerBody strap
+    m_Weight: 0
+  - m_Path: pepin shorts
+    m_Weight: 0
+  - m_Path: potion1
+    m_Weight: 0
+  - m_Path: potion2
+    m_Weight: 0
+  - m_Path: pupil male
+    m_Weight: 0
+  - m_Path: sammy sword.001
+    m_Weight: 0
+  - m_Path: scabard
+    m_Weight: 0
+  - m_Path: Shirt.001
+    m_Weight: 0
+  - m_Path: shoes.003
+    m_Weight: 0
+  - m_Path: sulli shorts
+    m_Weight: 0
+  - m_Path: teeth bottom
+    m_Weight: 0
+  - m_Path: teeth top
+    m_Weight: 0
+  - m_Path: Tongue
+    m_Weight: 0
+  - m_Path: upper Body strap large
+    m_Weight: 0
