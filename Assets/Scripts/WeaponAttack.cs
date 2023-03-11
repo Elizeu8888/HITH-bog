@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponAttack : MonoBehaviour
 {
 
+    public Collider _Coll;
+
     public static bool comboPossible, attackPossible = true;
     public int comboStep = 0;
 
@@ -13,6 +15,11 @@ public class WeaponAttack : MonoBehaviour
     void Start()
     {
         _Anim = gameObject.GetComponent<Animator>();
+    }
+
+    public void DealDamage()
+    {
+        LaunchDamage(_Coll, 10f);
     }
 
     public void Attack()
@@ -55,13 +62,14 @@ public class WeaponAttack : MonoBehaviour
         comboPossible = false;
         comboStep = 0;
     }
+
     public void LaunchDamage(Collider col, float damage)
     {
 
-        Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBoxes"));
+        Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
+
         foreach (Collider c in cols)
         {
-            print("damageLaunched");
 
             if (c.transform.parent == transform)
             {
@@ -72,16 +80,16 @@ public class WeaponAttack : MonoBehaviour
 
             switch (c.tag)
             {
-                case "enemy":
-                    _Anim.SetTrigger("hit");
+                case "Enemy":
+                    Debug.Log("HIT");
                     break;
                 default:
-                    Debug.Log("nopedidntwork");
+                    Debug.Log("nopedidntHIT");
                     break;
 
             }
 
-            c.SendMessageUpwards("TakeDamage", damage);
+            c.SendMessageUpwards("HitByAttack", damage);
 
         }
 
