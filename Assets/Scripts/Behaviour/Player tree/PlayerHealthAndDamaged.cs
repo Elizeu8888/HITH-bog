@@ -25,12 +25,31 @@ namespace PlayerManager
         public float _CurrentHealth, _MaxHealth;
         public float _CurrentStun, _MaxStun;
 
+        public GameObject _HealthBar;
+        Material _HealthBarMat;
+        float fillPercent;
 
         [SerializeField] float _I_Frames = 0f;
 
         void Start()
         {
             _CurrentHealth = _MaxHealth;
+            HealthBarStart();
+        }
+
+        void HealthBarStart()
+        {
+            _HealthBarMat = _HealthBar.GetComponent<Renderer>().material;
+
+            _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
+
+        }
+
+        void Update()
+        {
+            float scriptHealthPercent = (_CurrentHealth / _MaxHealth);
+            fillPercent = scriptHealthPercent;
+            _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
         }
 
         void FixedUpdate()
@@ -58,6 +77,11 @@ namespace PlayerManager
                 _I_Frames = 0f;
         }
 
+        public void StartBlocking()
+        {
+            isBlocking = true;
+        }
+
         void HitByAttack(float attackDamage)
         {
 
@@ -74,7 +98,7 @@ namespace PlayerManager
                 else if (isBlocking == true && blockTimer < 0.2f)//this will DEFLECT
                 {
                     _BlockResult = BlockResult.Deflected;
-                    blockTimer = 0.3f;
+                    blockTimer = 0.5f;
                     _I_Frames = 0.15f;
                     return;
                 }

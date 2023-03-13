@@ -19,6 +19,9 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
+
+            _Anim.SetBool("Blocking", false);
+            _Anim.SetBool("Moving", false);
             state = NodeState.RUNNING;
             return state;
         }

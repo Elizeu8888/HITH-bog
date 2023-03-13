@@ -23,13 +23,14 @@ namespace BehaviorTree
             if (Input.GetMouseButton(1) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && PlayerBT.attackCooldown <= 0)
             {
                 PlayerBT._HealthScript.blockTimer += Time.deltaTime;
-                PlayerBT._HealthScript.isBlocking = true;
+                _Anim.SetBool("Blocking", true);                
                 state = NodeState.SUCCESS;
                 return state;
             }
             else
             {
                 PlayerBT._HealthScript.isBlocking = false;
+                _Anim.SetBool("Blocking", false);
                 state = NodeState.FAILURE;
                 return state;
             }

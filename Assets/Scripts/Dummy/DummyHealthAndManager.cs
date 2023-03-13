@@ -9,6 +9,10 @@ public class DummyHealthAndManager : MonoBehaviour
 
     [SerializeField] float _I_Frames = 0f;
 
+    GameObject damageBox;
+    public GameObject damageBoxPrefab;
+    public Transform weaponLoc;
+
     void Start()
     {
         _CurrentHealth = _MaxHealth;
@@ -38,7 +42,19 @@ public class DummyHealthAndManager : MonoBehaviour
 
     void DealDamage()
     {
-        LaunchDamage(_Coll, 15f);
+        SpawnObj(damageBox, damageBoxPrefab, weaponLoc);
+
+        //LaunchDamage(_Coll, 15f);
+    }
+
+    void SpawnObj(GameObject item, GameObject prefab, Transform loc)
+    {
+        Destroy(item);
+        item = Instantiate(prefab, loc.position, Quaternion.identity);
+        item.transform.parent = loc;
+        //item.transform.localScale = new Vector3(1, 1, 1);
+        item.transform.localPosition = new Vector3(0, 0, 0);
+        item.transform.localRotation = Quaternion.identity;
     }
 
 
@@ -60,7 +76,7 @@ public class DummyHealthAndManager : MonoBehaviour
             switch (c.tag)
             {
                 case "Player":
-                    Debug.Log("HIT");
+                    c.SendMessageUpwards("HitByAttack", damage);
                     break;
                 default:
                     Debug.Log("nopedidntHIT");
@@ -68,7 +84,7 @@ public class DummyHealthAndManager : MonoBehaviour
 
             }
 
-            c.SendMessageUpwards("HitByAttack", damage);
+            
 
         }
 

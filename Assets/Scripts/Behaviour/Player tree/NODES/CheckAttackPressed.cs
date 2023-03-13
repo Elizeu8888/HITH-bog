@@ -20,8 +20,9 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetMouseButtonDown(0) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && PlayerBT.attackCooldown <= 0)
+            if (Input.GetMouseButtonDown(0) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
             {
+                PlayerBT._HealthScript.isBlocking = false;
                 state = NodeState.SUCCESS;
                 return state;
             }
