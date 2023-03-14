@@ -7,6 +7,7 @@ public class WeaponState : MonoBehaviour
 
     public Transform holster, lefthand, righthand;
 
+    public static int weaponState = 0;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class WeaponState : MonoBehaviour
         else
         {
             transform.SetParent(righthand);
+            weaponState = 2;
             transform.localPosition = new Vector3(0, 0, 0);
             transform.localRotation = Quaternion.Euler(180, 0, -180);
 
@@ -50,6 +52,7 @@ public class WeaponState : MonoBehaviour
         else
         {
             transform.SetParent(lefthand);
+            weaponState = 3;
             transform.localPosition = new Vector3(0, 0, 0);
             transform.localRotation = Quaternion.Euler(180, 0, -180);
 
@@ -66,6 +69,7 @@ public class WeaponState : MonoBehaviour
         else
         {
             transform.SetParent(holster);
+            weaponState = 1;
             transform.localPosition = new Vector3(0, 0, 0);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
 

@@ -9,7 +9,7 @@ public class PlayerBT : BT_Tree
 
     public static float speed = 2f;
 
-    public bool _InCombat = false;
+    public static bool _InCombat = false;
 
     public string[] _AnimationNames;
 
@@ -18,6 +18,7 @@ public class PlayerBT : BT_Tree
     [Header("Script_OnPlayer_Refrences")]
     public static WeaponAttack _WeapAttack;
     public static PlayerHealthAndDamaged _HealthScript;
+    public static EventSwitch _EventSwitch;
 
     Animator _AnimBase;
 
@@ -28,6 +29,7 @@ public class PlayerBT : BT_Tree
     {
         _WeapAttack = gameObject.GetComponent<WeaponAttack>();
         _HealthScript = gameObject.GetComponent<PlayerHealthAndDamaged>();
+        _EventSwitch = gameObject.GetComponent<EventSwitch>();
 
         _AnimBase = gameObject.GetComponent<Animator>();
         _CharacterController = gameObject.GetComponent<CharacterController>();

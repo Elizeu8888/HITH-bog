@@ -39,7 +39,7 @@ namespace PlayerManager
 
         void HealthBarStart()
         {
-            _HealthBarMat = _HealthBar.GetComponent<Renderer>().material;
+            _HealthBarMat = _HealthBar.GetComponent<SkinnedMeshRenderer>().material;
 
             _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
 

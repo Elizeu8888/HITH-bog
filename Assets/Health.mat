@@ -147,7 +147,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _CurrentFill: 0.5
-    - _CurrentFillPercent: 0.95
+    - _CurrentFillPercent: 1
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1

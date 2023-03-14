@@ -25,7 +25,10 @@ namespace BehaviorTree
             {
                 _Anim.Play("Deflect Right", 1);
             }
-
+            if (PlayerBT._HealthScript._BlockResult == BlockResult.Blocked)
+            {
+                _Anim.Play("sword guard Block", 1);
+            }
 
             state = NodeState.RUNNING;
             return state;
