@@ -20,7 +20,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetMouseButton(1) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && PlayerBT.attackCooldown <= 0)
+            if (Input.GetMouseButton(1) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && PlayerBT.attackCooldown <= 0)
             {
                 PlayerBT._HealthScript.blockTimer += Time.deltaTime;
                 _Anim.SetBool("Blocking", true);                
