@@ -19,8 +19,7 @@ namespace BehaviorTree
         {
 
             if (PlayerBT._HealthScript.beingHit == true)
-            {
-                Debug.Log("blocked A HIT");
+            {                
                 state = NodeState.SUCCESS;
                 return state;
             }

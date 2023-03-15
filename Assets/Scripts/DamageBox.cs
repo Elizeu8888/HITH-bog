@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using PlayerManager;
+
 public class DamageBox : MonoBehaviour
 {
     public Collider _Coll;
     public float lifeTime = 1f, damage = 15f;
+    public int leftright = 1;
     
     void Start()
     {
         _Coll = gameObject.GetComponent<BoxCollider>();
     }
 
-
-    void Update()
+    void Update()// this exists only to deal damage then disappear 
     {
         Destroy(gameObject, lifeTime);
 
@@ -29,17 +31,17 @@ public class DamageBox : MonoBehaviour
 
             Debug.Log(c.tag);
 
+
             switch (c.tag)
             {
                 case "Player":
-                    c.SendMessageUpwards("HitByAttack", damage);
+                    c.transform.parent.GetComponent<PlayerHealthAndDamaged>().HitByAttack(damage, leftright);
                     break;
                 default:
                     break;
 
-            }
+            }        
 
-            
 
         }
     }

@@ -7,7 +7,8 @@ namespace PlayerManager
     public enum BlockResult
     {
         Blocked,
-        Deflected,
+        DeflectedLeft,
+        DeflectedRight,
         Broken,
         Down
     }
@@ -77,12 +78,14 @@ namespace PlayerManager
                 _I_Frames = 0f;
         }
 
-        public void StartBlocking()
+        public void StartBlocking()// this is called in the block animation
         {
             isBlocking = true;
         }
 
-        void HitByAttack(float attackDamage)
+
+
+        public void HitByAttack(float attackDamage, int _LeftRight)
         {
 
 
@@ -95,13 +98,22 @@ namespace PlayerManager
                     _I_Frames = 0.15f;
                     return;
                 }
-                else if (isBlocking == true && blockTimer < 0.2f)//this will DEFLECT
+                else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 1)//this will DEFLECT LEFT
                 {
-                    _BlockResult = BlockResult.Deflected;
+                    _BlockResult = BlockResult.DeflectedLeft;
                     blockTimer = 0.5f;
                     _I_Frames = 0.15f;
                     return;
                 }
+                else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 2)//this will DEFLECT RIGHT
+                {
+                    _BlockResult = BlockResult.DeflectedRight;
+                    blockTimer = 0.5f;
+                    _I_Frames = 0.15f;
+                    return;
+                }
+
+
 
                 _CurrentHealth -= attackDamage;
                 beingDamaged = true;

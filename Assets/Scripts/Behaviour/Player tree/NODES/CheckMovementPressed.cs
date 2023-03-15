@@ -20,7 +20,7 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack") || _Anim.GetCurrentAnimatorStateInfo(1).IsTag("BlockReaction"))
             {
                 state = NodeState.FAILURE;
                 return state;
@@ -28,7 +28,7 @@ namespace BehaviorTree
 
 
             float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");// uses imput to find direction
+            float vertical = Input.GetAxisRaw("Vertical");// uses input to find direction
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
             if (direction.magnitude >= 0.1f)

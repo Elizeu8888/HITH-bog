@@ -40,55 +40,26 @@ public class DummyHealthAndManager : MonoBehaviour
         return;
     }
 
-    void DealDamage()
+    void DealDamageLeft()// this is called in an animation
     {
-        SpawnObj(damageBox, damageBoxPrefab, weaponLoc);
+        SpawnDamageBox(damageBox, damageBoxPrefab, weaponLoc, 1);
 
-        //LaunchDamage(_Coll, 15f);
+    }
+    void DealDamageRight()// this is called in an animation
+    {
+        SpawnDamageBox(damageBox, damageBoxPrefab, weaponLoc, 2);
     }
 
-    void SpawnObj(GameObject item, GameObject prefab, Transform loc)
+    void SpawnDamageBox(GameObject item, GameObject prefab, Transform loc, int leftright)// this is mainly used to spawn hitbox
     {
         Destroy(item);
         item = Instantiate(prefab, loc.position, Quaternion.identity);
         item.transform.parent = loc;
-        //item.transform.localScale = new Vector3(1, 1, 1);
+        item.GetComponent<DamageBox>().leftright = leftright;
         item.transform.localPosition = new Vector3(0, 0, 0);
         item.transform.localRotation = Quaternion.identity;
     }
 
-
-    public void LaunchDamage(Collider col, float damage)
-    {
-
-        Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
-
-        foreach (Collider c in cols)
-        {
-
-            if (c.transform.parent == transform)
-            {
-                continue;
-            }
-
-            Debug.Log(c.tag);
-
-            switch (c.tag)
-            {
-                case "Player":
-                    c.SendMessageUpwards("HitByAttack", damage);
-                    break;
-                default:
-                    Debug.Log("nopedidntHIT");
-                    break;
-
-            }
-
-            
-
-        }
-
-    }
 
 }
 

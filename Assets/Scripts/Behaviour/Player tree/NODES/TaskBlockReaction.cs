@@ -21,9 +21,17 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if(PlayerBT._HealthScript._BlockResult == BlockResult.Deflected)
+            if(PlayerBT._HealthScript._BlockResult == BlockResult.DeflectedRight)
+            {
+                _Anim.Play("Deflect Left", 1);
+                _Anim.Play("Deflect Left", 0);
+                
+            }
+            if (PlayerBT._HealthScript._BlockResult == BlockResult.DeflectedLeft)
             {
                 _Anim.Play("Deflect Right", 1);
+                _Anim.Play("Deflect Right", 0);
+                
             }
             if (PlayerBT._HealthScript._BlockResult == BlockResult.Blocked)
             {
@@ -34,6 +42,7 @@ namespace BehaviorTree
             return state;
 
         }
+
 
 
     }

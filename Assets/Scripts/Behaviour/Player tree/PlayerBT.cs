@@ -15,6 +15,10 @@ public class PlayerBT : BT_Tree
 
     public Transform _Camera;
 
+    public GameObject[] _VFX; 
+
+
+
     [Header("Script_OnPlayer_Refrences")]
     public static WeaponAttack _WeapAttack;
     public static PlayerHealthAndDamaged _HealthScript;
@@ -25,7 +29,18 @@ public class PlayerBT : BT_Tree
     public static Vector3 rootMotion;
     private CharacterController _CharacterController;
 
-    void Awake()
+
+    public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
+    {
+        Destroy(item);
+        item = Instantiate(prefab, loc.position, Quaternion.identity);
+        item.transform.parent = loc;
+        item.transform.localPosition = new Vector3(0, 0, 0);
+        item.transform.localRotation = Quaternion.identity;
+        Destroy(item, 0.5f);
+    }
+
+    void Awake()// cant use start since Tree node uses it
     {
         _WeapAttack = gameObject.GetComponent<WeaponAttack>();
         _HealthScript = gameObject.GetComponent<PlayerHealthAndDamaged>();
@@ -35,13 +50,13 @@ public class PlayerBT : BT_Tree
         _CharacterController = gameObject.GetComponent<CharacterController>();
     }
 
-    void OnAnimatorMove()
+    void OnAnimatorMove()// this allows root motion to work
     {
         rootMotion = _AnimBase.deltaPosition;
         _CharacterController.Move(rootMotion);
     }
 
-    protected override Node SetupTree()
+    protected override Node SetupTree()// this is the behaviour tree
     {
         Node root = new Selector(new List<Node>
         {
@@ -110,6 +125,8 @@ public class PlayerBT : BT_Tree
 
                     }),
 
+
+                    // here the player moves when in combat
                     new Sequence(new List<Node>
                     {
                         new CheckMovementPressed(transform),
