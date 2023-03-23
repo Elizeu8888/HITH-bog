@@ -93,6 +93,12 @@ ModelImporter:
   - first:
       74: 493108205547647276
     second: walk Forward
+  - first:
+      74: -215699890414486320
+    second: jog forward
+  - first:
+      74: 4412376628145492631
+    second: Jog forward
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -877,11 +883,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: walk Forward
-      takeName: walk Forward
+      name: Jog forward
+      takeName: Jog forward
       internalID: 0
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

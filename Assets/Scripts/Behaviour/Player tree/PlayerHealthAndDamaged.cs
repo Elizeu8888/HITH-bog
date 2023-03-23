@@ -95,21 +95,21 @@ namespace PlayerManager
                 {
                     _BlockResult = BlockResult.Blocked;
                     blockTimer = 1f;
-                    _I_Frames = 0.15f;
+                    _I_Frames = 0.2f;
                     return;
                 }
                 else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 1)//this will DEFLECT LEFT
                 {
                     _BlockResult = BlockResult.DeflectedLeft;
-                    blockTimer = 0.5f;
-                    _I_Frames = 0.15f;
+                    blockTimer = 1f;
+                    _I_Frames = 0.3f;
                     return;
                 }
                 else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 2)//this will DEFLECT RIGHT
                 {
                     _BlockResult = BlockResult.DeflectedRight;
-                    blockTimer = 0.5f;
-                    _I_Frames = 0.15f;
+                    blockTimer = 1f;
+                    _I_Frames = 0.3f;
                     return;
                 }
 
@@ -117,7 +117,7 @@ namespace PlayerManager
 
                 _CurrentHealth -= attackDamage;
                 beingDamaged = true;
-                _I_Frames = 0.2f;
+                _I_Frames = 0.25f;
             }
 
             return;

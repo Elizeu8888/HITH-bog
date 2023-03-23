@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Coll: {fileID: 1075960363087787200}
-  lifeTime: 0.1
+  lifeTime: 0.05
   damage: 15
   leftright: 1
 --- !u!1 &4290003580912854832

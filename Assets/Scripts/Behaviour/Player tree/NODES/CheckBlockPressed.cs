@@ -27,6 +27,14 @@ namespace BehaviorTree
                 state = NodeState.SUCCESS;
                 return state;
             }
+            else if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") || _Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right"))
+            {
+                PlayerBT._HealthScript.blockTimer += Time.deltaTime;
+                PlayerBT._HealthScript.isBlocking = true;
+                _Anim.SetBool("Blocking", true);
+                state = NodeState.FAILURE;
+                return state;
+            }
             else
             {
                 PlayerBT._HealthScript.isBlocking = false;

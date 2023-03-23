@@ -18,7 +18,12 @@ namespace BehaviorTree
         }
 
         public override NodeState LogicEvaluate()
-        {         
+        {
+            if (!_Anim.GetCurrentAnimatorStateInfo(1).IsName("Hurt"))
+            {
+                _Anim.Play("Hurt", 0);
+                _Anim.Play("Hurt", 1);
+            }
 
             if (_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") || _Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw"))
             {
@@ -29,11 +34,11 @@ namespace BehaviorTree
 
             PlayerBT._WeapAttack.ComboReset();
 
-            _Anim.Play("Hurt", 0);
-            _Anim.Play("Hurt", 1);
+
 
             _Anim.SetBool("Blocking", false);
             _Anim.SetBool("Moving", false);
+
 
             state = NodeState.RUNNING;
             return state;

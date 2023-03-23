@@ -9,10 +9,12 @@ namespace BehaviorTree
     public class CheckBeingDamaged : Node
     {
         private Transform _transform;
+        private Animator _Anim;
 
         public CheckBeingDamaged(Transform transform)
         {
             _transform = transform;
+            _Anim = transform.GetComponent<Animator>();
         }
 
         public override NodeState LogicEvaluate()
@@ -20,11 +22,13 @@ namespace BehaviorTree
 
             if (PlayerBT._HealthScript.beingDamaged == true)
             {
+                _Anim.SetBool("BeingHurt", true);
                 state = NodeState.SUCCESS;
                 return state;
             }
             else
             {
+                _Anim.SetBool("BeingHurt", false);
                 state = NodeState.FAILURE;
                 return state;
             }
