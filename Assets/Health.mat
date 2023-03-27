@@ -254,7 +254,7 @@ Material:
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _Empty: {r: 0.21698111, g: 0.0481043, b: 0.0481043, a: 0}
-    - _Fill: {r: 0.5754717, g: 0.15472588, b: 0.15472588, a: 0}
+    - _Fill: {r: 0.6415094, g: 0.14827341, b: 0.14827341, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
