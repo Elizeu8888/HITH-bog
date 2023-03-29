@@ -7,8 +7,9 @@ using BehaviorTree;
 
 namespace BehaviorTree
 {
-    public class TaskMoveToPlayer : Node
+    public class TaskBackAway : Node
     {
+
         private Animator _Anim;
 
         Transform _transform;
@@ -17,7 +18,7 @@ namespace BehaviorTree
         float x = 0f, xmot = 0f;
         float z = 0f, zmot = 0f;
 
-        public TaskMoveToPlayer(Transform transform)
+        public TaskBackAway(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
@@ -25,35 +26,25 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            //EnemyMediumBT._NavMesh.destination = EnemyMediumBT._Player.transform.position;
 
-
-            if(EnemyMediumBT._NavMesh.enabled == false)
+            if (EnemyMediumBT._NavMesh.enabled == false)
             {
                 EnemyMediumBT._NavMesh.enabled = true;
-            }         
+            }
 
             Vector3 lookPos;
             Quaternion targetRot;
 
-            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f;
+            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f -_transform.forward * 10;          
 
-            if (EnemyMediumBT._Dir_Change_Timer <= 0f)
+            if(EnemyMediumBT._Dir_Change_Timer <= 0.5f)
             {
-                if (EnemyMediumBT._PlayerDistance <= 8f)
+                if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, 8f, NavMesh.AllAreas))
                 {
-                    if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-                    {
-                        EnemyMediumBT._NavMesh.destination = hit.position;
-                        EnemyMediumBT._Dir_Change_Timer = 0.7f;
-                    }
-                }
-                else
-                {
-                    EnemyMediumBT._NavMesh.destination = EnemyMediumBT._Player.transform.position;
+                    EnemyMediumBT._NavMesh.destination = hit.position;
+                    EnemyMediumBT._Dir_Change_Timer = 1f;
                 }
             }
-
 
             _desVelocity = EnemyMediumBT._NavMesh.desiredVelocity;
 
@@ -62,10 +53,9 @@ namespace BehaviorTree
             targetRot = Quaternion.LookRotation(lookPos);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 3f);
 
-            EnemyMediumBT._charControl.Move(_desVelocity.normalized * 3f * Time.deltaTime);
+            EnemyMediumBT._charControl.Move(_desVelocity.normalized * 6f * Time.deltaTime);
 
             EnemyMediumBT._NavMesh.velocity = EnemyMediumBT._charControl.velocity;
-
 
 
             xmot = Vector3.Dot(EnemyMediumBT._charControl.velocity, _transform.right);
@@ -88,14 +78,12 @@ namespace BehaviorTree
                 _Anim.SetFloat("Ydir", z = Mathf.MoveTowards(z, -1, 3f * Time.deltaTime));
             }
 
-
-
-
             _Anim.SetBool("Moving", true);
+
 
             state = NodeState.RUNNING;
             return state;
-            
+
 
         }
 

@@ -53,8 +53,7 @@ public class EnemyMediumBT : BT_Tree
             }),
             new Sequence(new List<Node>
             {
-                new CheckCirclePlayer(transform),
-                new TaskCirclePlayer(transform),
+                new TaskBackAway(transform),
 
             }),
             new TaskEnemyIdle(transform),
