@@ -22,7 +22,7 @@ namespace BehaviorTree
             EnemyMediumBT._PlayerDistance = Vector3.Distance(EnemyMediumBT._Player.transform.position, _transform.position);
 
 
-            if (EnemyMediumBT._PlayerDistance <= 30f && EnemyMediumBT._PlayerDistance >= 5f)
+            if (EnemyMediumBT._PlayerDistance <= 30f && EnemyMediumBT._PlayerDistance >= 8f && EnemyMediumBT._Dir_Change_Timer <= 0f)
             {
                 state = NodeState.SUCCESS;
                 return state;

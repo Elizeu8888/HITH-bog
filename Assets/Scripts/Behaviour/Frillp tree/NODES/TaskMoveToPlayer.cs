@@ -25,7 +25,7 @@ namespace BehaviorTree
             if(EnemyMediumBT._NavMesh.enabled == false)
             {
                 EnemyMediumBT._NavMesh.enabled = true;
-            }
+            }         
 
             Vector3 lookPos;
             Quaternion targetRot;

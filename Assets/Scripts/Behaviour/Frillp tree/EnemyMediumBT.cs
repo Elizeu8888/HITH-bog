@@ -8,6 +8,9 @@ public class EnemyMediumBT : BT_Tree
 {
     public GameObject plyRefrence;
     public static GameObject _Player;
+    public static Transform[] _directions;
+    public Transform[] directions;
+    public static float _Dir_Change_Timer;
 
     public static float _PlayerDistance;
     public static NavMeshAgent _NavMesh;
@@ -19,6 +22,7 @@ public class EnemyMediumBT : BT_Tree
     void Awake()// cant use start since Tree node uses it
     {
         _Player = plyRefrence;
+        _directions = directions;
         _NavMesh = gameObject.GetComponent<NavMeshAgent>();
         _charControl = gameObject.GetComponent<CharacterController>();
         _NavMesh.updatePosition = false;
@@ -33,6 +37,7 @@ public class EnemyMediumBT : BT_Tree
     void FixedUpdate()
     {
         distance = _PlayerDistance;
+        _Dir_Change_Timer -= Time.deltaTime;
     }
 
     protected override Node SetupTree()// this is the behaviour tree
@@ -46,7 +51,12 @@ public class EnemyMediumBT : BT_Tree
                 new TaskMoveToPlayer(transform),            
 
             }),
+            new Sequence(new List<Node>
+            {
+                new CheckCirclePlayer(transform),
+                new TaskCirclePlayer(transform),
 
+            }),
             new TaskEnemyIdle(transform),
 
         });

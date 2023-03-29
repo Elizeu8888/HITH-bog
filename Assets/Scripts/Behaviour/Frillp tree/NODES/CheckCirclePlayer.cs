@@ -19,7 +19,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (EnemyMediumBT._PlayerDistance <= 5f)
+            if (EnemyMediumBT._PlayerDistance <= 9f)
             {
                 state = NodeState.SUCCESS;
                 return state;

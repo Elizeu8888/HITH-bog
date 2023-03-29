@@ -31,7 +31,6 @@ public class DamageBox : MonoBehaviour
 
             Debug.Log(c.tag);
 
-
             switch (c.tag)
             {
                 case "Player":
