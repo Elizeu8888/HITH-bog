@@ -6,23 +6,22 @@ using UnityEngine.AI;
 
 public class EnemyMediumBT : BT_Tree
 {
+    public Transform _CurrentEnemyTransform;
     public GameObject plyRefrence;
     public static GameObject _Player;
-    public static Transform[] _directions;
-    public Transform[] directions;
     public static float _Dir_Change_Timer;
+    public float _PlayerDistance;
+    public NavMeshAgent _NavMesh;
+    public CharacterController _charControl;
 
-    public static float _PlayerDistance;
-    public static NavMeshAgent _NavMesh;
-    public static CharacterController _charControl;
-
-    public float distance;
+    public static Transform _EnemyRestPos;
+    public Transform enemyRestPos;
 
 
     void Awake()// cant use start since Tree node uses it
     {
+        _EnemyRestPos = enemyRestPos;
         _Player = plyRefrence;
-        _directions = directions;
         _NavMesh = gameObject.GetComponent<NavMeshAgent>();
         _charControl = gameObject.GetComponent<CharacterController>();
         _NavMesh.updatePosition = false;
@@ -34,10 +33,10 @@ public class EnemyMediumBT : BT_Tree
 
     }
 
-    void FixedUpdate()
+    void FixedUpdate()//use this spparingly
     {
-        distance = _PlayerDistance;
         _Dir_Change_Timer -= Time.deltaTime;
+        _PlayerDistance = Vector3.Distance(_Player.transform.position, _CurrentEnemyTransform.position);
     }
 
     protected override Node SetupTree()// this is the behaviour tree
@@ -47,16 +46,16 @@ public class EnemyMediumBT : BT_Tree
 
             new Sequence(new List<Node>
             {
-                new CheckMoveToPlayer(transform),
-                new TaskMoveToPlayer(transform),            
+                new CheckMoveToPlayer(_CurrentEnemyTransform, _PlayerDistance),
+                new TaskMoveToPlayer(_CurrentEnemyTransform,_PlayerDistance, _NavMesh, _charControl),            
 
             }),
             new Sequence(new List<Node>
             {
-                new TaskBackAway(transform),
+                new TaskBackAway(_CurrentEnemyTransform, _NavMesh, _charControl),
 
             }),
-            new TaskEnemyIdle(transform),
+            new TaskEnemyIdle(_CurrentEnemyTransform,_NavMesh),
 
         });
 

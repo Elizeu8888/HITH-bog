@@ -17,49 +17,52 @@ namespace BehaviorTree
 
         float x = 0f, xmot = 0f;
         float z = 0f, zmot = 0f;
+        NavMeshAgent _NavMesh;
+        CharacterController _charControl;
 
-        public TaskBackAway(Transform transform)
+        public TaskBackAway(Transform transform, NavMeshAgent nav, CharacterController cha)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
+            _NavMesh = nav;
+            _charControl = cha;
         }
-
         public override NodeState LogicEvaluate()
         {
 
-            if (EnemyMediumBT._NavMesh.enabled == false)
+            if (_NavMesh.enabled == false)
             {
-                EnemyMediumBT._NavMesh.enabled = true;
+                _NavMesh.enabled = true;
             }
 
             Vector3 lookPos;
             Quaternion targetRot;
 
-            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f -_transform.forward * 10;          
+            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f - _transform.forward * 10;
 
-            if(EnemyMediumBT._Dir_Change_Timer <= 0.5f)
+            if (EnemyMediumBT._Dir_Change_Timer <= 0.5f)
             {
                 if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, 8f, NavMesh.AllAreas))
                 {
-                    EnemyMediumBT._NavMesh.destination = hit.position;
+                    _NavMesh.destination = hit.position;
                     EnemyMediumBT._Dir_Change_Timer = 1f;
                 }
             }
 
-            _desVelocity = EnemyMediumBT._NavMesh.desiredVelocity;
+            _desVelocity = _NavMesh.desiredVelocity;
 
             lookPos = EnemyMediumBT._Player.transform.position - _transform.position;
             lookPos.y = 0;
             targetRot = Quaternion.LookRotation(lookPos);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 3f);
 
-            EnemyMediumBT._charControl.Move(_desVelocity.normalized * 6f * Time.deltaTime);
+            _charControl.Move(_desVelocity.normalized * 6f * Time.deltaTime);
 
-            EnemyMediumBT._NavMesh.velocity = EnemyMediumBT._charControl.velocity;
+            _NavMesh.velocity = _charControl.velocity;
 
 
-            xmot = Vector3.Dot(EnemyMediumBT._charControl.velocity, _transform.right);
-            zmot = Vector3.Dot(EnemyMediumBT._charControl.velocity, _transform.forward);
+            xmot = Vector3.Dot(_charControl.velocity, _transform.right);
+            zmot = Vector3.Dot(_charControl.velocity, _transform.forward);
 
             if (xmot < 0.5f)
             {

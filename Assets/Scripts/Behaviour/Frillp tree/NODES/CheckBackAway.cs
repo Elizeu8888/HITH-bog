@@ -6,13 +6,13 @@ using BehaviorTree;
 
 namespace BehaviorTree
 {
-    public class CheckMoveToPlayer : Node
+    public class CheckBackAway : Node
     {
 
         Transform _transform;
         float _Distance;
 
-        public CheckMoveToPlayer(Transform transform, float distance)
+        public CheckBackAway(Transform transform, float distance)
         {
             _transform = transform;
         }
@@ -23,7 +23,7 @@ namespace BehaviorTree
             _Distance = Vector3.Distance(EnemyMediumBT._Player.transform.position, _transform.position);
 
 
-            if (_Distance <= 30f && _Distance >= 6f)
+            if (_Distance <= 6f)
             {
                 state = NodeState.SUCCESS;
                 return state;
