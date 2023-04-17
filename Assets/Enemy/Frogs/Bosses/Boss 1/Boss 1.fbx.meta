@@ -6,6 +6,12 @@ ModelImporter:
   - first:
       74: 726865251487581790
     second: Large idle
+  - first:
+      74: 4716884087702473102
+    second: second Fight boss anim
+  - first:
+      74: -9110401163455148440
+    second: Fight boss anim
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -38,7 +44,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -92,7 +98,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.015
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

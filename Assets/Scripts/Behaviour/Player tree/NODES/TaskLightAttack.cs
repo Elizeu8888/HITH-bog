@@ -25,9 +25,12 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            if(!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+
+            PlayerBT._WeapAttack.Attack();
+
+            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                PlayerBT._WeapAttack.Attack();
+                
             }
 
             state = NodeState.RUNNING;

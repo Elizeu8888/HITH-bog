@@ -15,18 +15,20 @@ namespace BehaviorTree
         Transform _transform;
         Vector3 _desVelocity;
 
-        float x = 0f, xmot = 0f;
-        float z = 0f, zmot = 0f;
         NavMeshAgent _NavMesh;
         CharacterController _charControl;
+        float _changeTime;
 
-        public TaskBackAway(Transform transform, NavMeshAgent nav, CharacterController cha)
+        public TaskBackAway(Transform transform, float changetime)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
-            _NavMesh = nav;
-            _charControl = cha;
+            _NavMesh = transform.GetComponent<NavMeshAgent>();
+            _charControl = transform.GetComponent<CharacterController>();
+            changetime = _changeTime;
         }
+
+
         public override NodeState LogicEvaluate()
         {
 
@@ -37,15 +39,16 @@ namespace BehaviorTree
 
             Vector3 lookPos;
             Quaternion targetRot;
+            _changeTime -= Time.deltaTime;
 
-            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f - _transform.forward * 10;
+            Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f - _transform.forward * 5;
 
-            if (EnemyMediumBT._Dir_Change_Timer <= 0.5f)
+            if (_changeTime <= 0.3f)
             {
                 if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, 8f, NavMesh.AllAreas))
                 {
                     _NavMesh.destination = hit.position;
-                    EnemyMediumBT._Dir_Change_Timer = 1f;
+                    _changeTime = 1f;
                 }
             }
 
@@ -56,32 +59,22 @@ namespace BehaviorTree
             targetRot = Quaternion.LookRotation(lookPos);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 3f);
 
-            _charControl.Move(_desVelocity.normalized * 6f * Time.deltaTime);
+            //_charControl.Move(_desVelocity.normalized * 7f * Time.deltaTime);
 
-            _NavMesh.velocity = _charControl.velocity;
+            //_NavMesh.velocity = _charControl.velocity;
 
+            _NavMesh.speed = 17f;
 
-            xmot = Vector3.Dot(_charControl.velocity, _transform.right);
-            zmot = Vector3.Dot(_charControl.velocity, _transform.forward);
+            _transform.gameObject.GetComponent<EnemyMediumBT>().MovementAnim();
 
-            if (xmot < 0.5f)
+            if (_NavMesh.velocity.magnitude <= 0.1f)
             {
-                _Anim.SetFloat("Xdir", x = Mathf.MoveTowards(x, 1, 3f * Time.deltaTime));
+                _Anim.SetBool("Moving", false);
             }
-            if (xmot > 0.5f)
+            else
             {
-                _Anim.SetFloat("Xdir", x = Mathf.MoveTowards(x, -1, 5f * Time.deltaTime));
+                _Anim.SetBool("Moving", true);
             }
-            if (zmot < 0.5f)
-            {
-                _Anim.SetFloat("Ydir", z = Mathf.MoveTowards(z, 1, 3f * Time.deltaTime));
-            }
-            if (zmot > 0.5f)
-            {
-                _Anim.SetFloat("Ydir", z = Mathf.MoveTowards(z, -1, 3f * Time.deltaTime));
-            }
-
-            _Anim.SetBool("Moving", true);
 
 
             state = NodeState.RUNNING;

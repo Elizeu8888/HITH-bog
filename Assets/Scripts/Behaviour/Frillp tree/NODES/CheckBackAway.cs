@@ -19,9 +19,7 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-
-            _Distance = Vector3.Distance(EnemyMediumBT._Player.transform.position, _transform.position);
-
+            _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
             if (_Distance <= 6f)
             {

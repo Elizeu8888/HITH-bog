@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using PlayerManager;
+using EnemyManager;
 
 public class DamageBox : MonoBehaviour
 {
     public Collider _Coll;
     public float lifeTime = 1f, damage = 15f;
     public int leftright = 1;
+    public string tagName = "1";
+    public GameObject damageInitiator;
     
     void Start()
     {
@@ -29,17 +32,25 @@ public class DamageBox : MonoBehaviour
                 continue;
             }
 
-            Debug.Log(c.tag);
-
-            switch (c.tag)
+            if(c.transform.parent == null)
             {
-                case "Player":
-                    c.transform.parent.GetComponent<PlayerHealthAndDamaged>().HitByAttack(damage, leftright);
-                    break;
-                default:
-                    break;
+                break;
+            }
 
-            }        
+            if(c.tag == tagName)
+            {
+                if (c.transform.parent.GetComponent<PlayerHealthAndDamaged>() != null)
+                {
+
+                    c.transform.parent.GetComponent<PlayerHealthAndDamaged>().HitByAttack(damage, leftright,damageInitiator);
+
+                }
+                else if(c.transform.parent.GetComponent<EnemyHealthManager>() != null)
+                {
+                    c.transform.parent.GetComponent<EnemyHealthManager>().HitByAttack(damage, leftright,damageInitiator);
+
+                }
+            }
 
 
         }

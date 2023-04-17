@@ -12,18 +12,19 @@ namespace BehaviorTree
         Transform _transform;
         float _Distance;
 
+        Animator _Anim;
+
         public CheckMoveToPlayer(Transform transform, float distance)
         {
             _transform = transform;
+            _Anim = transform.gameObject.GetComponent<Animator>();
         }
 
         public override NodeState LogicEvaluate()
         {
+            _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            _Distance = Vector3.Distance(EnemyMediumBT._Player.transform.position, _transform.position);
-
-
-            if (_Distance <= 30f && _Distance >= 6f)
+            if (_Distance <= 30f && _Distance >= 10f && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 state = NodeState.SUCCESS;
                 return state;

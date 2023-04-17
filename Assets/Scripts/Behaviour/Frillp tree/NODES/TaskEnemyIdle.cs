@@ -24,7 +24,8 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            _NavMesh.enabled = false;
+            _NavMesh.enabled = true;
+            _NavMesh.destination = _transform.position;
             
             Debug.Log("idle");
 

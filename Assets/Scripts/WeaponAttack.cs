@@ -6,33 +6,74 @@ public class WeaponAttack : MonoBehaviour
 {
 
     public Collider _Coll;
+    public string tagName;
 
-    public static bool comboPossible, attackPossible = true;
+    public float damage;
+
+    public string[] _AttackLightAnimNames;
+    public string[] _DashAttacks;
+    public ParticleSystem _LeftAttackParticle, _RightAttackParticle;
+
+    public bool comboPossible, attackPossible = true;
     public int comboStep = 0;
 
     private Animator _Anim;
+
+    GameObject damageBox;
+    public GameObject damageBoxPrefab;
+    public Transform weaponLoc;
+    float missedCombo = 0f;
+    public bool canBlock = true;
+
+    public int dashDir;
 
     void Start()
     {
         _Anim = gameObject.GetComponent<Animator>();
     }
 
-    public void DealDamage()
+    void Update()
     {
-        LaunchDamage(_Coll, 10f);
+        if(missedCombo >= 0f)
+            missedCombo -= Time.deltaTime;
+    }
+
+    public void DashAttack()
+    {
+        if(comboPossible)
+        {
+            canBlock = false;
+            _Anim.Play(_DashAttacks[dashDir], 0);
+            _Anim.Play(_DashAttacks[dashDir], 1);
+            comboStep = 0;
+            comboPossible = false;
+        }
+
     }
 
     public void Attack()
     {
+        canBlock = false;
         if (comboStep == 0)
         {
-            _Anim.Play("sword Light 1", 0);
-            _Anim.Play("sword Light 1", 1);
+            _Anim.Play(_AttackLightAnimNames[0], 0);
+            _Anim.Play(_AttackLightAnimNames[0], 1);
             comboStep = 1;
             return;
         }
         if (comboStep != 0)
         {
+            if(missedCombo >= 0f && comboPossible == true)
+            {
+                comboStep += 1;
+                
+                comboPossible = false;
+
+                Combo();
+
+                missedCombo = 0f;
+            }
+
             if (comboPossible)
             {
                 comboStep += 1;
@@ -47,51 +88,93 @@ public class WeaponAttack : MonoBehaviour
     }
     public void Combo()
     {
+
         if (comboStep == 2)
         {
-            _Anim.Play("Sword Light 2",0);
-            _Anim.Play("Sword Light 2",1);
+            _Anim.Play(_AttackLightAnimNames[1], 0);
+            _Anim.Play(_AttackLightAnimNames[1], 1);
+            return;
         }
         if (comboStep == 3)
-            _Anim.Play("attack3");
+        {
+            _Anim.Play(_AttackLightAnimNames[2], 0);
+            _Anim.Play(_AttackLightAnimNames[2], 1);
+            return;
+        }
+        if (comboStep == 4)
+        {
+            _Anim.Play(_AttackLightAnimNames[3], 0);
+            _Anim.Play(_AttackLightAnimNames[3], 1);
+            return;
+        }
+        if (missedCombo <= 0f)
+        {
+            missedCombo = 0.2f;
+        }
 
+        canBlock = true;
+    }
+
+    public void EnemyCombo()
+    {
+        float chance = Random.Range(0f, 1f);
+
+        if(chance <= 0.6f)
+        {
+            comboStep += 1;
+            comboPossible = false;
+        }
     }
 
     public void ComboReset()
     {
+        StartCoroutine(ComboResetCor());
+    }
+
+    public IEnumerator ComboResetCor()
+    {
+        yield return new WaitForSeconds(0.2f);
         comboPossible = false;
         comboStep = 0;
+        canBlock = true;
     }
 
-    public void LaunchDamage(Collider col, float damage)
+
+    void DealDamageLeft()// this is called in an animation
     {
-
-        Collider[] cols = Physics.OverlapBox(col.bounds.center, col.bounds.extents, col.transform.rotation, LayerMask.GetMask("HitBox"));
-
-        foreach (Collider c in cols)
-        {
-
-            if (c.transform.parent == transform)
-            {
-                continue;
-            }
-
-            Debug.Log(c.tag);
-
-            switch (c.tag)
-            {
-                case "Enemy":
-                    Debug.Log("HIT");
-                    break;
-                default:
-                    Debug.Log("nopedidntHIT");
-                    break;
-
-            }
-
-            c.SendMessageUpwards("HitByAttack", damage);
-
-        }
+        SpawnDamageBox(damage, damageBox, damageBoxPrefab, weaponLoc, 1, tagName, gameObject);
 
     }
+    void DealDamageRight()// this is called in an animation
+    {
+        SpawnDamageBox(damage, damageBox, damageBoxPrefab, weaponLoc, 2, tagName, gameObject);
+    }
+
+    void SpawnDamageBox(float dam, GameObject item, GameObject prefab, Transform loc, int leftright, string tagname, GameObject initiator)// this is mainly used to spawn hitbox
+    {
+        Destroy(item);
+        item = Instantiate(prefab, loc.position, Quaternion.identity);
+        item.transform.parent = loc;
+        item.GetComponent<DamageBox>().leftright = leftright;
+        item.GetComponent<DamageBox>().damage = dam;
+        item.GetComponent<DamageBox>().tagName = tagname;
+        item.GetComponent<DamageBox>().damageInitiator = initiator;
+        item.transform.localPosition = new Vector3(0, 0, 0);
+        item.transform.localRotation = Quaternion.identity;
+    }
+
+    public void TurnOnMeleeEffect_Right()
+    {
+        _RightAttackParticle.Play();
+        _RightAttackParticle.Clear();
+
+    }
+    public void TurnOnMeleeEffect_Left()
+    {
+        _LeftAttackParticle.Play();
+        _RightAttackParticle.Clear();
+    }
+
+
+
 }

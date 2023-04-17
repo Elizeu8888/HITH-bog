@@ -24,6 +24,7 @@ namespace BehaviorTree
         float z = 0f;
         float x = 0f;
 
+        float _2ndLayerWeight;
         public TaskSprinting(Transform transform, Transform camera)
         {
             _transform = transform;
@@ -35,7 +36,7 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-
+            _Anim.SetLayerWeight(1, 0);
             // uses input to find direction
             float horizontal = Input.GetAxisRaw("Horizontal") * 0.7f;
             float vertical = Input.GetAxisRaw("Vertical");

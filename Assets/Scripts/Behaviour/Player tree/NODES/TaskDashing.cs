@@ -1,0 +1,91 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using BehaviorTree;
+using PlayerManager;
+
+namespace BehaviorTree
+{
+    public class TaskDashing : Node
+    {
+        private Animator _Anim;
+        private Transform _transform;
+
+        Transform cam;
+        float targetangle = 0f;
+
+        private CharacterController _CharacterController;
+
+        Vector3 direction = new Vector3(0,0,0);
+
+
+        float turnsmoothing = 0.1f;
+        float turnsmoothvelocity = 0.35f;
+
+        public TaskDashing(Transform transform, Transform camera)
+        {
+            _transform = transform;
+            _Anim = transform.GetComponent<Animator>();
+            _CharacterController = transform.GetComponent<CharacterController>();
+            cam = camera;
+        }
+
+        public override NodeState LogicEvaluate()
+        {
+
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            {
+                float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnsmoothvelocity, turnsmoothing);
+                _transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                state = NodeState.RUNNING;
+                return state;
+            }
+
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+
+            _transform.GetComponent<WeaponAttack>().comboPossible = false;
+            _transform.GetComponent<WeaponAttack>().comboStep = 0;
+
+
+            // finds direction of movement
+            if(_Anim.GetBool("Dashing") == false)
+            {
+                if(horizontal == 0f && vertical == 0f)
+                {
+                    direction = new Vector3(0f, 0f, -1f).normalized;
+                }
+                else
+                    direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+                _Anim.SetFloat("InputY", direction.z);
+                _Anim.SetFloat("InputX", direction.x);
+
+                targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            }
+
+            // here is the movement
+            Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
+
+            
+            _CharacterController.Move(movedir.normalized * 16f * Time.deltaTime);
+
+
+            //here it sets the animation parameters for strafing. it first gets input from the mouses X input so it can add to make the character move their feet when rotating
+
+            _Anim.SetBool("Dashing", true);
+            _Anim.SetBool("Moving", false);
+            _Anim.SetBool("Sprinting", false);
+
+            state = NodeState.RUNNING;
+            return state;
+
+
+        }
+
+
+    }
+}
+

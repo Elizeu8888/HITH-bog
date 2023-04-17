@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
+using PlayerManager;
 
 namespace BehaviorTree
 {
@@ -26,7 +27,7 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            if (Input.GetKeyDown("r") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+            if (Input.GetKeyDown("r") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
                 _incombat = !_incombat;
                 if (_Anim.GetBool("InCombat") == true)

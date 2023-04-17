@@ -23,6 +23,8 @@ namespace BehaviorTree
 
         float z = 0f;
         float x = 0f;
+        float forwardTimer = 0f;
+
 
         public TaskMovement(Transform transform, Transform camera)
         {
@@ -40,7 +42,14 @@ namespace BehaviorTree
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
+            if(vertical == 1f)
+            {
+                forwardTimer += Time.deltaTime;
+            }
+            else
+            {
+                forwardTimer = 0f;
+            }
 
             // finds direction of movement
             float targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
@@ -52,13 +61,15 @@ namespace BehaviorTree
             // here is the movement
             Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
 
-            if(Input.GetAxisRaw("Vertical") == 1f && Input.GetAxisRaw("Horizontal") != 1f && Input.GetAxisRaw("Horizontal") != -1f)
+            if(Input.GetAxisRaw("Vertical") == 1f && Input.GetAxisRaw("Horizontal") == 0f && forwardTimer >= 0.3f && _Anim.GetBool("InCombat") == false)
             {
-                _CharacterController.Move(movedir.normalized * 11 * Time.deltaTime);
+                _CharacterController.Move(movedir.normalized * 10 * Time.deltaTime);
+                _Anim.SetBool("JogReady", true);
             }
             else
             {
-                _CharacterController.Move(movedir.normalized * 7 * Time.deltaTime);
+                _Anim.SetBool("JogReady", false);
+                _CharacterController.Move(movedir.normalized * 6 * Time.deltaTime);
             }
             
 

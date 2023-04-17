@@ -36,6 +36,7 @@ namespace BehaviorTree
             if (PlayerBT._HealthScript._BlockResult == BlockResult.Blocked)
             {
                 _Anim.Play("sword guard Block", 1);
+                _Anim.Play("sword guard Block", 0);
             }
 
             state = NodeState.RUNNING;

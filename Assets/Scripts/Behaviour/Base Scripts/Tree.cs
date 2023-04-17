@@ -15,20 +15,8 @@ namespace BehaviorTree
             _root = SetupTree();
         }
 
-        private void FixedUpdate()
-        {
-            if (_root != null)
-            {
-                _root.FixedEvaluate();
-
-            }
-               
-        }
-
-
         private void Update()
         {
-            attackCooldown -= UnityEngine.Time.deltaTime;
 
             if (_root != null)
                 _root.LogicEvaluate();

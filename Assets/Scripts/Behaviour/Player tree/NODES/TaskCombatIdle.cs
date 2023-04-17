@@ -26,7 +26,8 @@ namespace BehaviorTree
 
 
         public override NodeState LogicEvaluate()
-        {                    
+        {
+            _Anim.SetLayerWeight(1, 1);
 
             //rotation
 
