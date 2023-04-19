@@ -21,6 +21,9 @@ ModelImporter:
   - first:
       74: -1060636109370319095
     second: Fight camera anim.001
+  - first:
+      74: 7941252063790611393
+    second: Fight camera anim
   externalObjects: {}
   materials:
     materialImportMode: 2
