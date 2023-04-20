@@ -10,6 +10,17 @@ namespace PlayerManager
         public Transform _StartPosition;
         public Transform _EndPosition;
 
+        [Header("Animation")]
+
+        public Transform[] _CutSceneTransforms;
+        public Transform[] _CutSceneEndTransform;
+
+        [Header("Animation")]
+
+        public Animator[] _CutSceneAnimators;
+        public string[] _CutSceneAnimations;
+
+
 
     }
 }

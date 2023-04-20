@@ -17,13 +17,14 @@ namespace BehaviorTree
         private CharacterController _CharacterController;
 
         float elapsedTime;
-        float desiredTime = 0.5f;
+        float desiredTime = 0.8f;
 
         Transform _transform;
 
         PlayerCinematicHandler _CineMan;
 
         Transform _Cam;
+        CharacterContGravity grav;
 
         public TaskMoveToCutSceneStart(Transform transform, Transform cam)
         {
@@ -32,6 +33,7 @@ namespace BehaviorTree
             _Anim = transform.GetComponent<Animator>();
             _CineMan = transform.GetComponent<PlayerCinematicHandler>();
             _CharacterController = transform.GetComponent<CharacterController>();
+            grav = transform.GetComponent<CharacterContGravity>();
         }
 
 
@@ -39,7 +41,7 @@ namespace BehaviorTree
         {
 
             // here is the movement
-
+            grav.enabled = false;
 
             Vector3 locPoint = new Vector3(_CineMan._CinematicInScene._StartPosition.position.x, _transform.position.y, _CineMan._CinematicInScene._StartPosition.position.z);
             Vector3 movedir = locPoint - _transform.position;
@@ -52,7 +54,8 @@ namespace BehaviorTree
             //_CharacterController.Move(movedir * 6f * Time.deltaTime);
             _CharacterController.enabled = false;
             _transform.position = Vector3.Lerp(_transform.position, _CineMan._CinematicInScene._StartPosition.position, percent);
-            _transform.rotation = Quaternion.Lerp(_transform.rotation, _CineMan._CinematicInScene._StartPosition.rotation, percent);
+            _transform.rotation = Quaternion.Lerp(_transform.rotation, _CineMan._CinematicInScene._StartPosition.rotation, percent / 2);
+            
 
             //_transform.rotation = Quaternion.LookRotation(_CharacterController.velocity);
 

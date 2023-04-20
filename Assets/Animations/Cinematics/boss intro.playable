@@ -85,7 +85,7 @@ MonoBehaviour:
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
     m_Recordable: 0
-    m_PostExtrapolationMode: 1
+    m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 1
     m_PostExtrapolationTime: Infinity
     m_PreExtrapolationTime: 0
@@ -122,13 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: -9110401163455148440, guid: d954c7c8d72434146940c48e76667249, type: 3}
-  m_Position: {x: 0, y: 0, z: 0}
-  m_EulerAngles: {x: 0, y: 0, z: 0}
-  m_UseTrackMatchFields: 1
-  m_MatchTargetFields: 63
-  m_RemoveStartOffset: 1
-  m_ApplyFootIK: 1
+  m_Clip: {fileID: 7400000, guid: 955895ec03934244499580f1a258d540, type: 2}
+  m_Position: {x: -143.1, y: 39.15, z: -18.61}
+  m_EulerAngles: {x: 0, y: -95.24, z: 0}
+  m_UseTrackMatchFields: 0
+  m_MatchTargetFields: 0
+  m_RemoveStartOffset: 0
+  m_ApplyFootIK: 0
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -155,7 +155,7 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &1230540341382652903
+--- !u!114 &855588365969220019
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: -6792192863496702069, guid: d954c7c8d72434146940c48e76667249, type: 3}
+  m_Clip: {fileID: 7400000, guid: be3c8e87e70ea3b45b93934fb139ef63, type: 2}
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030f85c3f73729f4f976f66ffb23b875, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 7941252063790611393, guid: d954c7c8d72434146940c48e76667249, type: 3}
+  m_Clip: {fileID: 7941252063790611393, guid: fa0e5978fd3f75a4eb320692628192bc, type: 3}
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_UseTrackMatchFields: 1
@@ -333,7 +333,7 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 1230540341382652903}
+    m_Asset: {fileID: 855588365969220019}
     m_Duration: 18.875
     m_TimeScale: 1
     m_ParentTrack: {fileID: 8462704756367189586}
@@ -394,11 +394,11 @@ MonoBehaviour:
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
     m_Recordable: 0
-    m_PostExtrapolationMode: 1
+    m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 1
     m_PostExtrapolationTime: Infinity
     m_PreExtrapolationTime: 0
-    m_DisplayName: fight player anim
+    m_DisplayName: ply_Boss 1 anim
   m_Markers:
     m_Objects: []
   m_InfiniteClipPreExtrapolation: 0
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Position: {x: 0, y: 0, z: 0}
   m_EulerAngles: {x: 0, y: 0, z: 0}
   m_AvatarMask: {fileID: 0}
-  m_ApplyAvatarMask: 1
+  m_ApplyAvatarMask: 0
   m_TrackOffset: 0
   m_InfiniteClip: {fileID: 0}
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}

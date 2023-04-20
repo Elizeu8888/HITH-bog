@@ -37,9 +37,12 @@ namespace PlayerManager
 
         public bool _InCutScene = false;
 
+        CharacterContGravity grav;
+
         void Start()
         {
             _CharCont = gameObject.GetComponent<CharacterController>();
+            grav = gameObject.GetComponent<CharacterContGravity>();
         }
 
         void Update()
@@ -58,14 +61,43 @@ namespace PlayerManager
         public void PlayCutSceneTimeLine()
         {
 
-            direct.Play();
+
+            /*foreach (Animator i in _CinematicInScene._CutSceneAnimators)
+            {
+                i.Play(_CinematicInScene._CutSceneAnimations[i], 2);
+                i.SetLayerWeight(2, 1);
+            }*/
+            grav.enabled = false;
+
+            for (int i = 0; i < _CinematicInScene._CutSceneAnimators.Length; i++)
+            {
+                _CinematicInScene._CutSceneAnimators[i].Play(_CinematicInScene._CutSceneAnimations[i], 2);
+                _CinematicInScene._CutSceneAnimators[i].SetLayerWeight(2, 1);
+            }
+            //direct.Play();
                   
         }
 
         public void EventEndCutScene()
         {
             _InputPressed = false;
-            transform.position = _CinematicInScene._EndPosition.position;
+
+            grav.enabled = false;
+
+            for (int i = 0; i < _CinematicInScene._CutSceneTransforms.Length; i++)
+            {
+                _CinematicInScene._CutSceneTransforms[i].position = _CinematicInScene._CutSceneEndTransform[i].position;
+            }
+
+            for (int i = 0; i < _CinematicInScene._CutSceneAnimators.Length; i++)
+            {
+                //_CinematicInScene._CutSceneAnimators[i].Play(_CinematicInScene._CutSceneAnimations[i], 2);
+                _CinematicInScene._CutSceneAnimators[i].SetLayerWeight(2, 0);
+            }
+
+            //transform.position = _CinematicInScene._EndPosition.position;
+            //transform.position = _CinematicInScene._EndPosition.position;
+
             _CameraRig.position = _CinematicInScene._EndPosition.position;
             _CharCont.enabled = true;
             _InCutScene = false;

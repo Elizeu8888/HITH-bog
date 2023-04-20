@@ -37,6 +37,8 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
+            _transform.rotation = _CineMan._CinematicInScene._StartPosition.rotation;
+
             // here is the movement
             _CineMan.PlayCutSceneTimeLine();
 
