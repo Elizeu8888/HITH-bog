@@ -7,12 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WILLOW 4
+  m_Name: WILLOW 6
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHATEST_ON
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
   - _ENABLE_FOG_ON_TRANSPARENT
@@ -22,17 +21,17 @@ Material:
   m_InvalidKeywords:
   - _WINDQUALITY_BEST
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
-  - TransparentDepthPostpass
-  - RayTracingPrepass
   - TransparentBackface
+  - RayTracingPrepass
+  - TransparentDepthPostpass
   m_LockedProperties: _ZTestTransparent
   m_SavedProperties:
     serializedVersion: 3
@@ -42,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: e9c3ccf65bd02ba4da4e06a8df8f793e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 42c4127976228494ea93910f722472d3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -86,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e9c3ccf65bd02ba4da4e06a8df8f793e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 42c4127976228494ea93910f722472d3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -94,11 +93,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: bcc06616cd692df43b39fd1907ce6be9, type: 3}
+        m_Texture: {fileID: 2800000, guid: f8ebe934b1b548049829b769bba0edf8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
-        m_Texture: {fileID: 2800000, guid: bcc06616cd692df43b39fd1907ce6be9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SmoothnessMask:
@@ -155,13 +154,13 @@ Material:
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
-    - _AlphaClipThreshold: 0
+    - _AlphaClipThreshold: 0.053
     - _AlphaClipThresholdDepthPostpass: 0.6
     - _AlphaClipThresholdDepthPrepass: 0.9
-    - _AlphaCutoff: 0.68
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoff: 0.75
+    - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
-    - _AlphaCutoffPrepass: 0.728
+    - _AlphaCutoffPrepass: 0.75
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
@@ -174,7 +173,7 @@ Material:
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0
     - _CullModeForward: 0
-    - _Cutoff: 0.68
+    - _Cutoff: 0.75
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
     - _DetailNormalScale: 1
@@ -185,8 +184,8 @@ Material:
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
     - _DoubleSidedEnable: 1
-    - _DoubleSidedGIMode: 2
-    - _DoubleSidedNormalMode: 0
+    - _DoubleSidedGIMode: 0
+    - _DoubleSidedNormalMode: 1
     - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
@@ -219,7 +218,7 @@ Material:
     - _MetallicRemapMin: 0
     - _NormalMapKwToggle: 1
     - _NormalMapSpace: 0
-    - _NormalScale: 0.57
+    - _NormalScale: 0.13
     - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
@@ -256,7 +255,7 @@ Material:
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SubsurfaceMask: 1
-    - _SubsurfaceScale: 0.0001
+    - _SubsurfaceScale: 1.06
     - _SupportDecals: 1
     - _SurfaceType: 1
     - _TexWorldScale: 1
@@ -277,9 +276,9 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _WINDQUALITY: 4
-    - _WindQuality: 0
+    - _WindQuality: 1
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
+    - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
@@ -288,7 +287,7 @@ Material:
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
-    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
