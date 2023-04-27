@@ -47,13 +47,6 @@ public class EnemyMediumBT : BT_Tree
         _NavMesh.updateRotation = false;
     }
 
-    void OnAnimatorMove()// this allows root motion to work
-    {
-        //rootMotion = _EnemAnim.deltaPosition;
-        //_charControl.Move(rootMotion * 1.5f);        
-        
-    }
-
     void AttackChance(float chance, float minCool)// generates a chance for attack
     {
 
