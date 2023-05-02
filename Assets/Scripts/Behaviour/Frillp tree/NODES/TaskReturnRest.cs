@@ -28,6 +28,8 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
+
+
             if (_NavMesh.enabled == false)
             {
                 _NavMesh.enabled = true;

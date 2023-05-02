@@ -9,6 +9,7 @@ namespace BehaviorTree
 {
     public class TaskMediumHurt : Node
     {
+        //ENEMY NODE
         private Animator _Anim;
         private Transform _transform;
         NavMeshAgent _NavMesh;

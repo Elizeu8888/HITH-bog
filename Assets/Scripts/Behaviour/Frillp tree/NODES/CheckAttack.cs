@@ -11,20 +11,21 @@ namespace BehaviorTree
     {
         //ENEMY NODE
         Transform _transform;
-        float _Distance;
+        float _Distance, refDistance;
         Animator _Anim;
 
         public CheckAttack(Transform transform)
         {
             _transform = transform;
             _Anim = _transform.GetComponent<Animator>();
+            refDistance = _transform.GetComponent<EnemyMediumBT>().attackDistance;
         }
 
         public override NodeState LogicEvaluate()
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            if (_transform.gameObject.GetComponent<EnemyMediumBT>()._CanAttack == true && _Distance >= 1.8f && _Distance <= 9f)
+            if (_transform.gameObject.GetComponent<EnemyMediumBT>()._CanAttack == true && _Distance >= 1.8f && _Distance <= refDistance)
             {
                 state = NodeState.SUCCESS;
                 return state;

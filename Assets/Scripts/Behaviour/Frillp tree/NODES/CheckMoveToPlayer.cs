@@ -10,7 +10,7 @@ namespace BehaviorTree
     {
 
         Transform _transform;
-        float _Distance;
+        float _Distance, refDistance, refDistance2;
 
         Animator _Anim;
 
@@ -18,14 +18,19 @@ namespace BehaviorTree
         {
             _transform = transform;
             _Anim = transform.gameObject.GetComponent<Animator>();
+            refDistance = _transform.GetComponent<EnemyMediumBT>().hoverDistance;
+            refDistance2 = _transform.GetComponent<EnemyMediumBT>().returnDistance;
         }
 
         public override NodeState LogicEvaluate()
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            if (_Distance <= 30f && _Distance >= 10f && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (_Distance <= refDistance2 && _Distance >= refDistance && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
+
+                _transform.GetComponent<EnemyMediumBT>()._InCombat = true;
+
                 state = NodeState.SUCCESS;
                 return state;
             }

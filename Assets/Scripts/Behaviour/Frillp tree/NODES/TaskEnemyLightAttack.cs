@@ -9,7 +9,7 @@ namespace BehaviorTree
 {
     public class TaskEnemyLightAttack : Node
     {
-
+        //ENEMY NODE
         private Animator _Anim;
         private string[] _Animations;
         private Transform _transform;

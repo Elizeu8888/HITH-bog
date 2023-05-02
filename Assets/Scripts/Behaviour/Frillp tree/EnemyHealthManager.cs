@@ -33,6 +33,7 @@ namespace EnemyManager
         public GameObject _HealthBar;
         Material _HealthBarMat;
         float fillPercent;
+        float duration = 0.2f;
 
         [SerializeField] float _I_Frames = 0f;
 
@@ -64,7 +65,10 @@ namespace EnemyManager
 
         void FixedUpdate()
         {
-
+            if(isBlocking)
+            {
+                BlockTimer();
+            }
 
             if (_I_Frames > 0f)
             {
@@ -93,6 +97,20 @@ namespace EnemyManager
         {
             isBlocking = true;
         }
+        void BlockTimer()
+        {
+
+            duration -= Time.deltaTime;
+
+            if( duration <= 0)
+            {
+                isBlocking = false;
+                duration = Random.Range(0.3f, 1f);
+            }
+
+
+        }
+
 
         public void EnemyEndDashEvent()
         {
@@ -106,6 +124,14 @@ namespace EnemyManager
 
             if (_I_Frames == 0f && dashing == false)
             {
+
+                float blockchance = Random.Range(0f, 1f);
+                if(blockchance >= 0.4f)
+                {
+                    isBlocking = true;
+                }
+
+
                 if (isBlocking == true && blockTimer > 0.2f)//this will BLOCK
                 {
                     _BlockResult = BlockResult.Blocked;

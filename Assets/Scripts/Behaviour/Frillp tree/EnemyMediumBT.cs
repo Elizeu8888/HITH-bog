@@ -6,6 +6,8 @@ using EnemyManager;
 
 public class EnemyMediumBT : BT_Tree
 {
+    public bool _InCombat;
+
     public Transform _CurrentEnemyTransform;
     public GameObject plyRefrence;
     public static GameObject _Player;
@@ -30,6 +32,8 @@ public class EnemyMediumBT : BT_Tree
 
     EnemyHealthManager _HealthMan;
 
+    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f;
+
     void Awake()// cant use start since Tree node uses it
     {
         _EnemyRestPos = enemyRestPos;
@@ -46,6 +50,13 @@ public class EnemyMediumBT : BT_Tree
         //_NavMesh.updatePosition = false;
         _NavMesh.updateRotation = false;
     }
+
+    void OnAnimatorMove()
+    {
+
+
+    }
+
 
     void AttackChance(float chance, float minCool)// generates a chance for attack
     {
@@ -125,7 +136,7 @@ public class EnemyMediumBT : BT_Tree
     {
 
         _PlayerDistance = Vector3.Distance(_Player.transform.position, _CurrentEnemyTransform.position);
-        if(_PlayerDistance <= 9f && _PlayerDistance > 4f)
+        if(_PlayerDistance <= attackDistance && _PlayerDistance > 4f)
             AttackChance(0.65f, 0.5f);
         if (_PlayerDistance <= 4f)
             AttackChance(0.86f, 0.4f);
@@ -151,6 +162,11 @@ public class EnemyMediumBT : BT_Tree
                 new CheckEnemyBeingHit(_CurrentEnemyTransform),
                 new TaskMediumHurt(_CurrentEnemyTransform),
 
+            }),
+            new Sequence(new List<Node>
+            {
+                new CheckEnemyBlocking(_CurrentEnemyTransform),
+                new TaskEnemyBlock(_CurrentEnemyTransform),
             }),
             new Sequence(new List<Node>
             {

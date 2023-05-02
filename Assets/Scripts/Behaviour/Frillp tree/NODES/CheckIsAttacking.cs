@@ -9,7 +9,7 @@ namespace BehaviorTree
 {
     public class CheckIsAttacking : Node
     {
-
+        //ENEMY NODE
         Transform _transform;
         float _Distance;
         Animator _Anim;

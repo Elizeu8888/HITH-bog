@@ -10,18 +10,21 @@ namespace BehaviorTree
     {
 
         Transform _transform;
-        float _Distance;
+        float _Distance, refDistance;
 
         public CheckBackAway(Transform transform, float distance)
         {
             _transform = transform;
+            refDistance = _transform.GetComponent<EnemyMediumBT>().backawayDistance;
         }
 
         public override NodeState LogicEvaluate()
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            if (_Distance <= 6f)
+
+
+            if (_Distance <= refDistance)
             {
                 state = NodeState.SUCCESS;
                 return state;

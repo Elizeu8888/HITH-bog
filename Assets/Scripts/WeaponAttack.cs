@@ -50,7 +50,6 @@ public class WeaponAttack : MonoBehaviour
         }
 
     }
-
     public void Attack()
     {
         canBlock = false;
