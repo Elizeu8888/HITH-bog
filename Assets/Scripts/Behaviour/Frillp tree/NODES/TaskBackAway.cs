@@ -31,11 +31,13 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-
             if (_NavMesh.enabled == false)
             {
                 _NavMesh.enabled = true;
             }
+
+
+            //_NavMesh.velocity = Vector3.zero;
 
             Vector3 lookPos;
             Quaternion targetRot;
@@ -63,7 +65,7 @@ namespace BehaviorTree
 
             //_NavMesh.velocity = _charControl.velocity;
 
-            _NavMesh.speed = 17f;
+            _NavMesh.speed = 7f;
 
             _transform.gameObject.GetComponent<EnemyMediumBT>().MovementAnim();
 

@@ -23,6 +23,7 @@ namespace BehaviorTree
 
             if (_transform.GetComponent<EnemyHealthManager>().dashing == true)
             {
+
                 _Anim.SetBool("Dashing", true);
                 state = NodeState.SUCCESS;
                 return state;

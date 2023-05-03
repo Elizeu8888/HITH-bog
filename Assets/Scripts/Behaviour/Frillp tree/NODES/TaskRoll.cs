@@ -36,12 +36,12 @@ namespace BehaviorTree
             _transform.GetComponent<WeaponAttack>().comboPossible = false;
             _transform.GetComponent<WeaponAttack>().comboStep = 0;
 
-            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsName("dash"))
+            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
             {
-                _Anim.Play("dash");
+                _Anim.Play("Dash", 0);
             }
 
-            _NavMesh.destination = -5f * _transform.forward;
+            //_NavMesh.destination = -5f * _transform.forward;
 
             _NavMesh.velocity = _Anim.deltaPosition / Time.deltaTime;
 

@@ -25,7 +25,7 @@ namespace BehaviorTree
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            if (_transform.gameObject.GetComponent<EnemyMediumBT>()._CanAttack == true && _Distance >= 1.8f && _Distance <= refDistance)
+            if (_transform.gameObject.GetComponent<EnemyMediumBT>()._CanAttack == true && _Distance >= 1.8f && _Distance <= refDistance && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right"))
             {
                 state = NodeState.SUCCESS;
                 return state;

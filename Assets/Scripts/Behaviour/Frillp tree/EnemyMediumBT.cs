@@ -3,6 +3,7 @@ using BehaviorTree;
 using UnityEngine;
 using UnityEngine.AI;
 using EnemyManager;
+using UnityEngine.Rendering.HighDefinition;
 
 public class EnemyMediumBT : BT_Tree
 {
@@ -32,7 +33,7 @@ public class EnemyMediumBT : BT_Tree
 
     EnemyHealthManager _HealthMan;
 
-    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f;
+    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f, blockDistance = 7f;
 
     void Awake()// cant use start since Tree node uses it
     {
@@ -54,7 +55,7 @@ public class EnemyMediumBT : BT_Tree
     void OnAnimatorMove()
     {
 
-
+        //_NavMesh.velocity = _EnemAnim.deltaPosition / Time.deltaTime;
     }
 
 
@@ -92,6 +93,7 @@ public class EnemyMediumBT : BT_Tree
 
         if (_RollChance < chance)
         {
+            Debug.Log("roll triggerd");
             _HealthMan.dashing = true;
             _RollChance = 1f;
         }
@@ -132,19 +134,43 @@ public class EnemyMediumBT : BT_Tree
 
     }
 
+    bool BlockChanceCheck()
+    {
+        if (_EnemAnim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        {
+            return false;
+        }
+        if (_EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Block Reaction"))
+        {
+            return false;
+        }
+        return true;
+    }
+
     void FixedUpdate()//use this spparingly
     {
 
         _PlayerDistance = Vector3.Distance(_Player.transform.position, _CurrentEnemyTransform.position);
-        if(_PlayerDistance <= attackDistance && _PlayerDistance > 4f)
-            AttackChance(0.65f, 0.5f);
-        if (_PlayerDistance <= 4f)
-            AttackChance(0.86f, 0.4f);
-        if (_PlayerDistance <= 4f  && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
-            RollChance(0.3f, 0.5f, 2f);
-        if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
-            RollChance(0.6f, 0.8f, 3.5f);
-        if (_PlayerDistance > 9f)
+
+        if(BlockChanceCheck() == true)
+        {
+            if (_PlayerDistance <= attackDistance && _PlayerDistance > 3f)
+                AttackChance(0.65f, 0.5f);
+            if (_PlayerDistance <= 3f)
+                AttackChance(0.86f, 0.4f);
+            if (_PlayerDistance <= 4f && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+                RollChance(0.2f, 0.5f, 2f);
+            if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+                RollChance(0.4f, 0.8f, 3.5f);
+        }
+        else
+        {
+            _HealthMan.dashing = false;
+
+        }
+
+
+        if (_PlayerDistance > attackDistance)
         {
             _CanAttack = false;
         }
@@ -159,20 +185,33 @@ public class EnemyMediumBT : BT_Tree
 
             new Sequence(new List<Node>
             {
-                new CheckEnemyBeingHit(_CurrentEnemyTransform),
+                new CheckEnemyBeingDamaged(_CurrentEnemyTransform),
                 new TaskMediumHurt(_CurrentEnemyTransform),
 
-            }),
-            new Sequence(new List<Node>
-            {
-                new CheckEnemyBlocking(_CurrentEnemyTransform),
-                new TaskEnemyBlock(_CurrentEnemyTransform),
             }),
             new Sequence(new List<Node>
             {
                 new CheckEnemyRoll(_CurrentEnemyTransform),
                 new TaskRoll(_CurrentEnemyTransform),
 
+            }),
+            new Sequence(new List<Node>
+            {
+                new CheckEnemyBlocking(_CurrentEnemyTransform),
+               
+
+                new Selector(new List<Node>
+                {
+                    new Sequence(new List<Node>
+                    {
+                        new CheckEnemyBeingHit(_CurrentEnemyTransform),
+                        new TaskEnemyBlockReaction(_CurrentEnemyTransform),
+
+                    }),
+
+                     new TaskEnemyBlock(_CurrentEnemyTransform),
+                }),
+                
             }),
             new Sequence(new List<Node>
             {

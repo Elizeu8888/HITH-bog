@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponAttack : MonoBehaviour
 {
+
+    public static event Action<int> OnAttack;
+    public static event Action<int> OnComboReset;
 
     public Collider _Coll;
     public string tagName;
@@ -27,9 +31,23 @@ public class WeaponAttack : MonoBehaviour
 
     public int dashDir;
 
+    int attacker;
+
     void Start()
     {
         _Anim = gameObject.GetComponent<Animator>();
+
+        if(gameObject.GetComponent<EnemyMediumBT>() != null)
+        {
+            attacker = 1;
+        }
+        if (gameObject.GetComponent<PlayerBT>() != null)
+        {
+            attacker = 0;
+        }
+
+
+
     }
 
     void Update()
@@ -43,6 +61,7 @@ public class WeaponAttack : MonoBehaviour
         if(comboPossible)
         {
             canBlock = false;
+            OnAttack.Invoke(attacker);
             _Anim.Play(_DashAttacks[dashDir], 0);
             _Anim.Play(_DashAttacks[dashDir], 1);
             comboStep = 0;
@@ -55,6 +74,7 @@ public class WeaponAttack : MonoBehaviour
         canBlock = false;
         if (comboStep == 0)
         {
+            OnAttack?.Invoke(attacker);
             _Anim.Play(_AttackLightAnimNames[0], 0);
             _Anim.Play(_AttackLightAnimNames[0], 1);
             comboStep = 1;
@@ -90,18 +110,21 @@ public class WeaponAttack : MonoBehaviour
 
         if (comboStep == 2)
         {
+            OnAttack?.Invoke(attacker);
             _Anim.Play(_AttackLightAnimNames[1], 0);
             _Anim.Play(_AttackLightAnimNames[1], 1);
             return;
         }
         if (comboStep == 3)
         {
+            OnAttack?.Invoke(attacker);
             _Anim.Play(_AttackLightAnimNames[2], 0);
             _Anim.Play(_AttackLightAnimNames[2], 1);
             return;
         }
         if (comboStep == 4)
         {
+            OnAttack?.Invoke(attacker);
             _Anim.Play(_AttackLightAnimNames[3], 0);
             _Anim.Play(_AttackLightAnimNames[3], 1);
             return;
@@ -116,7 +139,7 @@ public class WeaponAttack : MonoBehaviour
 
     public void EnemyCombo()
     {
-        float chance = Random.Range(0f, 1f);
+        float chance = UnityEngine.Random.Range(0f, 1f);
 
         if(chance <= 0.6f)
         {
@@ -133,6 +156,7 @@ public class WeaponAttack : MonoBehaviour
     public IEnumerator ComboResetCor()
     {
         yield return new WaitForSeconds(0.2f);
+        OnComboReset?.Invoke(attacker);
         comboPossible = false;
         comboStep = 0;
         canBlock = true;

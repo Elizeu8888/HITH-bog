@@ -21,7 +21,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (_transform.gameObject.GetComponent<EnemyHealthManager>().beingDamaged == true)
+            if (_transform.gameObject.GetComponent<EnemyHealthManager>().beingHit == true)
             {
                 _Anim.SetBool("BeingHurt", true);
                 state = NodeState.SUCCESS;

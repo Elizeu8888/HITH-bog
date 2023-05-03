@@ -40,6 +40,9 @@ namespace BehaviorTree
                 _NavMesh.enabled = true;
             }
 
+            //_NavMesh.velocity = Vector3.zero;
+
+
             Vector3 lookPos;
             Quaternion targetRot;
 

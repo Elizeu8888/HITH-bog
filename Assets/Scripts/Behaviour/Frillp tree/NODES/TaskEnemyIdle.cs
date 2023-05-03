@@ -26,8 +26,9 @@ namespace BehaviorTree
 
             _NavMesh.enabled = true;
             _NavMesh.destination = _transform.position;
+            _NavMesh.speed = 0f;
+            _NavMesh.velocity = Vector3.zero;
             
-            Debug.Log("idle");
 
             state = NodeState.RUNNING;
             return state;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
+using EnemyManager;
 
 namespace BehaviorTree
 {
@@ -10,11 +11,13 @@ namespace BehaviorTree
     {
         private Animator _Anim;
         private Transform _transform;
+        EnemyHealthManager enemyHealthMan;
 
         public TaskHurt(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
+            enemyHealthMan = _transform.GetComponent<EnemyHealthManager>();
         }
 
         public override NodeState LogicEvaluate()
@@ -33,7 +36,6 @@ namespace BehaviorTree
             }
 
             PlayerBT._WeapAttack.ComboReset();
-
 
 
             _Anim.SetBool("Blocking", false);

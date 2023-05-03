@@ -35,23 +35,24 @@ namespace BehaviorTree
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
+            Debug.Log("movetoPlayer");
+
             if (_NavMesh.enabled == false)
             {
                 _NavMesh.enabled = true;
-            }         
+            }
+
+            //_NavMesh.velocity = Vector3.zero;
 
             Vector3 lookPos;
             Quaternion targetRot;
 
-            _changeTimer -= Time.deltaTime;
 
-            if (_changeTimer <= 0f)
-            {
-                speed = 7f;
-                _NavMesh.destination = EnemyMediumBT._Player.transform.position;
-                _changeTimer = 1f;
+            speed = 7f;
+            _NavMesh.destination = EnemyMediumBT._Player.transform.position;
+            _changeTimer = 1f;
 
-            }
+            
 
             _desVelocity = _NavMesh.desiredVelocity;
 
@@ -65,6 +66,7 @@ namespace BehaviorTree
             //_NavMesh.velocity = _charControl.velocity;
 
             _NavMesh.speed = speed;
+            //_NavMesh.velocity = Vector3.zero;
 
             _transform.gameObject.GetComponent<EnemyMediumBT>().MovementAnim();
 

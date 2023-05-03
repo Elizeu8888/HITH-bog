@@ -33,7 +33,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
             _NavMesh.enabled = true;
-            if(_transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance <= 2.2f)
+            if(_transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance <= 2.5f)
             {
                 _NavMesh.destination = _transform.position;
                 _NavMesh.velocity = Vector3.zero;
@@ -42,7 +42,7 @@ namespace BehaviorTree
             {
                 _NavMesh.destination = EnemyMediumBT._Player.transform.position;
 
-                _NavMesh.velocity = 1.2f * (_Anim.deltaPosition / Time.deltaTime);
+                _NavMesh.velocity = 1f * (_Anim.deltaPosition / Time.deltaTime);
 
                 Vector3 lookPos;
                 Quaternion targetRot;
@@ -52,15 +52,6 @@ namespace BehaviorTree
                 targetRot = Quaternion.LookRotation(lookPos);
                 _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 5f);
             }
-
-            //_NavMesh.stoppingDistance = 1f;
-            //Vector3 rootmotion = _Anim.deltaPosition;
-            //rootmotion.y = _NavMesh.nextPosition.y;
-            //_transform.position = rootmotion;
-            //_NavMesh.nextPosition = _transform.position;
-
-            //rootMotion = _Anim.deltaPosition;
-            //_charControl.Move(rootMotion * 1f);
             
 
             state = NodeState.RUNNING;

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 using BehaviorTree;
+using EnemyManager;
 
 namespace BehaviorTree
 {
@@ -24,13 +25,17 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
+            //_NavMesh.velocity = _Anim.deltaPosition / Time.deltaTime;
 
-            _NavMesh.enabled = true;
+            _Anim.SetBool("Blocking", false);
 
-            _NavMesh.velocity = _Anim.deltaPosition / Time.deltaTime;
+            _NavMesh.destination = _transform.position;
 
-            _transform.GetComponent<WeaponAttack>().ComboReset();
 
+            _transform.GetComponent<WeaponAttack>().comboPossible = false;
+            _transform.GetComponent<WeaponAttack>().comboStep = 0;
+
+            _transform.GetComponent<EnemyHealthManager>().dashing = false;
 
             _Anim.SetBool("Moving", false);
 

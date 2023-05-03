@@ -19,7 +19,7 @@ namespace EnemyManager
     {
         public bool beingDamaged = false, beingHit = false;
         public float blockTimer = 0f;
-        public bool isBlocking = false;
+        public bool isBlocking = false, blockAttack = false;
 
         public BlockResult _BlockResult;
 
@@ -37,18 +37,44 @@ namespace EnemyManager
 
         [SerializeField] float _I_Frames = 0f;
 
+        Animator _Anim;
+
+        public int _EnemyType;
+
+        private void OnEnable()
+        {
+            WeaponAttack.OnAttack += BlockChance;
+        }
+
+        private void OnDisable()
+        {
+            WeaponAttack.OnAttack -= BlockChance;
+        }
+
         void Start()
         {
             _CurrentHealth = _MaxHealth;
             HealthBarStart();
+
+
+
         }
 
+
+        void StartFindType()
+        {
+            if(_EnemyType == 0 )
+            {
+
+            }
+        }
         void HealthBarStart()
         {
             _HealthBarMat = _HealthBar.GetComponent<MeshRenderer>().material;
 
             _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
 
+            _Anim = gameObject.GetComponent<Animator>();
         }
 
         void Update()
@@ -81,7 +107,7 @@ namespace EnemyManager
             }
 
 
-            if (_I_Frames == 0)
+            if (_I_Frames <= 0)
             {
                 beingDamaged = false;
                 beingHit = false;
@@ -104,8 +130,10 @@ namespace EnemyManager
 
             if( duration <= 0)
             {
+                
+                duration = Random.Range(0.4f, 1f);
                 isBlocking = false;
-                duration = Random.Range(0.3f, 1f);
+                blockAttack = false;
             }
 
 
@@ -118,39 +146,64 @@ namespace EnemyManager
             transform.GetComponent<WeaponAttack>().canBlock = true;
         }
 
+        void BlockChance(int enemyID)
+        {
+
+            if (enemyID != 0 || BlockChanceCheck() == false)
+                return;
+
+            float blockchance = Random.Range(0f, 1f);
+            if (blockchance >= 0.3f)
+            {
+                isBlocking = true;
+            }
+        }
+
+        bool BlockChanceCheck()
+        {
+            if(_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+            {
+                return false;
+            }
+            if (_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Block Reaction"))
+            {
+                return false;
+            }
+            if (_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
+            {
+                return false;
+
+            }
+            return true;
+        }
+
         public void HitByAttack(float attackDamage, int _LeftRight, GameObject attacker)
         {
 
 
-            if (_I_Frames == 0f && dashing == false)
+            if (_I_Frames <= 0f && dashing == false)
             {
 
-                float blockchance = Random.Range(0f, 1f);
-                if(blockchance >= 0.4f)
-                {
-                    isBlocking = true;
-                }
 
-
-                if (isBlocking == true && blockTimer > 0.2f)//this will BLOCK
+                if (blockAttack == true && blockTimer > 0.1f)//this will BLOCK
                 {
                     _BlockResult = BlockResult.Blocked;
                     blockTimer = 1f;
                     _I_Frames = 0.2f;
                     return;
                 }
-                else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 1)//this will DEFLECT LEFT
+                else if (blockAttack == true && blockTimer < 0.1f && _LeftRight == 1)//this will DEFLECT LEFT
                 {
                     _BlockResult = BlockResult.DeflectedLeft;
                     blockTimer = 1f;
-                    _I_Frames = 0.3f;
+                    _I_Frames = 0.2f;
                     return;
                 }
-                else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 2)//this will DEFLECT RIGHT
+                else if (blockAttack == true && blockTimer < 0.1f && _LeftRight == 2)//this will DEFLECT RIGHT
                 {
                     _BlockResult = BlockResult.DeflectedRight;
                     blockTimer = 1f;
-                    _I_Frames = 0.3f;
+                    _I_Frames = 0.2f;
                     return;
                 }
 
@@ -158,7 +211,7 @@ namespace EnemyManager
 
                 _CurrentHealth -= attackDamage;
                 beingDamaged = true;
-                _I_Frames = 0.25f;
+                _I_Frames = 0.35f;
             }
 
             return;

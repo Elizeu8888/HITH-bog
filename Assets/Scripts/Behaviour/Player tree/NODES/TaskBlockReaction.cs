@@ -9,7 +9,7 @@ namespace BehaviorTree
 {
     public class TaskBlockReaction : Node
     {
-        //ENEMY NODE
+
         private Animator _Anim;
         private Transform _transform;
 
