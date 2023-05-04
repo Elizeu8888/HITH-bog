@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9e4ed5a6f56fb4ebd693e39684f36f, type: 3}
   m_Name: VolumetricClouds
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -540,11 +540,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   colorMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   tint:
     m_OverrideState: 0
     m_Value: {r: 0.49056602, g: 0.108757555, b: 0.108757555, a: 1}
@@ -562,10 +562,10 @@ MonoBehaviour:
     m_Value: 1000
   baseHeight:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 450
   maximumHeight:
     m_OverrideState: 0
-    m_Value: 100
+    m_Value: 580.9
   meanFreePath:
     m_OverrideState: 0
     m_Value: 400
@@ -573,8 +573,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   albedo:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.22908506, g: 0.49056602, b: 0.39443165, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 0
     m_Value: 1
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   postExposure:
     m_OverrideState: 0
     m_Value: 0.3
@@ -865,7 +865,7 @@ MonoBehaviour:
     m_Value: 0.00001
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 70.7
+    m_Value: 85
   farFocusEnd:
     m_OverrideState: 1
     m_Value: 96.54
@@ -877,7 +877,7 @@ MonoBehaviour:
     m_Value: 0
   m_FarSampleCount:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 3
   m_FarMaxBlur:
     m_OverrideState: 1
     m_Value: 0.15

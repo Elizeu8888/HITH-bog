@@ -28,7 +28,7 @@ namespace BehaviorTree
 
             if (_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true)
             {
-                _transform.GetComponent<NavMeshAgent>().stoppingDistance = 0.5f;
+                _transform.GetComponent<NavMeshAgent>().stoppingDistance = 0.8f;
                 state = NodeState.SUCCESS;
                 return state;
             }

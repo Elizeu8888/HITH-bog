@@ -10,6 +10,8 @@ namespace EnemyManager
         Blocked,
         DeflectedLeft,
         DeflectedRight,
+        HurtLeft,
+        HurtRight,
         Broken,
         Down
     }
@@ -38,6 +40,9 @@ namespace EnemyManager
         [SerializeField] float _I_Frames = 0f;
 
         Animator _Anim;
+        bool dyingTrigger = false;
+
+        public string[] deathAnim;
 
         public int _EnemyType;
 
@@ -83,10 +88,28 @@ namespace EnemyManager
             fillPercent = scriptHealthPercent;
             _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
 
-            if(_CurrentHealth <= 0f)
+            if (_CurrentHealth <= 0f)
             {
-                Destroy(gameObject);
+                Dying();
             }
+        }
+
+        void Dying()
+        {
+            if (dyingTrigger == false)
+            {
+                _Anim.SetLayerWeight(2, 1);
+                _Anim.Play(deathAnim[Random.Range(0, deathAnim.Length)], 2);
+                dyingTrigger = true;
+            }
+
+
+
+        }
+
+        public void Death()
+        {
+            Destroy(gameObject);
         }
 
         void FixedUpdate()
@@ -207,7 +230,14 @@ namespace EnemyManager
                     return;
                 }
 
-
+                if(_LeftRight == 1)
+                {
+                    _BlockResult = BlockResult.HurtLeft;
+                }
+                else
+                {
+                    _BlockResult = BlockResult.HurtRight;
+                }
 
                 _CurrentHealth -= attackDamage;
                 beingDamaged = true;

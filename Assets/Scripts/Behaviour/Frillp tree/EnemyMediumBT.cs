@@ -93,7 +93,6 @@ public class EnemyMediumBT : BT_Tree
 
         if (_RollChance < chance)
         {
-            Debug.Log("roll triggerd");
             _HealthMan.dashing = true;
             _RollChance = 1f;
         }
@@ -114,14 +113,6 @@ public class EnemyMediumBT : BT_Tree
         xmot = Vector3.Dot(_NavMesh.velocity, transform.right);
         zmot = Vector3.Dot(_NavMesh.velocity, transform.forward);
 
-        if (xmot <= 0.5f)
-        {
-            _EnemAnim.SetFloat("Xdir", x = Mathf.MoveTowards(x, 1, 3f * Time.deltaTime));
-        }
-        if (xmot > 0.5f)
-        {
-            _EnemAnim.SetFloat("Xdir", x = Mathf.MoveTowards(x, -1, 5f * Time.deltaTime));
-        }
         if (zmot <= 0.5f)
         {
             _EnemAnim.SetFloat("Ydir", z = Mathf.MoveTowards(z, 1, 3f * Time.deltaTime));
@@ -129,6 +120,15 @@ public class EnemyMediumBT : BT_Tree
         if (zmot > 0.5f)
         {
             _EnemAnim.SetFloat("Ydir", z = Mathf.MoveTowards(z, -1, 3f * Time.deltaTime));
+        }
+
+        if (xmot <= 0.5f)
+        {
+            _EnemAnim.SetFloat("Xdir", x = Mathf.MoveTowards(x, 1, 3f * Time.deltaTime));
+        }
+        if (xmot > 0.5f)
+        {
+            _EnemAnim.SetFloat("Xdir", x = Mathf.MoveTowards(x, -1, 5f * Time.deltaTime));
         }
 
 

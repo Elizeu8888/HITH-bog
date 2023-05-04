@@ -35,7 +35,6 @@ namespace BehaviorTree
         {
             _Distance = _transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance;
 
-            Debug.Log("movetoPlayer");
 
             if (_NavMesh.enabled == false)
             {

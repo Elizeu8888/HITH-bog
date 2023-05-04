@@ -100,7 +100,13 @@ public class PlayerBT : BT_Tree
             
                     new CheckDashPressed(transform),
 
+                    new Sequence(new List<Node>
+                    {
+                        new CheckDashing(transform),
+                        new CheckRollPressed(transform),
+                        new TaskPlayerRoll(transform,_Camera),
 
+                    }),
                     new Sequence(new List<Node>
                     {
                         new CheckDashing(transform),

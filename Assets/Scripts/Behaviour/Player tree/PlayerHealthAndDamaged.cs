@@ -29,7 +29,7 @@ namespace PlayerManager
         Material _HealthBarMat;
         float healthFillPercent;
 
-        public bool dashing;
+        public bool dashing, rolling;
         public float dashTimer;
 
         public float _CurrentPosture, _MaxPosture;
@@ -136,6 +136,7 @@ namespace PlayerManager
         {
             dashTimer = 0f;
             dashing = false;
+            rolling = false;
             transform.GetComponent<WeaponAttack>().canBlock = true;
             playerAnim.SetBool("Dashing", false);
         }
@@ -144,7 +145,7 @@ namespace PlayerManager
         {
 
 
-            if (_I_Frames == 0f && dashing == false)
+            if (_I_Frames == 0f && rolling == false)
             {
 
                 if(postureBroken == false)

@@ -61,7 +61,7 @@ public class WeaponAttack : MonoBehaviour
         if(comboPossible)
         {
             canBlock = false;
-            OnAttack.Invoke(attacker);
+            OnAttack?.Invoke(attacker);
             _Anim.Play(_DashAttacks[dashDir], 0);
             _Anim.Play(_DashAttacks[dashDir], 1);
             comboStep = 0;
