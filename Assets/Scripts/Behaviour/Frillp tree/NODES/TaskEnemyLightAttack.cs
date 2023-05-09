@@ -10,6 +10,7 @@ namespace BehaviorTree
     public class TaskEnemyLightAttack : Node
     {
         //ENEMY NODE
+
         private Animator _Anim;
         private string[] _Animations;
         private Transform _transform;
@@ -34,7 +35,9 @@ namespace BehaviorTree
         {
 
             if (!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-            {            
+            {
+
+
                 _transform.gameObject.GetComponent<WeaponAttack>().Attack();
             }
 

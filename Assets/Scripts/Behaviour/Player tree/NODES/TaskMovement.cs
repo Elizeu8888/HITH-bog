@@ -63,13 +63,13 @@ namespace BehaviorTree
 
             if(Input.GetAxisRaw("Vertical") == 1f && Input.GetAxisRaw("Horizontal") == 0f && forwardTimer >= 0.3f && _Anim.GetBool("InCombat") == false)
             {
-                _CharacterController.Move(movedir.normalized * 10 * Time.deltaTime);
+                _CharacterController.Move(movedir.normalized * 12 * Time.deltaTime);
                 _Anim.SetBool("JogReady", true);
             }
             else
             {
                 _Anim.SetBool("JogReady", false);
-                _CharacterController.Move(movedir.normalized * 6 * Time.deltaTime);
+                _CharacterController.Move(movedir.normalized * 9 * Time.deltaTime);
             }
             
 

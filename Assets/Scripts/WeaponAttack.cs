@@ -7,6 +7,7 @@ public class WeaponAttack : MonoBehaviour
 {
 
     public static event Action<int> OnAttack;
+    public static event Action<int,Vector3> OnAttackPosition;
     public static event Action<int> OnComboReset;
 
     public Collider _Coll;
@@ -31,7 +32,7 @@ public class WeaponAttack : MonoBehaviour
 
     public int dashDir;
 
-    int attacker;
+    public int attacker;
 
     void Start()
     {
@@ -62,6 +63,7 @@ public class WeaponAttack : MonoBehaviour
         {
             canBlock = false;
             OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker,transform.position);
             _Anim.Play(_DashAttacks[dashDir], 0);
             _Anim.Play(_DashAttacks[dashDir], 1);
             comboStep = 0;
@@ -71,10 +73,12 @@ public class WeaponAttack : MonoBehaviour
     }
     public void Attack()
     {
-        canBlock = false;
+
         if (comboStep == 0)
         {
+            canBlock = false;
             OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker,transform.position);
             _Anim.Play(_AttackLightAnimNames[0], 0);
             _Anim.Play(_AttackLightAnimNames[0], 1);
             comboStep = 1;
@@ -84,6 +88,8 @@ public class WeaponAttack : MonoBehaviour
         {
             if(missedCombo >= 0f && comboPossible == true)
             {
+                canBlock = false;
+
                 comboStep += 1;
                 
                 comboPossible = false;
@@ -95,6 +101,7 @@ public class WeaponAttack : MonoBehaviour
 
             if (comboPossible)
             {
+                canBlock = false;
                 comboStep += 1;
                 comboPossible = false;
 
@@ -111,6 +118,7 @@ public class WeaponAttack : MonoBehaviour
         if (comboStep == 2)
         {
             OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker, transform.position);
             _Anim.Play(_AttackLightAnimNames[1], 0);
             _Anim.Play(_AttackLightAnimNames[1], 1);
             return;
@@ -118,6 +126,7 @@ public class WeaponAttack : MonoBehaviour
         if (comboStep == 3)
         {
             OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker, transform.position);
             _Anim.Play(_AttackLightAnimNames[2], 0);
             _Anim.Play(_AttackLightAnimNames[2], 1);
             return;
@@ -125,6 +134,7 @@ public class WeaponAttack : MonoBehaviour
         if (comboStep == 4)
         {
             OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker, transform.position);
             _Anim.Play(_AttackLightAnimNames[3], 0);
             _Anim.Play(_AttackLightAnimNames[3], 1);
             return;
@@ -155,7 +165,7 @@ public class WeaponAttack : MonoBehaviour
 
     public IEnumerator ComboResetCor()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
         OnComboReset?.Invoke(attacker);
         comboPossible = false;
         comboStep = 0;

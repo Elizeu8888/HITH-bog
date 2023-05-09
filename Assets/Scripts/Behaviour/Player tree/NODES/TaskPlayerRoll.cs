@@ -51,10 +51,14 @@ namespace BehaviorTree
             _transform.GetComponent<WeaponAttack>().dashDir = dashNum;
 
 
-            targetRot = Quaternion.LookRotation(direction);
-            _transform.rotation = targetRot;
+            float targetangle = Mathf.Atan2(_CharacterController.velocity.x, _CharacterController.velocity.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;// finds direction of movement
 
+
+            float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, targetangle, ref turnsmoothvelocity, turnsmoothing);// makes it so the player faces its movement direction
+            _transform.rotation = Quaternion.Euler(0f, angle, 0f);
             
+
+
             Debug.Log("rolling");
 
             state = NodeState.RUNNING;

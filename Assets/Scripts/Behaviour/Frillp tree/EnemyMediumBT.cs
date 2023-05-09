@@ -155,11 +155,11 @@ public class EnemyMediumBT : BT_Tree
         if(BlockChanceCheck() == true)
         {
             if (_PlayerDistance <= attackDistance && _PlayerDistance > 3f)
-                AttackChance(0.65f, 0.5f);
+                AttackChance(0.75f, 0.4f);
             if (_PlayerDistance <= 3f)
-                AttackChance(0.86f, 0.4f);
+                AttackChance(0.9f, 0.3f);
             if (_PlayerDistance <= 4f && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
-                RollChance(0.2f, 0.5f, 2f);
+                RollChance(0.35f, 0.5f, 2f);
             if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
                 RollChance(0.4f, 0.8f, 3.5f);
         }

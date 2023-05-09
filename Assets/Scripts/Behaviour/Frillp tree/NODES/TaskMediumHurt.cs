@@ -15,6 +15,10 @@ namespace BehaviorTree
         private Transform _transform;
         NavMeshAgent _NavMesh;
         EnemyHealthManager enemyHealthMan;
+
+
+        public static event System.Action<Vector3> OnAttackPosition;
+
         public TaskMediumHurt(Transform transform)
         {
             _transform = transform;
@@ -33,9 +37,11 @@ namespace BehaviorTree
 
             enemyHealthMan.dashing = false;
 
-            if (!_Anim.GetCurrentAnimatorStateInfo(1).IsName("Hurt"))
+            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
             {
+                OnAttackPosition?.Invoke(_transform.position);
                 _Anim.Play("Hurt", 0);
+                
             }
 
             _transform.GetComponent<WeaponAttack>().ComboReset();
