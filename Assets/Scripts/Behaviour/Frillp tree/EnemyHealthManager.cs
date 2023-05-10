@@ -19,7 +19,7 @@ namespace EnemyManager
 
     public class EnemyHealthManager : MonoBehaviour
     {
-        public bool beingDamaged = false, beingHit = false;
+        public bool beingDamaged = false, beingHit = false, staggered = false;
         public float blockTimer = 0f;
         public bool isBlocking = false, blockAttack = false;
 
@@ -37,13 +37,16 @@ namespace EnemyManager
         float fillPercent;
         float duration = 0.2f;
 
+        GameObject hurtInstant;
+        public GameObject hurtVFX;
+        public Transform bloodSpawn;
+
         [SerializeField] float _I_Frames = 0f;
 
         Animator _Anim;
         bool dyingTrigger = false;
 
         public string[] deathAnim;
-
         public int _EnemyType;
 
         private void OnEnable()
@@ -133,6 +136,7 @@ namespace EnemyManager
             if (_I_Frames <= 0)
             {
                 beingDamaged = false;
+                staggered = false;
                 beingHit = false;
             }
             else
@@ -162,6 +166,15 @@ namespace EnemyManager
 
         }
 
+        public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
+        {
+            Destroy(item);
+            item = Instantiate(prefab, loc.position, Quaternion.identity);
+            item.transform.parent = loc;
+            item.transform.localPosition = new Vector3(0, 0, 0);
+            item.transform.localRotation = Quaternion.identity;
+            Destroy(item, 0.5f);
+        }
 
         public void EnemyEndDashEvent()
         {
@@ -237,6 +250,17 @@ namespace EnemyManager
                 else
                 {
                     _BlockResult = BlockResult.HurtRight;
+                }
+
+
+
+
+
+                SpawnVFX(hurtInstant, hurtVFX, bloodSpawn);
+
+                if(Random.Range(0f,1f) >= 0.6f)
+                {
+                    staggered = true;
                 }
 
                 _CurrentHealth -= attackDamage;

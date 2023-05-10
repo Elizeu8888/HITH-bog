@@ -40,11 +40,6 @@ namespace BehaviorTree
         {
 
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-
             _transform.GetComponent<WeaponAttack>().comboPossible = true;
             _transform.GetComponent<WeaponAttack>().comboStep = 0;
 

@@ -12,22 +12,24 @@ namespace BehaviorTree
         private Animator _Anim;
         private Transform _transform;
         PlayerHealthAndDamaged plyHealth;
-
+        WeaponAttack weapAttack;
         public CheckDashPressed(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             plyHealth = _transform.GetComponent<PlayerHealthAndDamaged>();
+            weapAttack = _transform.GetComponent<WeaponAttack>();
         }
 
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetKeyDown("space") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (Input.GetKeyDown("space") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
 
                 plyHealth.dashing = true;
                 _transform.GetComponent<WeaponAttack>().canBlock = false;
+                weapAttack.ComboReset();
 
                 _Anim.Play("Dash", 0);
                 _Anim.Play("Dash", 1);

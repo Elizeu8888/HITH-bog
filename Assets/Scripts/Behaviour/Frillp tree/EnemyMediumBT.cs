@@ -185,14 +185,14 @@ public class EnemyMediumBT : BT_Tree
 
             new Sequence(new List<Node>
             {
-                new CheckEnemyBeingDamaged(_CurrentEnemyTransform),
-                new TaskMediumHurt(_CurrentEnemyTransform),
+                new CheckEnemyRoll(_CurrentEnemyTransform),
+                new TaskRoll(_CurrentEnemyTransform),
 
             }),
             new Sequence(new List<Node>
             {
-                new CheckEnemyRoll(_CurrentEnemyTransform),
-                new TaskRoll(_CurrentEnemyTransform),
+                new CheckEnemyBeingDamaged(_CurrentEnemyTransform),
+                new TaskMediumHurt(_CurrentEnemyTransform),
 
             }),
             new Sequence(new List<Node>

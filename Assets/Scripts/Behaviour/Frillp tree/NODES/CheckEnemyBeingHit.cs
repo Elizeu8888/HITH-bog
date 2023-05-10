@@ -11,7 +11,6 @@ namespace BehaviorTree
     {
         private Transform _transform;
         private Animator _Anim;
-
         public CheckEnemyBeingHit(Transform transform)
         {
             _transform = transform;

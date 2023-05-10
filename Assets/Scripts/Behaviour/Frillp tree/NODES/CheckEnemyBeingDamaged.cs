@@ -13,7 +13,7 @@ namespace BehaviorTree
         private Transform _transform;
         private Animator _Anim;
         EnemyHealthManager _EnemyMedium;
-
+        float ran = 0f;
         public CheckEnemyBeingDamaged(Transform transform)
         {
             _transform = transform;
@@ -24,10 +24,23 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (_EnemyMedium.beingDamaged == true)
+            if (_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
             {
                 _Anim.SetBool("BeingHurt", true);
                 state = NodeState.SUCCESS;
+                return state;
+            }
+            if (_EnemyMedium.beingDamaged == true)
+            {
+                if (_EnemyMedium.staggered == true)
+                {
+                    _Anim.SetBool("BeingHurt", true);
+                    state = NodeState.SUCCESS;
+                    return state;
+                }
+
+                _Anim.SetBool("BeingHurt", false);
+                state = NodeState.FAILURE;
                 return state;
             }
             else
