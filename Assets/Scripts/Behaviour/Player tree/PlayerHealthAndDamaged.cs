@@ -46,12 +46,27 @@ namespace PlayerManager
 
         Animator playerAnim;
 
+        GameObject hurtInstant;
+        public GameObject hurtVFX;
+        public Transform bloodSpawn;
+        public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
+        {
+            Destroy(item);
+            item = Instantiate(prefab, loc.position, Quaternion.identity);
+            item.transform.parent = loc;
+            item.transform.localPosition = new Vector3(0, 0, 0);
+            item.transform.localRotation = Quaternion.identity;
+            Destroy(item, 0.5f);
+        }
+
+
+
         void Start()
         {
             _CurrentHealth = _MaxHealth;
             HealthBarStart();
             playerAnim = transform.GetComponent<Animator>();
-            //PostureBarStart();
+            PostureBarStart();
         }
 
         void HealthBarStart()
@@ -74,6 +89,10 @@ namespace PlayerManager
             float scriptHealthPercent = (_CurrentHealth / _MaxHealth);
             healthFillPercent = scriptHealthPercent;
             _HealthBarMat.SetFloat("_CurrentFillPercent", healthFillPercent);
+
+            float scriptPosturePercent = (_CurrentPosture / _MaxPosture);
+            PostureFillPercent = scriptPosturePercent;
+            _PostureBarMat.SetFloat("_CurrentFillPercent", PostureFillPercent);
         }
 
         void FixedUpdate()
@@ -188,7 +207,7 @@ namespace PlayerManager
                 }
 
 
-
+                SpawnVFX(hurtInstant, hurtVFX, bloodSpawn);
                 _CurrentHealth -= attackDamage;
                 beingDamaged = true;
                 _I_Frames = 0.25f;

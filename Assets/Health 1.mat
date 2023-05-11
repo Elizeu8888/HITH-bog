@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Health
-  m_Shader: {fileID: -6465566751694194690, guid: fbbd5d2c09b8ef74e9fce86b94e99875,
+  m_Name: Health 1
+  m_Shader: {fileID: -6465566751694194690, guid: 99f882638ee99a24aa14d8409bd23d53,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -150,7 +150,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _CurrentFill: 0.5
-    - _CurrentFillPercent: 0.48
+    - _CurrentFillPercent: -0.1
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -253,12 +253,12 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _Emission: {r: 0.6698113, g: 0.16113384, b: 0.16113384, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _Empty: {r: 0.21698111, g: 0.0481043, b: 0.0481043, a: 0}
-    - _Fill: {r: 0.6415094, g: 0.14827341, b: 0.14827341, a: 0}
+    - _Empty: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0}
+    - _Fill: {r: 0.764151, g: 0.37126204, b: 0.635636, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

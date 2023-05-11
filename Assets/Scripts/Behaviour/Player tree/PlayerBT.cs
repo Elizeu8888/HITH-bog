@@ -74,7 +74,6 @@ public class PlayerBT : BT_Tree
                 new CheckMoveToCutScene(transform),
                 new TaskMoveToCutSceneStart(transform, _Camera),
             }),
-
             new Sequence(new List<Node>
             {
                 new CheckBeingDamaged(transform),

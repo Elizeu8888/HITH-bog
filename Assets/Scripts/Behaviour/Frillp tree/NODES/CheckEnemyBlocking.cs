@@ -36,7 +36,6 @@ namespace BehaviorTree
 
             if (enemyHealthMan.isBlocking == true && _Distance <= refDistance && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
             {
-                Debug.Log("blocking");
 
                 enemyHealthMan.blockAttack = true;
                 enemyHealthMan.dashing = false;

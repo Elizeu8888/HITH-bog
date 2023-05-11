@@ -245,7 +245,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: fdb18602662f66f4ba92169a2bd97e2e, type: 2}
-  m_Tag: Attack
+  m_Tag: Dash
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -475,8 +475,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword start Guard
-  m_Speed: 1
+  m_Name: Block Start
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2657157385843104827}
@@ -490,7 +490,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 5829292b42169fb4a8daa08a496489f6, type: 2}
-  m_Tag: 
+  m_Tag: Blocking
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -912,7 +912,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IDLE
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -947,9 +947,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.05
   m_TransitionOffset: 0
-  m_ExitTime: 0.7
+  m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -1637,7 +1637,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: sword guard Block
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6986779933098848405}
@@ -1886,7 +1886,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 7702a2b5e5463f44ab8e236184256c7c, type: 2}
-  m_Tag: Attack
+  m_Tag: Dash
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -2016,7 +2016,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: ad302832997dabb40a9bd6fa91ef00a8, type: 2}
-  m_Tag: 
+  m_Tag: Blocking
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -2465,16 +2465,16 @@ AnimatorStateMachine:
     m_Position: {x: -200, y: 430, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8622164191687530091}
-    m_Position: {x: -200, y: 390, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 191796929743936091}
     m_Position: {x: -200, y: 350, z: 0}
   - serializedVersion: 1
+    m_State: {fileID: 191796929743936091}
+    m_Position: {x: -200, y: 310, z: 0}
+  - serializedVersion: 1
     m_State: {fileID: -4744995975175123200}
-    m_Position: {x: -200, y: 270, z: 0}
+    m_Position: {x: -200, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8151270384402017424}
-    m_Position: {x: -200, y: 310, z: 0}
+    m_Position: {x: -200, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8209175064265946394}
     m_Position: {x: 1276.2402, y: 415.2935, z: 0}
@@ -2827,7 +2827,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 2
-  m_TransitionOffset: 0.005278377
+  m_TransitionOffset: 0
   m_ExitTime: 0.00000016447059
   m_HasExitTime: 0
   m_HasFixedDuration: 0
