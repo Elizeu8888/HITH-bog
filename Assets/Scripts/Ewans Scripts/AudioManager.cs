@@ -108,7 +108,6 @@ public class AudioManager : MonoBehaviour
 
         bool value = audioMixer.GetFloat("EnemySFX", out float volume);
         volume = Mathf.Pow(10f, volume / 20);
-        Debug.Log("stop");
 
         //audioSources[(int)AudioChannel.Ambiance].PlayOneShot(frillpDamageSounds[Random.Range(0, frillpDamageSounds.Length)]);
         Play3DClip(frillpDamageSounds[Random.Range(0, frillpDamageSounds.Length)], pos, volume * 0.4f);

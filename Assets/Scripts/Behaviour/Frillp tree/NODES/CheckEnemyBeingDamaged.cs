@@ -13,7 +13,7 @@ namespace BehaviorTree
         private Transform _transform;
         private Animator _Anim;
         EnemyHealthManager _EnemyMedium;
-        float ran = 0f;
+
         public CheckEnemyBeingDamaged(Transform transform)
         {
             _transform = transform;

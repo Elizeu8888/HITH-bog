@@ -10,17 +10,21 @@ namespace BehaviorTree
     {
         private Animator _Anim;
         private Transform _transform;
+        PlayerBT _plyBT;
+
+
 
         public CheckAttackPressed(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
+            _plyBT = _transform.GetComponent<PlayerBT>();
         }
 
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetMouseButtonDown(0) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Roll") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
+            if (_plyBT.attackPressed && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Roll") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
             {
                 PlayerBT._HealthScript.isBlocking = false;
                 state = NodeState.SUCCESS;

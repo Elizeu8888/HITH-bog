@@ -27,9 +27,11 @@ namespace BehaviorTree
             }
 
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");// uses input to find direction
+            float horizontal = InputManager.movementInput.x;
+            float vertical = InputManager.movementInput.y;
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            Debug.Log(horizontal);
 
             if (direction.magnitude >= 0.1f)
             {

@@ -20,8 +20,8 @@ namespace BehaviorTree
         Vector3 direction = new Vector3(0,0,0);
 
 
-        float turnsmoothing = 0.1f;
-        float turnsmoothvelocity = 0.35f;
+        float turnsmoothing = 0.12f;
+        float turnsmoothvelocity = 0.45f;
 
         public TaskDashing(Transform transform, Transform camera)
         {
@@ -43,8 +43,8 @@ namespace BehaviorTree
                 return state;
             }
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = InputManager.movementInput.x;
+            float vertical = InputManager.movementInput.y;// uses input to find direction
 
             _transform.GetComponent<WeaponAttack>().comboPossible = false;
             _transform.GetComponent<WeaponAttack>().comboStep = 0;
@@ -71,6 +71,18 @@ namespace BehaviorTree
 
             
             _CharacterController.Move(movedir.normalized * 16f * Time.deltaTime);
+
+
+            if (_transform.GetComponent<PlayerHealthAndDamaged>().rolling == true)
+            {
+
+                //_transform.GetComponent<WeaponAttack>().dashDir = dashNum;
+
+                float velDirection = Mathf.Atan2(_CharacterController.velocity.x, _CharacterController.velocity.z) * Mathf.Rad2Deg;
+
+                float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, velDirection, ref turnsmoothvelocity, turnsmoothing);// makes it so the player faces its movement direction
+                _transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
 
 
             //here it sets the animation parameters for strafing. it first gets input from the mouses X input so it can add to make the character move their feet when rotating

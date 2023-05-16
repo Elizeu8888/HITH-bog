@@ -30,6 +30,35 @@ public class PlayerBT : BT_Tree
     private CharacterController _CharacterController;
 
 
+    public bool attackPressed = false, dashPressed = false;
+
+
+    void OnEnable()
+    {
+        InputManager.OnAttackPressed += AttackPressed;
+    }
+
+    void OnDisable()
+    {
+        InputManager.OnAttackPressed -= AttackPressed;
+    }
+
+
+    void AttackPressed()
+    {
+        
+        StartCoroutine(AttackPressedCorou());
+    }
+
+    public System.Collections.IEnumerator AttackPressedCorou()
+    {
+        attackPressed = true;
+        yield return new WaitForSeconds(0.05f);
+        attackPressed = false;
+        yield return null;
+    }
+
+
     public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
     {
         Destroy(item);
@@ -93,10 +122,10 @@ public class PlayerBT : BT_Tree
                 new CheckInCombat(transform, _InCombat),
                 new TaskEnteringCombat(transform),
 
+
                 new Selector(new List<Node>
                 {
 
-            
                     new CheckDashPressed(transform),
 
                     new Sequence(new List<Node>

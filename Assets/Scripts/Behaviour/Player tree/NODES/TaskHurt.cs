@@ -12,16 +12,20 @@ namespace BehaviorTree
         private Animator _Anim;
         private Transform _transform;
         EnemyHealthManager enemyHealthMan;
+        CharacterController characterController;
 
         public TaskHurt(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             enemyHealthMan = _transform.GetComponent<EnemyHealthManager>();
+            characterController = _transform.GetComponent<CharacterController>();
         }
 
         public override NodeState LogicEvaluate()
         {
+            characterController.velocity.Set(0f,0f,0f);           
+
             if (!_Anim.GetCurrentAnimatorStateInfo(1).IsName("Hurt"))
             {
                 _Anim.Play("Hurt", 0);
