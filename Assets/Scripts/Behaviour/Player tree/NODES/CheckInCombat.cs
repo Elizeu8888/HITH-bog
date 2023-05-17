@@ -16,20 +16,22 @@ namespace BehaviorTree
 
         float _2ndLayerWeight;
 
+        PlayerBT _plyBT;
         public CheckInCombat(Transform transform, bool incombat)
         {
             incombat = _incombat;
 
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
+            _plyBT = _transform.GetComponent<PlayerBT>();
         }
 
 
         public override NodeState LogicEvaluate()
         {
-            if (Input.GetKeyDown("r") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
+            if (_plyBT.weaponDrawPressed && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
-                _incombat = !_incombat;
+                _plyBT._InCombat = !_plyBT._InCombat;
                 if (_Anim.GetBool("InCombat") == true)
                     _Anim.SetBool("InCombat", false);
 
@@ -43,7 +45,7 @@ namespace BehaviorTree
 
 
 
-            if (_incombat == true)
+            if (_plyBT._InCombat == true)
             {
                 if (_2ndLayerWeight <= 1)
                     _Anim.SetLayerWeight(1, _2ndLayerWeight += 3f * Time.deltaTime);

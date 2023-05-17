@@ -33,7 +33,9 @@ public class EnemyMediumBT : BT_Tree
 
     EnemyHealthManager _HealthMan;
 
-    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f, blockDistance = 7f;
+    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f, blockDistance = 7f, rollDistance = 4f;
+
+    public float movementSpeed = 8f, backawaySpeed = 10f;
 
     void Awake()// cant use start since Tree node uses it
     {
@@ -158,7 +160,7 @@ public class EnemyMediumBT : BT_Tree
                 AttackChance(0.75f, 0.4f);
             if (_PlayerDistance <= 3f)
                 AttackChance(0.9f, 0.3f);
-            if (_PlayerDistance <= 4f && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+            if (_PlayerDistance <= rollDistance && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
                 RollChance(0.35f, 0.5f, 2f);
             if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
                 RollChance(0.4f, 0.8f, 3.5f);

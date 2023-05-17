@@ -27,25 +27,31 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
                 
-            if (_Anim.GetFloat("InputX") == 0f)
+            float horizontal = InputManager.movementInput.x;
+            float vertical = InputManager.movementInput.y;// uses input to find direction
+
+            if (horizontal < 0.2f)
             {
-                if (_Anim.GetFloat("InputY") > 0f)
+                if (vertical > 0f)
                 {
                     dashNum = 0;
                 }
-                if (_Anim.GetFloat("InputY") < 0f)
+                if (vertical < 0f)
                 {
                     dashNum = 1;
                 }
             }
-            if (_Anim.GetFloat("InputX") > 0f)
+            if (horizontal > 0.2f)
             {
                 dashNum = 2;
             }
-            if (_Anim.GetFloat("InputX") < 0f)
+            if (horizontal < -0.2f)
             {
                 dashNum = 3;
             }
+            
+
+            Debug.Log(dashNum);
 
             _transform.GetComponent<WeaponAttack>().comboPossible = true;
             _transform.GetComponent<WeaponAttack>().comboStep = 0;

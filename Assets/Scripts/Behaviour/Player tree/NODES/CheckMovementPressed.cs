@@ -31,8 +31,6 @@ namespace BehaviorTree
             float vertical = InputManager.movementInput.y;
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-            Debug.Log(horizontal);
-
             if (direction.magnitude >= 0.1f)
             {
                 state = NodeState.SUCCESS;

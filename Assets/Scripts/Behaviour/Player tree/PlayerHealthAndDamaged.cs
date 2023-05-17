@@ -30,6 +30,7 @@ namespace PlayerManager
         float healthFillPercent;
 
         public bool dashing, rolling;
+        public bool rollPossible;
         public float dashTimer;
 
         public float _CurrentPosture, _MaxPosture;
@@ -160,6 +161,21 @@ namespace PlayerManager
             playerAnim.SetBool("Dashing", false);
         }
 
+
+        void RollPossible()
+        {
+            StartCoroutine(RollTimerCorou());
+        }
+
+        public IEnumerator RollTimerCorou()
+        {
+            rollPossible = true;
+            yield return new WaitForSeconds(0.5f);
+            rollPossible = false;
+            yield return null;
+        }
+
+
         public void HitByAttack(float attackDamage, int _LeftRight, GameObject attacker)
         {
 
@@ -170,7 +186,7 @@ namespace PlayerManager
                 if(postureBroken == false)
                 {
 
-                    if (isBlocking == true && blockTimer > 0.25f && _CanBlock == true)//this will BLOCK
+                    if (isBlocking == true && blockTimer > 0.2f && _CanBlock == true)//this will BLOCK
                     {
                         _BlockResult = BlockResult.Blocked;
                         _CurrentPosture += attackDamage * 0.5f;
@@ -178,7 +194,7 @@ namespace PlayerManager
                         _I_Frames = 0.2f;
                         return;
                     }
-                    else if (isBlocking == true && blockTimer < 0.25f && _LeftRight == 1)//this will DEFLECT LEFT
+                    else if (isBlocking == true && blockTimer < 0.2f && _LeftRight == 1)//this will DEFLECT LEFT
                     {
                         _BlockResult = BlockResult.DeflectedLeft;
                         _CurrentPosture += attackDamage * 0.2f;
@@ -186,7 +202,7 @@ namespace PlayerManager
                         _I_Frames = 0.3f;
                         return;
                     }
-                    else if (isBlocking == true && blockTimer < 0.25f  && _LeftRight == 2)//this will DEFLECT RIGHT
+                    else if (isBlocking == true && blockTimer < 0.2f  && _LeftRight == 2)//this will DEFLECT RIGHT
                     {
                         _BlockResult = BlockResult.DeflectedRight;
                         _CurrentPosture += attackDamage * 0.2f;
@@ -194,7 +210,7 @@ namespace PlayerManager
                         _I_Frames = 0.3f;
                         return;
                     }
-                    else if (isBlocking == true && blockTimer > 0.25f && _CanBlock == false)
+                    else if (isBlocking == true && blockTimer > 0.2f && _CanBlock == false)
                     {
                         _BlockResult = BlockResult.Broken;
                         _CurrentPosture = _MaxPosture;

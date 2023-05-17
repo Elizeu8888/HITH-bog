@@ -22,12 +22,14 @@ namespace BehaviorTree
 
         float _Distance, _changeTimer;
 
+        EnemyMediumBT enemyBT;
         public TaskMoveToPlayer(Transform transform, float changetime)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             _NavMesh = transform.GetComponent<NavMeshAgent>();
             _charControl = transform.GetComponent<CharacterController>();
+            enemyBT  = transform.GetComponent<EnemyMediumBT>();
             changetime = _changeTimer;
         }
 
@@ -47,7 +49,7 @@ namespace BehaviorTree
             Quaternion targetRot;
 
 
-            speed = 7f;
+            speed = enemyBT.movementSpeed;
             _NavMesh.destination = EnemyMediumBT._Player.transform.position;
             _changeTimer = 1f;
 

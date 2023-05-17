@@ -12,16 +12,19 @@ namespace BehaviorTree
         Animator _Anim;
         Transform _transform;
 
+        PlayerBT _plyBT;
+
         public CheckSprintPressed(Transform transform)
         {
             _transform = transform;
             _Anim = _transform.GetComponent<Animator>();
+            _plyBT = _transform.GetComponent<PlayerBT>();
         }
 
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetAxisRaw("Vertical") >= 0.1f && Input.GetKey(KeyCode.LeftShift) && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw"))
+            if (Input.GetAxisRaw("Vertical") >= 0.1f && _plyBT.sprintPressed && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw"))
             {
                 //_Anim.SetLayerWeight(1, 0);
                 state = NodeState.SUCCESS;

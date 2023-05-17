@@ -13,17 +13,19 @@ namespace BehaviorTree
         private Transform _transform;
         private WeaponAttack _weaponAttack;
 
+        PlayerBT _plyBT;
         public CheckBlockPressed(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             _weaponAttack = _transform.GetComponent<WeaponAttack>();
+            _plyBT = _transform.GetComponent<PlayerBT>();
         }
 
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetMouseButton(1) && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
+            if (_plyBT.blockPressed && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
 
                 PlayerBT._HealthScript.blockTimer += Time.deltaTime;

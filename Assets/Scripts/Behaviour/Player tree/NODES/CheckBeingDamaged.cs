@@ -20,7 +20,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (PlayerBT._HealthScript.beingDamaged == true)
+            if (PlayerBT._HealthScript.beingDamaged)
             {
                 _Anim.SetBool("BeingHurt", true);
                 state = NodeState.SUCCESS;

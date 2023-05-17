@@ -13,17 +13,19 @@ namespace BehaviorTree
         private Transform _transform;
         PlayerHealthAndDamaged plyHealth;
 
+        PlayerBT _plyBT;
         public CheckRollPressed(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             plyHealth = _transform.GetComponent<PlayerHealthAndDamaged>();
+            _plyBT = _transform.GetComponent<PlayerBT>();
         }
 
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetKeyDown("space") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (_plyBT.dashPressed && plyHealth.stunTimer <= 0f && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && plyHealth.rollPossible)
             {
 
                 plyHealth.rolling = true;

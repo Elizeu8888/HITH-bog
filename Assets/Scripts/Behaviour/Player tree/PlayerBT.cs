@@ -9,7 +9,7 @@ public class PlayerBT : BT_Tree
 
     public static float speed = 2f;
 
-    public static bool _InCombat = false;
+    public bool _InCombat = false;
 
     public string[] _AnimationNames;
 
@@ -30,26 +30,63 @@ public class PlayerBT : BT_Tree
     private CharacterController _CharacterController;
 
 
-    public bool attackPressed = false, dashPressed = false;
+    public bool attackPressed = false, dashPressed = false, sprintPressed = false, weaponDrawPressed = false, blockPressed = false;
 
 
     void OnEnable()
     {
         InputManager.OnAttackPressed += AttackPressed;
+        InputManager.OnWeaponDrawPressed += WeaponDrawPressed;
+        InputManager.OnDashPressed += DashPressed;
+
+        InputManager.OnSprintPressed += SprintPressed;
+        InputManager.OnSprintCanceled += SprintCanceled;
+
+        InputManager.OnBlockPressed += BlockPressed;
+        InputManager.OnBlockCanceled += BlockCanceled;
     }
 
     void OnDisable()
     {
         InputManager.OnAttackPressed -= AttackPressed;
+        InputManager.OnWeaponDrawPressed -= WeaponDrawPressed;
+
+        InputManager.OnSprintPressed -= SprintPressed;
+        InputManager.OnSprintCanceled -= SprintCanceled;
     }
 
 
     void AttackPressed()
-    {
-        
+    {        
         StartCoroutine(AttackPressedCorou());
     }
-
+    void WeaponDrawPressed()
+    {
+        StartCoroutine(WeaponDrawPressedCorou());
+    }
+    void DashPressed()
+    {        
+        StartCoroutine(DashPressedCorou());
+    }
+//-----------------------------------------
+    void SprintPressed()
+    {
+        sprintPressed = true;
+    }
+    void SprintCanceled()
+    {
+        sprintPressed = false;
+    }
+//-----------------------------------------
+    void BlockPressed()
+    {
+        blockPressed = true;
+    }
+    void BlockCanceled()
+    {
+        blockPressed = false;
+    }
+//-----------------------------------------
     public System.Collections.IEnumerator AttackPressedCorou()
     {
         attackPressed = true;
@@ -57,8 +94,21 @@ public class PlayerBT : BT_Tree
         attackPressed = false;
         yield return null;
     }
-
-
+    public System.Collections.IEnumerator WeaponDrawPressedCorou()
+    {
+        weaponDrawPressed = true;
+        yield return new WaitForSeconds(0.05f);
+        weaponDrawPressed = false;
+        yield return null;
+    }
+    public System.Collections.IEnumerator DashPressedCorou()
+    {
+        dashPressed = true;
+        yield return new WaitForSeconds(0.01f);
+        dashPressed = false;
+        yield return null;
+    }
+//-----------------------------------------
     public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
     {
         Destroy(item);

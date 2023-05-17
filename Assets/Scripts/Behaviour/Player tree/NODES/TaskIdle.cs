@@ -23,8 +23,8 @@ namespace BehaviorTree
             //here it makes the character strafe left adn right when rotating the camera
 
 
-
-
+            _Anim.SetFloat("InputX", 0f);
+            _Anim.SetFloat("InputY", 0f);
 
 
             _Anim.SetBool("Moving", false);

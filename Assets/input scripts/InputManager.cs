@@ -12,6 +12,16 @@ public class InputManager : MonoBehaviour
     public static event Action<Vector2> OnMovePressed;
     public static event Action<Vector2> OnMoveHeld;
     public static event Action OnAttackPressed;
+    public static event Action OnWeaponDrawPressed;
+    public static event Action OnDashPressed;
+
+
+    public static event Action OnBlockPressed;
+    public static event Action OnBlockCanceled;
+
+    public static event Action OnSprintPressed;
+    public static event Action OnSprintCanceled;
+
     public static Vector2 movementInput;
 
     bool _MoveHeld;
@@ -34,20 +44,64 @@ public class InputManager : MonoBehaviour
         _plyInput.Gameplay.Movement.performed += OnMovePerformed;
         _plyInput.Gameplay.Movement.canceled += OnMoveCanceled;
 
+        _plyInput.Gameplay.Sprint.started += OnSprintStart;
+        _plyInput.Gameplay.Sprint.canceled += OnSprintEnd;
+
+        _plyInput.Gameplay.Block.started += OnBlockStart;
+        _plyInput.Gameplay.Block.canceled += OnBlockEnd;
+
         _plyInput.Gameplay.Attack.started += OnAttackStart;
+        _plyInput.Gameplay.Dash.started += OnDashStart;
+        _plyInput.Gameplay.WeaponDraw.started += OnWeaponDrawStart;
 
     }
 
     void OnAttackStart(InputAction.CallbackContext context)
     {
         bool attackInput;
-        attackInput = context.ReadValue<float>() == 1 ? true:false;
+        attackInput = context.ReadValue<float>() > 0 ? true:false;
         if(attackInput)
         {
             OnAttackPressed?.Invoke();
-
         }
+    }
 
+    void OnWeaponDrawStart(InputAction.CallbackContext context)
+    {
+        bool WeaponDraw;
+        WeaponDraw = context.ReadValue<float>() > 0 ? true : false;
+        if (WeaponDraw)
+        {
+            OnWeaponDrawPressed?.Invoke();
+        }
+    }
+
+    void OnDashStart(InputAction.CallbackContext context)
+    {
+        bool dash;
+        dash = context.ReadValue<float>() > 0 ? true : false;
+        if (dash)
+        {
+            OnDashPressed?.Invoke();
+        }
+    }
+
+    void OnBlockStart(InputAction.CallbackContext context)
+    {
+        OnBlockPressed?.Invoke();      
+    }
+    void OnBlockEnd(InputAction.CallbackContext context)
+    {
+        OnBlockCanceled?.Invoke();    
+    }
+
+    void OnSprintStart(InputAction.CallbackContext context)
+    {
+        OnSprintPressed?.Invoke();
+    }
+    void OnSprintEnd(InputAction.CallbackContext context)
+    {
+        OnSprintCanceled?.Invoke();    
     }
 
     void OnMovePerformed(InputAction.CallbackContext context)
@@ -68,6 +122,24 @@ public class InputManager : MonoBehaviour
         movementInput = Vector2.zero;
     }
 
+
+    void OnDisable()
+    {
+
+        _plyInput.Gameplay.Movement.performed -= OnMovePerformed;
+        _plyInput.Gameplay.Movement.canceled -= OnMoveCanceled;
+
+        _plyInput.Gameplay.Attack.started -= OnAttackStart;
+        _plyInput.Gameplay.Attack.started -= OnSprintStart;
+        _plyInput.Gameplay.Attack.started -= OnWeaponDrawStart;
+
+        _plyInput.Gameplay.Block.started -= OnBlockStart;
+        _plyInput.Gameplay.Block.canceled -= OnBlockEnd;
+
+        _plyInput.Gameplay.Dash.started -= OnDashStart;
+        _plyInput.Gameplay.WeaponDraw.started -= OnWeaponDrawStart;
+
+    }
 
     //
     // Update is called once per frame

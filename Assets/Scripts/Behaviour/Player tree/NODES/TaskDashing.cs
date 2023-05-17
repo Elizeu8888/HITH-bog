@@ -33,6 +33,10 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
+            
+
+
+
 
             if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
             {
@@ -45,6 +49,27 @@ namespace BehaviorTree
 
             float horizontal = InputManager.movementInput.x;
             float vertical = InputManager.movementInput.y;// uses input to find direction
+
+            if (horizontal < 0.2f)
+            {
+                if (vertical > 0f)
+                {
+                    _Anim.SetFloat("InputY", 1);
+                }
+                if (vertical < 0f)
+                {
+                    _Anim.SetFloat("InputY", -1f);
+                }
+            }
+            if (horizontal > 0.2f)
+            {
+                _Anim.SetFloat("InputY", 1);
+            }
+            if (horizontal < -0.2f)
+            {
+                _Anim.SetFloat("InputY", -1);
+            }
+
 
             _transform.GetComponent<WeaponAttack>().comboPossible = false;
             _transform.GetComponent<WeaponAttack>().comboStep = 0;
@@ -60,8 +85,6 @@ namespace BehaviorTree
                 else
                     direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-                _Anim.SetFloat("InputY", direction.z);
-                _Anim.SetFloat("InputX", direction.x);
 
                 targetangle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             }

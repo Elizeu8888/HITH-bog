@@ -36,6 +36,9 @@ namespace BehaviorTree
 
             //Animations
 
+            _Anim.SetFloat("InputX", 0f);
+            _Anim.SetFloat("InputY", 0f);
+
             _Anim.SetBool("Moving", false);
             state = NodeState.RUNNING;
             return state;

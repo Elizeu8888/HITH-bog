@@ -19,12 +19,16 @@ namespace BehaviorTree
         CharacterController _charControl;
         float _changeTime;
 
+
+        EnemyMediumBT enemyBT;
+
         public TaskBackAway(Transform transform, float changetime)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             _NavMesh = transform.GetComponent<NavMeshAgent>();
             _charControl = transform.GetComponent<CharacterController>();
+            enemyBT = transform.GetComponent<EnemyMediumBT>();
             changetime = _changeTime;
         }
 
@@ -45,7 +49,7 @@ namespace BehaviorTree
 
             Vector3 samplePoint = _transform.position + Random.insideUnitSphere * 5f - _transform.forward * 5;
 
-            if (_changeTime <= 0.3f)
+            if (_changeTime <= 0.65f)
             {
                 if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, 8f, NavMesh.AllAreas))
                 {
@@ -65,7 +69,7 @@ namespace BehaviorTree
 
             //_NavMesh.velocity = _charControl.velocity;
 
-            _NavMesh.speed = 7f;
+            _NavMesh.speed = enemyBT.backawaySpeed;;
 
             _transform.gameObject.GetComponent<EnemyMediumBT>().MovementAnim();
 

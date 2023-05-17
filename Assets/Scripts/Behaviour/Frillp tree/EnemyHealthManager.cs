@@ -22,12 +22,12 @@ namespace EnemyManager
         public bool beingDamaged = false, beingHit = false, staggered = false;
         public float blockTimer = 0f;
         public bool isBlocking = false, blockAttack = false;
-
+        public float blockChance = 0.35f;
         public BlockResult _BlockResult;
 
         [Header("Health and Stun")]
         public float _CurrentHealth, _MaxHealth;
-        public float _CurrentStun, _MaxStun;
+        public float _CurrentStun, _MaxStun, stunChance = 0.6f;
 
         public bool dashing = false;
         public float dashTimer;
@@ -102,6 +102,7 @@ namespace EnemyManager
             if (dyingTrigger == false)
             {
                 _Anim.SetLayerWeight(2, 1);
+                _Anim.Play("Idle", 0);
                 _Anim.Play(deathAnim[Random.Range(0, deathAnim.Length)], 2);
                 dyingTrigger = true;
             }
@@ -189,7 +190,7 @@ namespace EnemyManager
                 return;
 
             float blockchance = Random.Range(0f, 1f);
-            if (blockchance >= 0.3f)
+            if (blockchance >= blockChance)
             {
                 isBlocking = true;
             }
@@ -258,7 +259,7 @@ namespace EnemyManager
 
                 SpawnVFX(hurtInstant, hurtVFX, bloodSpawn);
 
-                if(Random.Range(0f,1f) >= 0.6f)
+                if(Random.Range(0f,1f) >= stunChance)
                 {
                     staggered = true;
                 }
