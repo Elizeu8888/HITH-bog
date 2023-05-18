@@ -26,7 +26,13 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-                
+            if (_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                state = NodeState.RUNNING;
+                return state;
+            }
+
+
             float horizontal = InputManager.movementInput.x;
             float vertical = InputManager.movementInput.y;// uses input to find direction
 

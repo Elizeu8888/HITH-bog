@@ -86,7 +86,8 @@ public class PlayerBT : BT_Tree
     {
         blockPressed = false;
     }
-//-----------------------------------------
+//----------------------------------------------------
+//---------------Coroutines for input-----------------
     public System.Collections.IEnumerator AttackPressedCorou()
     {
         attackPressed = true;
@@ -108,7 +109,7 @@ public class PlayerBT : BT_Tree
         dashPressed = false;
         yield return null;
     }
-//-----------------------------------------
+//----------------------------------------------------
     public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
     {
         Destroy(item);
@@ -140,8 +141,7 @@ public class PlayerBT : BT_Tree
     {
         Node root = new Selector(new List<Node>
         {
-            //here the Hurt branch which always goes first
-
+            //here the Cut Scene branch which always goes first
             new Sequence(new List<Node>
             {
                 new CheckEnteredCutScene(transform),
@@ -153,17 +153,17 @@ public class PlayerBT : BT_Tree
                 new CheckMoveToCutScene(transform),
                 new TaskMoveToCutSceneStart(transform, _Camera),
             }),
-            new Sequence(new List<Node>
-            {
-                new CheckBeingDamaged(transform),
-                new TaskHurt(transform),
-            }),
 
             new Sequence(new List<Node>
             {
                 new CheckGuardBroken(transform),
                 new TaskGuardBroken(transform),
+            }),
 
+            new Sequence(new List<Node>
+            {
+                new CheckBeingDamaged(transform),
+                new TaskHurt(transform),
             }),
 
             //here checking if the player has weapon out
@@ -199,14 +199,11 @@ public class PlayerBT : BT_Tree
 
                     }),
 
-
                     //here the player is checking if block is being pressed
                     new Sequence(new List<Node>
                     {
 
                         new CheckBlockPressed(transform),
-
-
 
                         new Selector(new List<Node>
                         {
@@ -229,24 +226,16 @@ public class PlayerBT : BT_Tree
 
                         }),
 
-
                     }),
-
 
                     //here the player is checking and continuing the attack
                     new Sequence(new List<Node>
                     {  
                         
                         new CheckAttackPressed(transform),
-
-                        new TaskLightAttack(transform, _AnimationNames),
-
-
-                        
-
+                        new TaskLightAttack(transform, _AnimationNames),                
 
                     }),
-
 
                     // here the player moves when in combat
                     new Sequence(new List<Node>
@@ -274,8 +263,6 @@ public class PlayerBT : BT_Tree
                     new TaskCombatIdle(transform,_Camera),
 
                 }),
-
-
               
             }),
 

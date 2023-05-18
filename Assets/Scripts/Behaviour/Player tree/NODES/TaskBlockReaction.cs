@@ -20,8 +20,13 @@ namespace BehaviorTree
         }
 
         public override NodeState LogicEvaluate()
-        {
+        {      
 
+            if (PlayerBT._HealthScript._BlockResult == BlockResult.Broken)
+            {
+                state = NodeState.RUNNING;
+                return state;
+            }
             if(PlayerBT._HealthScript._BlockResult == BlockResult.DeflectedRight)
             {
                 _Anim.Play("Deflect Left", 1);

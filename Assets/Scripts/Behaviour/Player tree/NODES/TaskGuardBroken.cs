@@ -24,6 +24,14 @@ namespace BehaviorTree
 
             _transform.GetComponent<PlayerHealthAndDamaged>()._CurrentPosture = 0f;
 
+            if (!_Anim.GetCurrentAnimatorStateInfo(0).IsName("Guard Break"))
+            {
+                _Anim.SetBool("Blocking", false);
+                _Anim.Play("Guard Break", 0);
+                _Anim.Play("Guard Break", 1);
+            }
+
+
             state = NodeState.RUNNING;
             return state;
             

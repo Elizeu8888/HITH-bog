@@ -20,7 +20,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (PlayerBT._HealthScript.beingDamaged)
+            if (PlayerBT._HealthScript.beingDamaged && !_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Dash Attack"))
             {
                 _Anim.SetBool("BeingHurt", true);
                 state = NodeState.SUCCESS;

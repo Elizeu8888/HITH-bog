@@ -33,7 +33,14 @@ public class EnemyMediumBT : BT_Tree
 
     EnemyHealthManager _HealthMan;
 
-    public float attackDistance = 8f, hoverDistance = 10f, backawayDistance = 6f, returnDistance = 35f, blockDistance = 7f, rollDistance = 4f;
+       [Header("Enemy movement settings")]
+    public float attackDistance = 8f,
+     hoverDistance = 10f, 
+     backawayDistance = 6f,
+      returnDistance = 35f, 
+      blockDistance = 7f, 
+      rollDistance = 4f, 
+      maxAttackDistance = 1.5f;
 
     public float movementSpeed = 8f, backawaySpeed = 10f;
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 namespace EnemyManager
 {
@@ -27,6 +27,7 @@ namespace EnemyManager
 
         [Header("Health and Stun")]
         public float _CurrentHealth, _MaxHealth;
+        public TMP_Text healthText;
         public float _CurrentStun, _MaxStun, stunChance = 0.6f;
 
         public bool dashing = false;
@@ -90,6 +91,7 @@ namespace EnemyManager
             float scriptHealthPercent = (_CurrentHealth / _MaxHealth);
             fillPercent = scriptHealthPercent;
             _HealthBarMat.SetFloat("_CurrentFillPercent", fillPercent);
+
 
             if (_CurrentHealth <= 0f)
             {
@@ -177,6 +179,13 @@ namespace EnemyManager
             Destroy(item, 0.5f);
         }
 
+        public IEnumerator HealthNumber()
+        {
+            healthText.text = _CurrentHealth.ToString();
+            yield return new WaitForSeconds(Random.Range(1f, 2f));
+            healthText.text = "";
+        }
+
         public void EnemyEndDashEvent()
         {
             dashing = false;
@@ -259,6 +268,7 @@ namespace EnemyManager
 
                 SpawnVFX(hurtInstant, hurtVFX, bloodSpawn);
 
+                StartCoroutine(HealthNumber());
                 if(Random.Range(0f,1f) >= stunChance)
                 {
                     staggered = true;

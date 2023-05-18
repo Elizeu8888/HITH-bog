@@ -20,20 +20,21 @@ namespace BehaviorTree
         NavMeshAgent _NavMesh;
         CharacterController _charControl;
         Vector3 rootMotion;
-
+        float refDistance;
         public TaskEnemyAttacking(Transform transform)
         {
             _transform = transform;
             _Anim = transform.GetComponent<Animator>();
             _NavMesh = transform.GetComponent<NavMeshAgent>();
             _charControl = _transform.GetComponent<CharacterController>();
+            refDistance = _transform.GetComponent<EnemyMediumBT>().maxAttackDistance;
         }
 
 
         public override NodeState LogicEvaluate()
         {
             _NavMesh.enabled = true;
-            if(_transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance <= 2.5f)
+            if(_transform.gameObject.GetComponent<EnemyMediumBT>()._PlayerDistance <= refDistance)
             {
                 _NavMesh.destination = _transform.position;
                 _NavMesh.velocity = Vector3.zero;

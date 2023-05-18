@@ -24,7 +24,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (_plyBT.attackPressed && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Roll") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
+            if (_plyBT.attackPressed && NotDashing() && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Roll") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
             {
                 PlayerBT._HealthScript.isBlocking = false;
                 state = NodeState.SUCCESS;
@@ -38,6 +38,23 @@ namespace BehaviorTree
 
         }
 
+
+        bool NotDashing()
+        {
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.F"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.B"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.R"))
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }

@@ -114,10 +114,12 @@ namespace PlayerManager
                 stunTimer -= Time.deltaTime;
             }
             //--------------------------------
+
             if (isBlocking == false)
             {
                 blockTimer = 0;
-                _BlockResult = BlockResult.Down;
+                if(postureBroken == false)
+                    _BlockResult = BlockResult.Down;
             }
             //--------------------------------
             if(_CurrentPosture > _MaxPosture * 0.8f)
@@ -149,7 +151,8 @@ namespace PlayerManager
 
         public void StartBlocking()// this is called in the block animation
         {
-            isBlocking = true;
+            if(postureBroken == false)
+                isBlocking = true;
         }
 
         public void EndDashEvent()
@@ -220,6 +223,10 @@ namespace PlayerManager
                         isBlocking = false;
                         return;
                     }
+                }
+                else
+                {
+                    _BlockResult = BlockResult.Broken;
                 }
 
 

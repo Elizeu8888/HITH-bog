@@ -25,7 +25,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (_plyBT.blockPressed && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
+            if (_plyBT.blockPressed && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && !_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Dash Attack") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Guard Break") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
 
                 PlayerBT._HealthScript.blockTimer += Time.deltaTime;
