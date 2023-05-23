@@ -17,6 +17,7 @@ public class PlayerBT : BT_Tree
 
     public GameObject[] _VFX; 
 
+    public bool inMenu;
 
    
     [Header("Script_OnPlayer_Refrences")]
@@ -35,6 +36,9 @@ public class PlayerBT : BT_Tree
 
     void OnEnable()
     {
+
+        PlayerCinematicHandler.OnLeaveMenu += LeftMenu;
+
         InputManager.OnAttackPressed += AttackPressed;
         InputManager.OnWeaponDrawPressed += WeaponDrawPressed;
         InputManager.OnDashPressed += DashPressed;
@@ -48,12 +52,25 @@ public class PlayerBT : BT_Tree
 
     void OnDisable()
     {
+        PlayerCinematicHandler.OnLeaveMenu -= LeftMenu;
+
         InputManager.OnAttackPressed -= AttackPressed;
         InputManager.OnWeaponDrawPressed -= WeaponDrawPressed;
 
         InputManager.OnSprintPressed -= SprintPressed;
         InputManager.OnSprintCanceled -= SprintCanceled;
+
+        InputManager.OnBlockPressed -= BlockPressed;
+        InputManager.OnBlockCanceled -= BlockCanceled;
     }
+    
+
+    void LeftMenu()
+    {        
+        inMenu = false;
+    }
+
+
 
 
     void AttackPressed()
@@ -91,14 +108,14 @@ public class PlayerBT : BT_Tree
     public System.Collections.IEnumerator AttackPressedCorou()
     {
         attackPressed = true;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.02f);
         attackPressed = false;
         yield return null;
     }
     public System.Collections.IEnumerator WeaponDrawPressedCorou()
     {
         weaponDrawPressed = true;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.02f);
         weaponDrawPressed = false;
         yield return null;
     }
@@ -156,6 +173,13 @@ public class PlayerBT : BT_Tree
 
             new Sequence(new List<Node>
             {
+                new CheckInMenu(transform),
+                new TaskIdle(transform),
+            }),
+
+
+            new Sequence(new List<Node>
+            {
                 new CheckGuardBroken(transform),
                 new TaskGuardBroken(transform),
             }),
@@ -178,6 +202,14 @@ public class PlayerBT : BT_Tree
 
                     new CheckDashPressed(transform),
 
+
+
+                    new Sequence(new List<Node>
+                    {
+                        new CheckDashing(transform),
+                        new CheckDashAttacking(transform),
+                        new TaskDashAttack(transform),
+                    }),
                     new Sequence(new List<Node>
                     {
                         new CheckDashing(transform),
@@ -191,7 +223,6 @@ public class PlayerBT : BT_Tree
                         new CheckAttackPressed(transform),
                         new TaskDashAttack(transform),
                     }),
-
                     new Sequence(new List<Node>
                     {
                         new CheckDashing(transform),

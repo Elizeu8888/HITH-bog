@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -8,6 +9,12 @@ namespace PlayerManager
 {
     public class PlayerCinematicHandler : MonoBehaviour
     {
+
+        public static event Action OnInMenu;
+        public static event Action OnLeaveMenu;
+
+        public CinemaCam cineCam;
+
         public static bool _InCinematic;
 
         public Transform _CamPosition;
@@ -39,6 +46,10 @@ namespace PlayerManager
 
         CharacterContGravity grav;
 
+        public Animator[] mainMenuAnimator;
+        public string[] mainMenuAnimations;
+
+
         void Start()
         {
             _CharCont = gameObject.GetComponent<CharacterController>();
@@ -58,15 +69,76 @@ namespace PlayerManager
             }
         }
 
-        public void PlayCutSceneTimeLine()
+        public void playMainMenuAnimation()
         {
-
 
             /*foreach (Animator i in _CinematicInScene._CutSceneAnimators)
             {
                 i.Play(_CinematicInScene._CutSceneAnimations[i], 2);
                 i.SetLayerWeight(2, 1);
             }*/
+
+            grav.enabled = false;
+
+            for (int i = 0; i < mainMenuAnimator.Length; i++)
+            {
+                mainMenuAnimator[i].Play(mainMenuAnimations[i], 2);
+                mainMenuAnimator[i].SetLayerWeight(2, 1);
+            }
+            //direct.Play();
+
+
+                  
+        }
+
+        public void EventEndMainMenuAnim()
+        {
+            _InputPressed = false;      
+
+            grav.enabled = true;
+
+            for (int i = 0; i < _CinematicInScene._CutSceneTransforms.Length; i++)
+            {
+                _CinematicInScene._CutSceneTransforms[i].position = _CinematicInScene._CutSceneEndTransform[i].position;
+            }
+
+            for (int i = 0; i < _CinematicInScene._CutSceneAnimators.Length; i++)
+            {
+                //_CinematicInScene._CutSceneAnimators[i].Play(_CinematicInScene._CutSceneAnimations[i], 2);
+                _CinematicInScene._CutSceneAnimators[i].SetLayerWeight(2, 0);
+            }
+
+            OnLeaveMenu?.Invoke();
+
+            cineCam.SetCamTargetToPlayer();
+
+            //transform.position = _CinematicInScene._EndPosition.position;
+            //transform.position = _CinematicInScene._EndPosition.position;
+
+            _CharCont.enabled = true;
+            _InCutScene = false;
+            
+            _EnteredCutScene = false;
+            Destroy(_CinematicInScene.GetComponent<BoxCollider>());
+            Destroy(_CinematicInScene);
+            direct.enabled = false;
+            
+        }
+
+        public void SetCamTargetToTarget()
+        {
+            cineCam.target = _CinematicInScene._CutSceneEndTransform[0];
+            cineCam.SetCamTarget(); 
+        }
+        public void SetCamTargetPriority()
+        {
+            //cineCam.target = _CinematicInScene._CutSceneEndTransform[0];
+            cineCam.freeCamera.m_Priority = 15; 
+        }
+        public void PlayCutSceneTimeLine()
+        {
+ 
+
             grav.enabled = false;
 
             for (int i = 0; i < _CinematicInScene._CutSceneAnimators.Length; i++)
@@ -74,6 +146,7 @@ namespace PlayerManager
                 _CinematicInScene._CutSceneAnimators[i].Play(_CinematicInScene._CutSceneAnimations[i], 2);
                 _CinematicInScene._CutSceneAnimators[i].SetLayerWeight(2, 1);
             }
+            //_CineMachine.transform.position = _CinematicInScene._EndPosition.position;
             //direct.Play();
                   
         }
@@ -82,7 +155,9 @@ namespace PlayerManager
         {
             _InputPressed = false;
 
-            grav.enabled = false;
+            grav.enabled = true;
+
+            //_CineMachine.transform.position = _CinematicInScene._EndPosition.position;
 
             for (int i = 0; i < _CinematicInScene._CutSceneTransforms.Length; i++)
             {
@@ -98,10 +173,12 @@ namespace PlayerManager
             //transform.position = _CinematicInScene._EndPosition.position;
             //transform.position = _CinematicInScene._EndPosition.position;
 
-            _CameraRig.position = _CinematicInScene._EndPosition.position;
             _CharCont.enabled = true;
             _InCutScene = false;
-            _CineMachine.SetActive(true);
+            
+            cineCam.SetCamTargetToPlayer();
+
+
             _EnteredCutScene = false;
             Destroy(_CinematicInScene.GetComponent<BoxCollider>());
             Destroy(_CinematicInScene);

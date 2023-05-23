@@ -111491,15 +111491,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.041666668
-    functionName: ComboPossible
+  - time: 0.083333336
+    functionName: RollPossible
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.083333336
-    functionName: RollPossible
+  - time: 0.125
+    functionName: ComboPossible
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

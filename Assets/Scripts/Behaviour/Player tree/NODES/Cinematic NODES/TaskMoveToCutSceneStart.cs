@@ -59,7 +59,7 @@ namespace BehaviorTree
 
             //_transform.rotation = Quaternion.LookRotation(_CharacterController.velocity);
 
-            _CineMan._CineMachine.SetActive(false);
+            
             _CineMan._CameraRig.position = _CineMan._CinematicInScene._StartPosition.position;
             _CineMan._CameraRig.rotation = _CineMan._CinematicInScene._StartPosition.rotation;
 

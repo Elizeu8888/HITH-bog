@@ -27,19 +27,18 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (_plyBT.dashPressed && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
+            if (_plyBT.dashPressed && NotDashing() &&!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
 
                 plyHealth.dashing = true;
                 _transform.GetComponent<WeaponAttack>().canBlock = false;
-                weapAttack.ComboReset();
+                _transform.GetComponent<WeaponAttack>().comboPossible = false;
+                _transform.GetComponent<WeaponAttack>().comboStep = 0;
 
                 _Anim.Play("Dash", 0);
                 _Anim.Play("Dash", 1);
                 state = NodeState.SUCCESS;
-                return state;
-                
-
+                return state;      
 
 
             }
@@ -49,6 +48,27 @@ namespace BehaviorTree
                 return state;
             }
 
+        }
+
+        bool NotDashing()
+        {
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_F"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_B"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_R"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_L"))
+            {
+                return false;
+            }
+            return true;
         }
 
 

@@ -47,6 +47,8 @@ namespace BehaviorTree
                 return state;
             }
 
+
+
             float horizontal = InputManager.movementInput.x;
             float vertical = InputManager.movementInput.y;// uses input to find direction
 
@@ -69,10 +71,6 @@ namespace BehaviorTree
             {
                 _Anim.SetFloat("InputY", -1);
             }
-
-
-            _transform.GetComponent<WeaponAttack>().comboPossible = false;
-            _transform.GetComponent<WeaponAttack>().comboStep = 0;
 
 
             // finds direction of movement

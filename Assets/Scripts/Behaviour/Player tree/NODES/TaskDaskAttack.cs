@@ -38,7 +38,7 @@ namespace BehaviorTree
 
             if (horizontal < 0.2f)
             {
-                if (vertical > 0f)
+                if (vertical >= 0f)
                 {
                     dashNum = 0;
                 }
@@ -59,14 +59,18 @@ namespace BehaviorTree
 
             Debug.Log(dashNum);
 
-            _transform.GetComponent<WeaponAttack>().comboPossible = true;
-            _transform.GetComponent<WeaponAttack>().comboStep = 0;
+        
+
+           
 
             _transform.GetComponent<WeaponAttack>().dashDir = dashNum;
 
+
             if (!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
+
                 PlayerBT._WeapAttack.DashAttack();
+                _transform.GetComponent<WeaponAttack>().comboPossible = false;
             }
 
             state = NodeState.RUNNING;

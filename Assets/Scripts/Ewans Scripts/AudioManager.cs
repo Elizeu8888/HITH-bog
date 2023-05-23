@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] frillpFootstepSounds;
     [SerializeField] private AudioClip frillpDeathSound;
     [SerializeField] private AudioClip frillpStopHittingMeSound;
+    [Header("Combat")]
+    [SerializeField] private AudioClip[] bloodSplatSounds;
+    [SerializeField] private AudioClip[] deflectSounds;
     [Header("Essentials")]
     [SerializeField] private AudioClip[] musicTracks;
     [SerializeField] private AudioClip pauseSound;

@@ -39,8 +39,10 @@ namespace BehaviorTree
         {
 
             // uses input to find direction
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+
+            float horizontal = InputManager.movementInput.x;
+            float vertical = InputManager.movementInput.y;
+
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
             if(vertical == 1f)
             {
@@ -61,7 +63,7 @@ namespace BehaviorTree
             // here is the movement
             Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
 
-            if(Input.GetAxisRaw("Vertical") == 1f && Input.GetAxisRaw("Horizontal") == 0f && forwardTimer >= 0.3f && _Anim.GetBool("InCombat") == false)
+            if(vertical == 1f && horizontal == 0f && forwardTimer >= 0.3f && _Anim.GetBool("InCombat") == false)
             {
                 _CharacterController.Move(movedir.normalized * 12 * Time.deltaTime);
                 _Anim.SetBool("JogReady", true);

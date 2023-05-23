@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using BehaviorTree;
+
+namespace BehaviorTree
+{
+    public class TaskInMenu : Node
+    {
+        private Animator _Anim;
+
+
+        public TaskInMenu(Transform transform)
+        {
+            _Anim = transform.GetComponent<Animator>();
+        }
+
+
+        public override NodeState LogicEvaluate()
+        {
+
+            //here it makes the character strafe left adn right when rotating the camera
+
+
+            _Anim.SetFloat("InputX", 0f);
+            _Anim.SetFloat("InputY", 0f);
+
+
+            _Anim.SetBool("Moving", false);
+            state = NodeState.RUNNING;
+            return state;
+        }
+
+    }
+}
+

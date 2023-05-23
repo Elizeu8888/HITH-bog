@@ -35,7 +35,6 @@ public class CharacterContGravity : MonoBehaviour
             _CharControl.Move(-transform.up * 19f * Time.deltaTime);
             if(usingnav && _NavMesh.enabled == true)
             {
-                print("dsf");
                 //_NavMesh.enabled = false;
             }
         }

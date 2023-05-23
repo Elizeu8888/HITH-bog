@@ -586,7 +586,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8828775412009620398}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -731,6 +731,8 @@ MonoBehaviour:
   _NavMesh: {fileID: 0}
   _charControl: {fileID: 0}
   enemyRestPos: {fileID: 0}
+  attackChance: 1.5
+  rollChance: 1
   _CanAttack: 0
   rollCheckTick: 0.3
   attackCheckTick: 0.2
@@ -741,7 +743,7 @@ MonoBehaviour:
   attackDistance: 8
   hoverDistance: 8
   backawayDistance: 9
-  returnDistance: 25
+  returnDistance: 45
   blockDistance: 6
   rollDistance: 7
   maxAttackDistance: 4
@@ -766,6 +768,7 @@ MonoBehaviour:
   - small attack 1
   - small attack 2
   _DashAttacks: []
+  _DashAttacksCombo: 
   _LeftAttackParticle: {fileID: 0}
   _RightAttackParticle: {fileID: 0}
   comboPossible: 0

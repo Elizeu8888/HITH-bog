@@ -5,6 +5,12 @@ using UnityEngine.AI;
 using EnemyManager;
 using UnityEngine.Rendering.HighDefinition;
 
+
+
+using PlayerManager;
+
+
+
 public class EnemyMediumBT : BT_Tree
 {
     public bool _InCombat;
@@ -20,8 +26,13 @@ public class EnemyMediumBT : BT_Tree
     public static Transform _EnemyRestPos;
     public Transform enemyRestPos;
 
+    [Header("Enemy Combat settings")]
+    
     float _AttackChance;
+    public float attackChance;
     float _RollChance;
+    public float rollChance;
+
     public bool _CanAttack = false;
     public float rollCheckTick = 0.4f;
     public float attackCheckTick = 0.4f;
@@ -33,16 +44,26 @@ public class EnemyMediumBT : BT_Tree
 
     EnemyHealthManager _HealthMan;
 
-       [Header("Enemy movement settings")]
-    public float attackDistance = 8f,
-     hoverDistance = 10f, 
-     backawayDistance = 6f,
-      returnDistance = 35f, 
-      blockDistance = 7f, 
-      rollDistance = 4f, 
-      maxAttackDistance = 1.5f;
+    public float attackDistance = 8f,hoverDistance = 10f, backawayDistance = 6f,returnDistance = 35f, blockDistance = 7f, rollDistance = 4f, maxAttackDistance = 1.5f;
 
     public float movementSpeed = 8f, backawaySpeed = 10f;
+
+    bool canPlay;    
+
+
+    void OnEnable()
+    {
+        PlayerCinematicHandler.OnLeaveMenu += CanPlay;
+    }
+    void OnDisable()
+    {
+        PlayerCinematicHandler.OnLeaveMenu -= CanPlay;
+    }
+
+    void CanPlay()
+    {
+        canPlay = true;
+    }
 
     void Awake()// cant use start since Tree node uses it
     {
@@ -57,18 +78,16 @@ public class EnemyMediumBT : BT_Tree
         _EnemAnim.enabled = false;
         _EnemAnim.enabled = true;
 
-        //_NavMesh.updatePosition = false;
         _NavMesh.updateRotation = false;
     }
 
     void OnAnimatorMove()
     {
-
-        //_NavMesh.velocity = _EnemAnim.deltaPosition / Time.deltaTime;
+        
     }
 
 
-    void AttackChance(float chance, float minCool)// generates a chance for attack
+    void AttackChance(float chance, float minCool, float maxCool)// generates a chance for attack
     {
 
         if (attackCheckTick >= 0f)
@@ -88,7 +107,7 @@ public class EnemyMediumBT : BT_Tree
             if(attackCheckTick <= 0)
             {
                 _AttackChance = Random.Range(0f, 1f);
-                attackCheckTick = Random.Range(minCool, 2.3f);
+                attackCheckTick = Random.Range(minCool, maxCool);
             }
         }
     }
@@ -159,18 +178,40 @@ public class EnemyMediumBT : BT_Tree
     void FixedUpdate()//use this spparingly
     {
 
+
+        if(canPlay == false)
+        {
+            _PlayerDistance = 100f;
+            return;
+        }
+
         _PlayerDistance = Vector3.Distance(_Player.transform.position, _CurrentEnemyTransform.position);
 
-        if(BlockChanceCheck() == true)
+
+
+
+
+        if(BlockChanceCheck())
         {
-            if (_PlayerDistance <= attackDistance && _PlayerDistance > 3f)
-                AttackChance(0.75f, 0.4f);
-            if (_PlayerDistance <= 3f)
-                AttackChance(0.9f, 0.3f);
-            if (_PlayerDistance <= rollDistance && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
-                RollChance(0.35f, 0.5f, 2f);
-            if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
-                RollChance(0.4f, 0.8f, 3.5f);
+            if(_HealthMan._CurrentHealth <= _HealthMan._MaxHealth * 0.35f)
+            {
+                if (_PlayerDistance <= rollDistance && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+                   RollChance(1, 0.25f, 0.9f);
+
+                if (_PlayerDistance <= attackDistance && _PlayerDistance > 3f)
+                    AttackChance(1, 0.1f, 0.5f);
+            }
+            else
+            {
+                if (_PlayerDistance <= attackDistance && _PlayerDistance > 3f)
+                    AttackChance(attackChance * 0.75f, 0.4f, 1f);
+                if (_PlayerDistance <= 3f)
+                    AttackChance(attackChance, 0.3f, 0.6f);
+                if (_PlayerDistance <= rollDistance && _PlayerDistance >= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+                    RollChance(rollChance * 0.5f, 0.5f, 2f);
+                if (_PlayerDistance <= 1.5f && _EnemAnim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == false)
+                    RollChance(rollChance, 0.8f, 3.5f);
+            }
         }
         else
         {

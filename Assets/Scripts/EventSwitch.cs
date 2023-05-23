@@ -7,6 +7,8 @@ public class EventSwitch : MonoBehaviour
 {
     public UnityEvent weaponHolster, weaponRight, weaponLeft;
 
+    public UnityEvent daggerHolster, daggerRight, daggerLeft;
+
     private Animator _Anim;
 
     private PlayerBT _plyBT;
@@ -33,6 +35,8 @@ public class EventSwitch : MonoBehaviour
         _plyBT.SpawnVFX(_vfx, _plyBT._VFX[1], transform);
     }
 
+    //-----------------------WEAPON----------------------
+
     public void WeaponHolster()
     {
         weaponHolster.Invoke();
@@ -46,5 +50,22 @@ public class EventSwitch : MonoBehaviour
     public void WeaponLeftHand()
     {
         weaponLeft.Invoke();
+    }
+
+    //------------------------DAGGER---------------------
+
+    public void DaggerHolster()
+    {
+        daggerHolster.Invoke();
+    }
+
+    public void DaggerRightHand()
+    {
+        daggerRight.Invoke();
+    }
+
+    public void DaggerLeftHand()
+    {
+        daggerLeft.Invoke();
     }
 }

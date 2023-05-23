@@ -38,8 +38,8 @@ namespace BehaviorTree
         {
             _Anim.SetLayerWeight(1, 0);
             // uses input to find direction
-            float horizontal = Input.GetAxisRaw("Horizontal") * 0.7f;
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = InputManager.movementInput.x * 0.7f;
+            float vertical = InputManager.movementInput.y;
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
 

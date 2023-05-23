@@ -33,6 +33,7 @@ namespace BehaviorTree
 
             if (direction.magnitude >= 0.1f)
             {
+
                 state = NodeState.SUCCESS;
                 return state;
             }

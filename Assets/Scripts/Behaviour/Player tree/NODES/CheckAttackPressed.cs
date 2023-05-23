@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BehaviorTree;
+using PlayerManager;
 
 namespace BehaviorTree
 {
@@ -26,6 +27,13 @@ namespace BehaviorTree
 
             if (_plyBT.attackPressed && NotDashing() && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Roll") && PlayerBT.attackCooldown <= 0 && PlayerBT._HealthScript.beingHit == false)
             {
+
+                if(_transform.GetComponent<PlayerHealthAndDamaged>().dashing == true)
+                {
+                    _transform.GetComponent<WeaponAttack>().comboStep = -1;
+                }
+
+
                 PlayerBT._HealthScript.isBlocking = false;
                 state = NodeState.SUCCESS;
                 return state;
@@ -41,15 +49,16 @@ namespace BehaviorTree
 
         bool NotDashing()
         {
-            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.F"))
+
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_B"))
             {
                 return false;
             }
-            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.B"))
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_R"))
             {
                 return false;
             }
-            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack.R"))
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_L"))
             {
                 return false;
             }

@@ -24,7 +24,7 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (Input.GetAxisRaw("Vertical") >= 0.1f && _plyBT.sprintPressed && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw"))
+            if (InputManager.movementInput.y >= 0.1f && _plyBT.sprintPressed && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") == true && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw"))
             {
                 //_Anim.SetLayerWeight(1, 0);
                 state = NodeState.SUCCESS;

@@ -17,6 +17,8 @@ public class WeaponAttack : MonoBehaviour
 
     public string[] _AttackLightAnimNames;
     public string[] _DashAttacks;
+    public string _DashAttacksCombo;
+
     public ParticleSystem _LeftAttackParticle, _RightAttackParticle;
 
     public bool comboPossible, attackPossible = true;
@@ -59,14 +61,13 @@ public class WeaponAttack : MonoBehaviour
 
     public void DashAttack()
     {
-        if(comboPossible)
+        if(comboPossible && comboStep == -1)
         {
             canBlock = false;
             OnAttack?.Invoke(attacker);
             OnAttackPosition?.Invoke(attacker,transform.position);
             _Anim.Play(_DashAttacks[dashDir], 0);
             _Anim.Play(_DashAttacks[dashDir], 1);
-            comboStep = 0;
             comboPossible = false;
         }
 
@@ -139,6 +140,15 @@ public class WeaponAttack : MonoBehaviour
             _Anim.Play(_AttackLightAnimNames[3], 1);
             return;
         }
+        if (comboStep == -2)// ForwardDash Combo
+        {
+            OnAttack?.Invoke(attacker);
+            OnAttackPosition?.Invoke(attacker, transform.position);
+            _Anim.Play(_DashAttacksCombo, 0);
+            _Anim.Play(_DashAttacksCombo, 1);
+            return;
+        }
+
         if (missedCombo <= 0f)
         {
             missedCombo = 0.2f;
@@ -165,7 +175,7 @@ public class WeaponAttack : MonoBehaviour
 
     public IEnumerator ComboResetCor()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
         OnComboReset?.Invoke(attacker);
         comboPossible = false;
         comboStep = 0;

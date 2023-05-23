@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e3a929361f3b5428e811b7c76e1d6f, type: 3}
   m_Name: Boss 1 Intro
   m_EditorClassIdentifier: 
-  _CutSceneName: Boss 1 intro
+  _CutSceneName: Menu Intro
   _EndInCombat: 1
-  _StartInCombat: 0
-  _WaitForPlayerInput: 0
-  _InputWanted: f
+  _StartInCombat: 1
+  _WaitForPlayerInput: 1
+  _InputWanted: l

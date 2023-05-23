@@ -20,11 +20,21 @@ namespace BehaviorTree
         public override NodeState LogicEvaluate()
         {
 
-            if (PlayerBT._HealthScript.beingDamaged && !_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Dash Attack"))
+            if (PlayerBT._HealthScript.beingDamaged)
             {
-                _Anim.SetBool("BeingHurt", true);
-                state = NodeState.SUCCESS;
+
+                if(NotDashing())
+                {
+                    _Anim.SetBool("BeingHurt", true);
+                    state = NodeState.SUCCESS;
+                    return state;
+                }
+
+                
+                _Anim.SetBool("BeingHurt", false);
+                state = NodeState.FAILURE;
                 return state;
+
             }
             else
             {
@@ -35,6 +45,31 @@ namespace BehaviorTree
 
         }
 
+
+        bool NotDashing()
+        {
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_F_Combo"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_F"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_B"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_R"))
+            {
+                return false;
+            }
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsName("Dash Attack_L"))
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }

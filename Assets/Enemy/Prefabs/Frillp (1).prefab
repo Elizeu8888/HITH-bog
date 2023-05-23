@@ -281,7 +281,6 @@ GameObject:
   - component: {fileID: 5512907772339500016}
   - component: {fileID: 5512907772339500017}
   - component: {fileID: 5512907772339499918}
-  - component: {fileID: 5512907772339499919}
   - component: {fileID: 5512907772339499916}
   - component: {fileID: 5512907772339499917}
   m_Layer: 0
@@ -333,22 +332,24 @@ MonoBehaviour:
   _NavMesh: {fileID: 0}
   _charControl: {fileID: 0}
   enemyRestPos: {fileID: 0}
+  attackChance: 0.8
+  rollChance: 0.8
   _CanAttack: 0
-  rollCheckTick: 0.4
-  attackCheckTick: 0.4
+  rollCheckTick: 0.8
+  attackCheckTick: 0.2
   x: 0
   xmot: 0
   z: 0
   zmot: 0
-  attackDistance: 4
-  hoverDistance: 6
-  backawayDistance: 8
-  returnDistance: 25
+  attackDistance: 5
+  hoverDistance: 8
+  backawayDistance: 9
+  returnDistance: 35
   blockDistance: 3
-  rollDistance: 4
-  maxAttackDistance: 1.5
-  movementSpeed: 15
-  backawaySpeed: 18
+  rollDistance: 6
+  maxAttackDistance: 2
+  movementSpeed: 14
+  backawaySpeed: 16
 --- !u!114 &5512907772339500016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +369,7 @@ MonoBehaviour:
   - small attack 1
   - small attack 2
   _DashAttacks: []
+  _DashAttacksCombo: 
   _LeftAttackParticle: {fileID: 0}
   _RightAttackParticle: {fileID: 0}
   comboPossible: 0
@@ -401,7 +403,7 @@ MonoBehaviour:
   _BlockResult: 0
   _CurrentHealth: 0
   _MaxHealth: 120
-  healthText: {fileID: 0}
+  healthText: {fileID: 6420995598792966744}
   _CurrentStun: 0
   _MaxStun: 0
   stunChance: 0.5
@@ -435,24 +437,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &5512907772339499919
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5512907772339499914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.28
-  m_SlopeLimit: 0
-  m_StepOffset: 0
-  m_SkinWidth: 0.15
-  m_MinMoveDistance: 0.01
-  m_Center: {x: 0, y: 1.04, z: 0}
 --- !u!195 &5512907772339499916
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -469,12 +453,12 @@ NavMeshAgent:
   m_AngularSpeed: 0
   m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &5512907772339499917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +527,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5512907772513877918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
