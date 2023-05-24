@@ -89,6 +89,24 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MenuStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""aedfaf92-88cd-496a-97f6-a8017830e21b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeathRestart"",
+                    ""type"": ""Button"",
+                    ""id"": ""79a86424-0e71-4c72-a720-e6a3e939ff8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -289,6 +307,50 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d09ae0d8-6fcf-4d15-996d-f35108015c6b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""MenuStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""412797d6-e37d-41ea-9c29-134c8528bdd5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Mouse"",
+                    ""action"": ""MenuStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6059efa2-2e43-4759-aed6-7d6b671c8cd0"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Mouse"",
+                    ""action"": ""DeathRestart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c526df14-6c70-4773-b6e0-53a60d31f90f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DeathRestart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +394,8 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         m_Gameplay_WeaponDraw = m_Gameplay.FindAction("WeaponDraw", throwIfNotFound: true);
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_MenuStart = m_Gameplay.FindAction("MenuStart", throwIfNotFound: true);
+        m_Gameplay_DeathRestart = m_Gameplay.FindAction("DeathRestart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -398,6 +462,8 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_WeaponDraw;
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_MenuStart;
+    private readonly InputAction m_Gameplay_DeathRestart;
     public struct GameplayActions
     {
         private @PlayersInput m_Wrapper;
@@ -409,6 +475,8 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         public InputAction @WeaponDraw => m_Wrapper.m_Gameplay_WeaponDraw;
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @MenuStart => m_Wrapper.m_Gameplay_MenuStart;
+        public InputAction @DeathRestart => m_Wrapper.m_Gameplay_DeathRestart;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -439,6 +507,12 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @MenuStart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenuStart;
+                @MenuStart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenuStart;
+                @MenuStart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenuStart;
+                @DeathRestart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
+                @DeathRestart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
+                @DeathRestart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -464,6 +538,12 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @MenuStart.started += instance.OnMenuStart;
+                @MenuStart.performed += instance.OnMenuStart;
+                @MenuStart.canceled += instance.OnMenuStart;
+                @DeathRestart.started += instance.OnDeathRestart;
+                @DeathRestart.performed += instance.OnDeathRestart;
+                @DeathRestart.canceled += instance.OnDeathRestart;
             }
         }
     }
@@ -495,5 +575,7 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         void OnWeaponDraw(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMenuStart(InputAction.CallbackContext context);
+        void OnDeathRestart(InputAction.CallbackContext context);
     }
 }

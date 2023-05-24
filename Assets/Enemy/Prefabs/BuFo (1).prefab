@@ -814,7 +814,7 @@ MonoBehaviour:
   _I_Frames: 0
   deathAnim:
   - Death 1
-  - Death 2
+  - Death 1
   _EnemyType: 0
 --- !u!95 &8828775412286228861
 Animator:

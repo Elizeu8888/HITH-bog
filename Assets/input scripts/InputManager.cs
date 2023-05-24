@@ -15,7 +15,8 @@ public class InputManager : MonoBehaviour
     public static event Action OnWeaponDrawPressed;
     public static event Action OnDashPressed;
 
-
+    public static event Action OnGameStart;
+    public static event Action OnDeathPressed;
     public static event Action OnBlockPressed;
     public static event Action OnBlockCanceled;
 
@@ -40,6 +41,10 @@ public class InputManager : MonoBehaviour
     void OnEnable()
     {
         _plyInput.Enable();
+
+        _plyInput.Gameplay.MenuStart.started += OnMenuIsPressed;
+
+        _plyInput.Gameplay.DeathRestart.started += OnDeathIsPressed;
 
         _plyInput.Gameplay.Movement.performed += OnMovePerformed;
         _plyInput.Gameplay.Movement.canceled += OnMoveCanceled;
@@ -73,6 +78,26 @@ public class InputManager : MonoBehaviour
         if (WeaponDraw)
         {
             OnWeaponDrawPressed?.Invoke();
+        }
+    }
+
+
+    void OnDeathIsPressed(InputAction.CallbackContext context)
+    {
+        bool WeaponDraw;
+        WeaponDraw = context.ReadValue<float>() > 0 ? true : false;
+        if (WeaponDraw)
+        {
+            OnDeathPressed?.Invoke();
+        }
+    }
+        void OnMenuIsPressed(InputAction.CallbackContext context)
+    {
+        bool WeaponDraw;
+        WeaponDraw = context.ReadValue<float>() > 0 ? true : false;
+        if (WeaponDraw)
+        {
+            OnGameStart?.Invoke();
         }
     }
 
@@ -125,17 +150,22 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
+        _plyInput.Disable();
+
+        _plyInput.Gameplay.MenuStart.started -= OnMenuIsPressed;
+
+        _plyInput.Gameplay.DeathRestart.started -= OnDeathIsPressed;
 
         _plyInput.Gameplay.Movement.performed -= OnMovePerformed;
         _plyInput.Gameplay.Movement.canceled -= OnMoveCanceled;
 
-        _plyInput.Gameplay.Attack.started -= OnAttackStart;
-        _plyInput.Gameplay.Attack.started -= OnSprintStart;
-        _plyInput.Gameplay.Attack.started -= OnWeaponDrawStart;
+        _plyInput.Gameplay.Sprint.started -= OnSprintStart;
+        _plyInput.Gameplay.Sprint.canceled -= OnSprintEnd;
 
         _plyInput.Gameplay.Block.started -= OnBlockStart;
         _plyInput.Gameplay.Block.canceled -= OnBlockEnd;
 
+        _plyInput.Gameplay.Attack.started -= OnAttackStart;
         _plyInput.Gameplay.Dash.started -= OnDashStart;
         _plyInput.Gameplay.WeaponDraw.started -= OnWeaponDrawStart;
 

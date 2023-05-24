@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlayerManager
 {
@@ -50,6 +51,9 @@ namespace PlayerManager
         GameObject hurtInstant;
         public GameObject hurtVFX;
         public Transform bloodSpawn;
+
+        public bool _dying;
+
         public void SpawnVFX(GameObject item, GameObject prefab, Transform loc)// This is used in other scripts
         {
             Destroy(item);
@@ -103,6 +107,15 @@ namespace PlayerManager
                 dashTimer -= Time.deltaTime;
             }
 
+            if(PlayerBT.deathPressed)
+            {
+                RestartScene();
+            }
+
+            if(_CurrentHealth <= 0f)
+            {
+                _dying = true;
+            }
 
             if (_I_Frames >= 0f)
             {
@@ -178,6 +191,14 @@ namespace PlayerManager
             yield return null;
         }
 
+
+        public void RestartScene()
+        {
+            
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = Time.timeScale;
+
+        }
 
         public void HitByAttack(float attackDamage, int _LeftRight, GameObject attacker)
         {

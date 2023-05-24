@@ -33,11 +33,15 @@ public class PlayerBT : BT_Tree
 
     public bool attackPressed = false, dashPressed = false, sprintPressed = false, weaponDrawPressed = false, blockPressed = false;
 
-
+    public static bool menuPressed, _CanPressMenu;
+    public static bool deathPressed, _CanPressDeath;
     void OnEnable()
     {
 
         PlayerCinematicHandler.OnLeaveMenu += LeftMenu;
+        
+        InputManager.OnDeathPressed += DeathPressed;
+        InputManager.OnGameStart += MenuIsStarting;
 
         InputManager.OnAttackPressed += AttackPressed;
         InputManager.OnWeaponDrawPressed += WeaponDrawPressed;
@@ -53,9 +57,13 @@ public class PlayerBT : BT_Tree
     void OnDisable()
     {
         PlayerCinematicHandler.OnLeaveMenu -= LeftMenu;
+        
+        InputManager.OnDeathPressed -= DeathPressed;
+        InputManager.OnGameStart -= MenuIsStarting;
 
         InputManager.OnAttackPressed -= AttackPressed;
         InputManager.OnWeaponDrawPressed -= WeaponDrawPressed;
+        InputManager.OnDashPressed -= DashPressed;
 
         InputManager.OnSprintPressed -= SprintPressed;
         InputManager.OnSprintCanceled -= SprintCanceled;
@@ -70,8 +78,16 @@ public class PlayerBT : BT_Tree
         inMenu = false;
     }
 
+    void DeathPressed()
+    {
+        if(_CanPressDeath)
+            deathPressed = true;
+    }
 
-
+    void MenuIsStarting()
+    {
+        StartCoroutine(MenuPressedCorou());
+    }
 
     void AttackPressed()
     {        
@@ -112,6 +128,14 @@ public class PlayerBT : BT_Tree
         attackPressed = false;
         yield return null;
     }
+    public System.Collections.IEnumerator MenuPressedCorou()
+    {
+        menuPressed = true;
+        Debug.Log("menupressed");
+        yield return new WaitForSeconds(0.02f);
+        menuPressed = false;
+        yield return null;
+    }
     public System.Collections.IEnumerator WeaponDrawPressedCorou()
     {
         weaponDrawPressed = true;
@@ -150,14 +174,27 @@ public class PlayerBT : BT_Tree
 
     void OnAnimatorMove()// this allows root motion to work
     {
-        rootMotion = _AnimBase.deltaPosition;
-        _CharacterController.Move(rootMotion);
+        if(_CharacterController.enabled)
+        {
+            rootMotion = _AnimBase.deltaPosition;
+            _CharacterController.Move(rootMotion);
+        }
+
     }
 
     protected override Node SetupTree()// this is the behaviour tree
     {
         Node root = new Selector(new List<Node>
         {
+            //here the Cut Scene branch which always goes first
+            new Sequence(new List<Node>
+            {
+                new CheckPlayerDying(transform),
+                new TaskPlayerDying(transform),
+            }),
+
+
+
             //here the Cut Scene branch which always goes first
             new Sequence(new List<Node>
             {

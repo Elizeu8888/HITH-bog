@@ -268,13 +268,14 @@ namespace EnemyManager
 
                 SpawnVFX(hurtInstant, hurtVFX, bloodSpawn);
 
-                StartCoroutine(HealthNumber());
+                
                 if(Random.Range(0f,1f) >= stunChance)
                 {
                     staggered = true;
                 }
 
                 _CurrentHealth -= attackDamage;
+                StartCoroutine(HealthNumber());
                 beingDamaged = true;
                 _I_Frames = 0.35f;
             }

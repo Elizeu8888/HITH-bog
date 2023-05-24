@@ -24,20 +24,24 @@ public class CharacterContGravity : MonoBehaviour
 
     void Update()
     {
-        IsGrounded();
+        if(_CharControl.enabled)
+        {
+            IsGrounded();
 
-        if(grounded == true)
-        {
-            return;
-        }
-        else
-        {
-            _CharControl.Move(-transform.up * 19f * Time.deltaTime);
-            if(usingnav && _NavMesh.enabled == true)
+            if(grounded == true)
             {
-                //_NavMesh.enabled = false;
+                return;
+            }
+            else
+            {
+                _CharControl.Move(-transform.up * 19f * Time.deltaTime);
+                if(usingnav && _NavMesh.enabled == true)
+                {
+                    //_NavMesh.enabled = false;
+                }
             }
         }
+
     }
 
 

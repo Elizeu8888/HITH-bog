@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Playables;
 
 
@@ -33,7 +34,7 @@ namespace PlayerManager
         public LayerMask hitLayer;
         RaycastHit _CutSceneHit;
 
-        public bool _EnteredCutScene;
+        public bool _EnteredCutScene = true;
         public bool _InputPressed;
 
         public Transform checkPoint;
@@ -56,19 +57,45 @@ namespace PlayerManager
             grav = gameObject.GetComponent<CharacterContGravity>();
         }
 
+        void FixedUpdate()
+        {
+            if(gameObject.GetComponent<PlayerBT>().inMenu)
+            {
+                _EnteredCutScene = true;
+            }
+            if(PlayerBT.deathPressed)
+            {
+                RestartScene();
+                _EnteredCutScene = true;
+            }
+        }
+
+
         void Update()
         {
-
             
             if (_EnteredCutScene && _CinematicOBJ != null)
             {
-                if(Input.GetKeyDown(_CinematicOBJ._InputWanted))
+                if(PlayerBT.menuPressed)
                 {
+                    Debug.Log("pressedMENU");
                     _InputPressed = true;
                 }
             }
         }
 
+        public void RestartScene()
+        {
+            _EnteredCutScene = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = Time.timeScale;
+            PlayerBT._CanPressDeath = false;
+            PlayerBT.deathPressed = false;
+            _EnteredCutScene = true;
+            
+        }
+    
         public void playMainMenuAnimation()
         {
 
@@ -108,6 +135,9 @@ namespace PlayerManager
                 _CinematicInScene._CutSceneAnimators[i].SetLayerWeight(2, 0);
             }
 
+            _CinematicInScene._CutSceneTransforms[0].rotation = _CinematicInScene._CutSceneEndTransform[0].rotation;
+
+
             OnLeaveMenu?.Invoke();
 
             cineCam.SetCamTargetToPlayer();
@@ -121,7 +151,6 @@ namespace PlayerManager
             _EnteredCutScene = false;
             Destroy(_CinematicInScene.GetComponent<BoxCollider>());
             Destroy(_CinematicInScene);
-            direct.enabled = false;
             
         }
 
@@ -178,19 +207,18 @@ namespace PlayerManager
             
             cineCam.SetCamTargetToPlayer();
 
-
             _EnteredCutScene = false;
             Destroy(_CinematicInScene.GetComponent<BoxCollider>());
             Destroy(_CinematicInScene);
-            direct.enabled = false;
             
         }
 
-        public void OnTriggerEnter(Collider col)
+        public void OnTriggerStay(Collider col)
         {
 
             if (col.transform.gameObject.tag == "cutscene")
             {
+                Debug.Log("triggering");
                 _EnteredCutScene = true;
                 _CinematicInScene = col.transform.GetComponent<CinematicSceneOBJ>();
                 _CinematicOBJ = _CinematicInScene._CinematicScriptOBJ;
@@ -210,7 +238,7 @@ namespace PlayerManager
 
         public bool CanStartCutScene()
         {
-            if(_CinematicInScene != null)
+            if(_CinematicInScene != null && _CinematicOBJ != null)
             {
 
                 if (_CinematicOBJ._WaitForPlayerInput == true)
@@ -228,11 +256,6 @@ namespace PlayerManager
                         _InCutScene = true;
                         return true;
                     }
-                }
-                if (direct.playableGraph.IsValid() && direct.playableGraph.IsPlaying() == true)
-                {
-                    _InCutScene = true;
-                    return true;
                 }
                   
             }
