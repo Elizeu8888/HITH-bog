@@ -333,21 +333,21 @@ MonoBehaviour:
   _charControl: {fileID: 0}
   enemyRestPos: {fileID: 0}
   attackChance: 0.8
-  rollChance: 0.8
+  rollChance: 0.6
   _CanAttack: 0
   rollCheckTick: 0.8
-  attackCheckTick: 0.2
+  attackCheckTick: 0.4
   x: 0
   xmot: 0
   z: 0
   zmot: 0
-  attackDistance: 5
-  hoverDistance: 8
-  backawayDistance: 9
+  attackDistance: 7
+  hoverDistance: 9
+  backawayDistance: 12
   returnDistance: 35
   blockDistance: 3
   rollDistance: 6
-  maxAttackDistance: 2
+  maxAttackDistance: 1
   movementSpeed: 14
   backawaySpeed: 16
 --- !u!114 &5512907772339500016
@@ -402,11 +402,11 @@ MonoBehaviour:
   blockChance: 0.35
   _BlockResult: 0
   _CurrentHealth: 0
-  _MaxHealth: 120
+  _MaxHealth: 100
   healthText: {fileID: 6420995598792966744}
   _CurrentStun: 0
   _MaxStun: 0
-  stunChance: 0.5
+  stunChance: 0.3
   dashing: 0
   dashTimer: 0
   _HealthBar: {fileID: 5512907772513877918}

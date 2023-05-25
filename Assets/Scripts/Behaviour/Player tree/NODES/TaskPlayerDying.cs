@@ -46,9 +46,10 @@ namespace BehaviorTree
             tim = Mathf.Lerp(1f, 0.1f, 0.2f);
 
 
-            if(Time.timeScale <= 0.03)
+            if(Time.timeScale <= 0.2)
             {
                 Camera.main.GetComponent<Cinemachine.CinemachineBrain>().enabled = false;
+                _transform.GetComponent<PlayerBT>()._DeathScreen.SetActive(true);
                 PlayerBT._CanPressDeath = true;
             }
             else

@@ -107,6 +107,15 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ForceRestart"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ab532ec-6b37-4a51-9e05-7ec9abe4c789"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,28 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                     ""action"": ""DeathRestart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""900686bf-343f-4e96-8f06-0b5aa3a6c668"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ForceRestart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6e51e84-9d16-414b-9e66-9e86232e0537"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Mouse"",
+                    ""action"": ""ForceRestart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -396,6 +427,7 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_MenuStart = m_Gameplay.FindAction("MenuStart", throwIfNotFound: true);
         m_Gameplay_DeathRestart = m_Gameplay.FindAction("DeathRestart", throwIfNotFound: true);
+        m_Gameplay_ForceRestart = m_Gameplay.FindAction("ForceRestart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -464,6 +496,7 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_MenuStart;
     private readonly InputAction m_Gameplay_DeathRestart;
+    private readonly InputAction m_Gameplay_ForceRestart;
     public struct GameplayActions
     {
         private @PlayersInput m_Wrapper;
@@ -477,6 +510,7 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @MenuStart => m_Wrapper.m_Gameplay_MenuStart;
         public InputAction @DeathRestart => m_Wrapper.m_Gameplay_DeathRestart;
+        public InputAction @ForceRestart => m_Wrapper.m_Gameplay_ForceRestart;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -513,6 +547,9 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                 @DeathRestart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
                 @DeathRestart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
                 @DeathRestart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDeathRestart;
+                @ForceRestart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnForceRestart;
+                @ForceRestart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnForceRestart;
+                @ForceRestart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnForceRestart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -544,6 +581,9 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
                 @DeathRestart.started += instance.OnDeathRestart;
                 @DeathRestart.performed += instance.OnDeathRestart;
                 @DeathRestart.canceled += instance.OnDeathRestart;
+                @ForceRestart.started += instance.OnForceRestart;
+                @ForceRestart.performed += instance.OnForceRestart;
+                @ForceRestart.canceled += instance.OnForceRestart;
             }
         }
     }
@@ -577,5 +617,6 @@ public partial class @PlayersInput : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnMenuStart(InputAction.CallbackContext context);
         void OnDeathRestart(InputAction.CallbackContext context);
+        void OnForceRestart(InputAction.CallbackContext context);
     }
 }

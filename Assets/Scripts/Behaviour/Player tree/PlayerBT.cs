@@ -9,6 +9,7 @@ public class PlayerBT : BT_Tree
 
     public static float speed = 2f;
 
+    public GameObject _DeathScreen;
     public bool _InCombat = false;
 
     public string[] _AnimationNames;
@@ -18,6 +19,7 @@ public class PlayerBT : BT_Tree
     public GameObject[] _VFX; 
 
     public bool inMenu;
+    public static bool _ReadInMenuStatic = true;
 
    
     [Header("Script_OnPlayer_Refrences")]
@@ -76,6 +78,7 @@ public class PlayerBT : BT_Tree
     void LeftMenu()
     {        
         inMenu = false;
+        _ReadInMenuStatic = false;
     }
 
     void DeathPressed()
@@ -163,6 +166,7 @@ public class PlayerBT : BT_Tree
 
     void Awake()// cant use start since Tree node uses it
     {
+        
         _WeapAttack = gameObject.GetComponent<WeaponAttack>();
         _AnimationNames = _WeapAttack._AttackLightAnimNames;
         _HealthScript = gameObject.GetComponent<PlayerHealthAndDamaged>();

@@ -12,6 +12,7 @@ namespace BehaviorTree
 
         protected void Start()
         {
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
             _root = SetupTree();
         }
 

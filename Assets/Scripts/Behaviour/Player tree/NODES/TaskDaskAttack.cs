@@ -26,6 +26,8 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
+
+            Debug.Log("running dashattack");
             if (_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 state = NodeState.RUNNING;

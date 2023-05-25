@@ -14,6 +14,7 @@ namespace PlayerManager
         public static event Action OnInMenu;
         public static event Action OnLeaveMenu;
 
+        public GameObject menuOBJ;
         public CinemaCam cineCam;
 
         public static bool _InCinematic;
@@ -59,6 +60,12 @@ namespace PlayerManager
 
         void FixedUpdate()
         {
+
+        }
+
+
+        void Update()
+        {
             if(gameObject.GetComponent<PlayerBT>().inMenu)
             {
                 _EnteredCutScene = true;
@@ -68,11 +75,6 @@ namespace PlayerManager
                 RestartScene();
                 _EnteredCutScene = true;
             }
-        }
-
-
-        void Update()
-        {
             
             if (_EnteredCutScene && _CinematicOBJ != null)
             {
@@ -87,9 +89,10 @@ namespace PlayerManager
         public void RestartScene()
         {
             _EnteredCutScene = true;
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            menuOBJ.SetActive(true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-            Time.timeScale = 1f;
-            Time.fixedDeltaTime = Time.timeScale;
             PlayerBT._CanPressDeath = false;
             PlayerBT.deathPressed = false;
             _EnteredCutScene = true;
@@ -156,7 +159,8 @@ namespace PlayerManager
 
         public void SetCamTargetToTarget()
         {
-            cineCam.target = _CinematicInScene._CutSceneEndTransform[0];
+            menuOBJ.SetActive(false);
+            cineCam.target = _CinematicInScene._EndCameraPosition;
             cineCam.SetCamTarget(); 
         }
         public void SetCamTargetPriority()

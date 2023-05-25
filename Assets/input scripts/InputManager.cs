@@ -15,6 +15,10 @@ public class InputManager : MonoBehaviour
     public static event Action OnWeaponDrawPressed;
     public static event Action OnDashPressed;
 
+    
+    public static event Action OnRestartHeld;
+    public static event Action OnRestartReleased;
+
     public static event Action OnGameStart;
     public static event Action OnDeathPressed;
     public static event Action OnBlockPressed;
@@ -42,6 +46,11 @@ public class InputManager : MonoBehaviour
     {
         _plyInput.Enable();
 
+
+        _plyInput.Gameplay.ForceRestart.started += OnForceRestart;
+
+        _plyInput.Gameplay.ForceRestart.canceled += OnForceRestartCheck;
+
         _plyInput.Gameplay.MenuStart.started += OnMenuIsPressed;
 
         _plyInput.Gameplay.DeathRestart.started += OnDeathIsPressed;
@@ -60,6 +69,29 @@ public class InputManager : MonoBehaviour
         _plyInput.Gameplay.WeaponDraw.started += OnWeaponDrawStart;
 
     }
+
+
+    void OnForceRestart(InputAction.CallbackContext context)
+    {
+        bool attackInput;
+        attackInput = context.ReadValue<float>() > 0 ? true:false;
+        if(attackInput)
+        {
+            OnRestartHeld?.Invoke();
+        }
+    }
+
+    
+    void OnForceRestartCheck(InputAction.CallbackContext context)
+    {
+        bool attackInput;
+        attackInput = context.ReadValue<float>() > 0 ? true:false;
+        if(!attackInput)
+        {
+            OnRestartReleased?.Invoke();
+        }
+    }
+
 
     void OnAttackStart(InputAction.CallbackContext context)
     {
@@ -151,6 +183,11 @@ public class InputManager : MonoBehaviour
     void OnDisable()
     {
         _plyInput.Disable();
+
+        
+        _plyInput.Gameplay.ForceRestart.started -= OnForceRestart;
+
+        _plyInput.Gameplay.ForceRestart.canceled -= OnForceRestartCheck;
 
         _plyInput.Gameplay.MenuStart.started -= OnMenuIsPressed;
 

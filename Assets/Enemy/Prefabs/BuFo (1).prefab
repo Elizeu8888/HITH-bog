@@ -402,7 +402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8828775411199903676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 1.62, z: 0.72}
+  m_LocalPosition: {x: -0.01, y: 2.76, z: 0.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -801,7 +801,7 @@ MonoBehaviour:
   blockChance: 0.7
   _BlockResult: 0
   _CurrentHealth: 0
-  _MaxHealth: 225
+  _MaxHealth: 200
   healthText: {fileID: 1142200357899883820}
   _CurrentStun: 0
   _MaxStun: 0

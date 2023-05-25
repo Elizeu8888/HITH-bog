@@ -33,24 +33,10 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
-            
-
-
-
-
-            if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
-            {
-                float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnsmoothvelocity, turnsmoothing);
-                _transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-                state = NodeState.RUNNING;
-                return state;
-            }
-
-
-
+    
             float horizontal = InputManager.movementInput.x;
-            float vertical = InputManager.movementInput.y;// uses input to find direction
+            float vertical = InputManager.movementInput.y;
+
 
             if (horizontal < 0.2f)
             {
@@ -90,7 +76,13 @@ namespace BehaviorTree
             // here is the movement
             Vector3 movedir = Quaternion.Euler(0f, targetangle, 0f) * Vector3.forward;
 
-            
+            if(_Anim.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            {
+                float angle = Mathf.SmoothDampAngle(_transform.eulerAngles.y, cam.transform.eulerAngles.y, ref turnsmoothvelocity, turnsmoothing);
+                _transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                state = NodeState.RUNNING;
+                return state;
+            }
             _CharacterController.Move(movedir.normalized * 16f * Time.deltaTime);
 
 

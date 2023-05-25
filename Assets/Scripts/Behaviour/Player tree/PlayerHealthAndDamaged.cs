@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnemyManager;
 using UnityEngine.SceneManagement;
 
 namespace PlayerManager
@@ -43,7 +44,7 @@ namespace PlayerManager
 
         public float _CurrentKenetic, _MaxKenetic;
 
-        public bool isDashing;
+        public bool isDashing, dashIframe;
         [SerializeField] float _I_Frames = 0f;
 
         Animator playerAnim;
@@ -64,8 +65,14 @@ namespace PlayerManager
             Destroy(item, 0.5f);
         }
 
-
-
+        void OnEnable()
+        {
+            EnemyHealthManager.OnEnemyDeath -= HealthFromKill;
+        }
+        void HealthFromKill()
+        {
+            _CurrentHealth += 25;
+        }
         void Start()
         {
             _CurrentHealth = _MaxHealth;
@@ -104,7 +111,17 @@ namespace PlayerManager
         {
             if(dashing)
             {
-                dashTimer -= Time.deltaTime;
+                dashTimer += Time.deltaTime;
+                if(playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Dash"))
+                {
+                    StartCoroutine(DashingSmallIF());
+                }
+            }
+
+
+            if(dashTimer >= 0.8f)
+            {
+                StartCoroutine(DashMakeSureTurnOff());
             }
 
             if(PlayerBT.deathPressed)
@@ -176,6 +193,15 @@ namespace PlayerManager
             transform.GetComponent<WeaponAttack>().canBlock = true;
             playerAnim.SetBool("Dashing", false);
         }
+        public IEnumerator DashMakeSureTurnOff()
+        {
+            yield return new WaitForSeconds(0.8f);
+            dashTimer = 0f;
+            dashing = false;
+            rolling = false;
+            transform.GetComponent<WeaponAttack>().canBlock = true;
+            playerAnim.SetBool("Dashing", false);
+        }
 
 
         void RollPossible()
@@ -192,11 +218,18 @@ namespace PlayerManager
         }
 
 
-        public void RestartScene()
+        public IEnumerator DashingSmallIF()
         {
-            
-            Time.timeScale = 1f;
-            Time.fixedDeltaTime = Time.timeScale;
+            dashIframe = false;
+            yield return new WaitForSeconds(0.25f);
+            dashIframe = true;
+            yield return new WaitForSeconds(0.15f);
+            dashIframe = false;
+            yield return null;
+        }
+
+        public void RestartScene()
+        {   
 
         }
 
@@ -204,7 +237,7 @@ namespace PlayerManager
         {
 
 
-            if (_I_Frames == 0f && rolling == false)
+            if (_I_Frames == 0f && rolling == false && dashIframe == false)
             {
 
                 if(postureBroken == false)

@@ -13,6 +13,9 @@ using PlayerManager;
 
 public class EnemyMediumBT : BT_Tree
 {
+
+    public static event System.Action OnAwake;
+
     public bool _InCombat;
 
     public Transform _CurrentEnemyTransform;
@@ -54,10 +57,17 @@ public class EnemyMediumBT : BT_Tree
     void OnEnable()
     {
         PlayerCinematicHandler.OnLeaveMenu += CanPlay;
+        EnemyRequiredScript.OnRequestAmount += IncreaseCounter;
     }
     void OnDisable()
     {
         PlayerCinematicHandler.OnLeaveMenu -= CanPlay;
+        EnemyRequiredScript.OnRequestAmount -= IncreaseCounter;
+    }
+
+    void IncreaseCounter()
+    {
+        EnemyRequiredScript.enemyCounter ++;
     }
 
     void CanPlay()
@@ -69,8 +79,7 @@ public class EnemyMediumBT : BT_Tree
     {
         _EnemyRestPos = enemyRestPos;
         _Player = plyRefrence;
-
-
+        
         _NavMesh = gameObject.GetComponent<NavMeshAgent>();
         _charControl = gameObject.GetComponent<CharacterController>();
         _HealthMan = gameObject.GetComponent<EnemyHealthManager>();
@@ -86,6 +95,10 @@ public class EnemyMediumBT : BT_Tree
         
     }
 
+    public void BeingHurtFix()
+    {
+        _EnemAnim.SetBool("BeingHurt", false);
+    }
 
     void AttackChance(float chance, float minCool, float maxCool)// generates a chance for attack
     {

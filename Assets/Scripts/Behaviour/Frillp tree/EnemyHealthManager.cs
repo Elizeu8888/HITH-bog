@@ -19,6 +19,7 @@ namespace EnemyManager
 
     public class EnemyHealthManager : MonoBehaviour
     {
+        public static event System.Action OnEnemyDeath;
         public bool beingDamaged = false, beingHit = false, staggered = false;
         public float blockTimer = 0f;
         public bool isBlocking = false, blockAttack = false;
@@ -115,6 +116,7 @@ namespace EnemyManager
 
         public void Death()
         {
+            OnEnemyDeath?.Invoke();
             Destroy(gameObject);
         }
 
@@ -123,6 +125,17 @@ namespace EnemyManager
             if(isBlocking)
             {
                 BlockTimer();
+            }
+
+            if(dashing)
+            {
+                dashTimer += Time.deltaTime;
+            }
+
+
+            if(dashTimer >= 0.8f)
+            {
+                StartCoroutine(DashMakeSureTurnOff());
             }
 
             if (_I_Frames > 0f)
@@ -184,6 +197,15 @@ namespace EnemyManager
             healthText.text = _CurrentHealth.ToString();
             yield return new WaitForSeconds(Random.Range(1f, 2f));
             healthText.text = "";
+        }
+
+        
+        public IEnumerator DashMakeSureTurnOff()
+        {
+            yield return new WaitForSeconds(0.6f);
+            dashTimer = 0f;
+            dashing = false;
+            transform.GetComponent<WeaponAttack>().canBlock = true;
         }
 
         public void EnemyEndDashEvent()

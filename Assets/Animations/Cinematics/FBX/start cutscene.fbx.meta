@@ -195,7 +195,7 @@ ModelImporter:
       takeName: Player landing
       internalID: 0
       firstFrame: 0
-      lastFrame: 89
+      lastFrame: 117
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -282,7 +282,7 @@ ModelImporter:
       takeName: camera Intro 2 Intro
       internalID: 0
       firstFrame: 0
-      lastFrame: 89
+      lastFrame: 113
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

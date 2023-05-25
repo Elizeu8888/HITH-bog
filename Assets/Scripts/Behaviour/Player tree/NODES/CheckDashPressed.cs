@@ -26,6 +26,19 @@ namespace BehaviorTree
 
         public override NodeState LogicEvaluate()
         {
+            
+            if(_Anim.GetBool("Dashing") && !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash") && NotDashing()&& !_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                plyHealth.dashing = true;
+                _transform.GetComponent<WeaponAttack>().canBlock = false;
+                _transform.GetComponent<WeaponAttack>().comboPossible = false;
+                _transform.GetComponent<WeaponAttack>().comboStep = 0;
+
+                _Anim.Play("Dash", 0);
+                _Anim.Play("Dash", 1);
+                state = NodeState.SUCCESS;
+                return state; 
+            }
 
             if (_plyBT.dashPressed && NotDashing() &&!_Anim.GetCurrentAnimatorStateInfo(0).IsTag("Dash") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Redraw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Sword Draw") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Left") && !_Anim.GetCurrentAnimatorStateInfo(1).IsName("Deflect Right") && _transform.GetComponent<PlayerHealthAndDamaged>().stunTimer <= 0f)
             {
